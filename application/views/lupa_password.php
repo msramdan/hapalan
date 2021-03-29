@@ -17,8 +17,8 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <img style="width: 90%;height: auto;margin-top: 20px;" src="<?php echo base_url(); ?>assets/img/logo/logo.png">
-<!--     <a href="<?=base_url()?>assets/index2.html"><b>Manajemen</b> Sistem</a> -->
+    <!-- <img style="width: 90%;height: auto;margin-top: 20px;" src="<?php echo base_url(); ?>assets/img/logo/logo.png"> -->
+    <a href="<?=base_url()?>assets/index2.html"><b>HIRS</b> Sistem</a>
   </div>
   <div class="login-box-body">
     <p class="login-box-msg">Halaman Reset Password</p>

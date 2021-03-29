@@ -1,85 +1,46 @@
-<section class="content">
-  <div class="alert alert-success alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <marquee direction="left" scrollamount="4" align="center" font-size="50px"><h4>Selamat datang, Web Aplikasi Manajemen Sistem PT Wahyu Arta Digital</h4></marquee>
-  </div>
-
-<!-- Script Untuk Menampilkan waktu real time -->
-<center>
-
-<script type="text/javascript">    
-    //fungsi displayTime yang dipanggil di bodyOnLoad dieksekusi tiap 1000ms = 1detik
-    function tampilkanwaktu(){
-        //buat object date berdasarkan waktu saat ini
-        var waktu = new Date();
-        //ambil nilai jam, 
-        //tambahan script + "" supaya variable sh bertipe string sehingga bisa dihitung panjangnya : sh.length
-        var sh = waktu.getHours() + ""; 
-        //ambil nilai menit
-        var sm = waktu.getMinutes() + "";
-        //ambil nilai detik
-        var ss = waktu.getSeconds() + "";
-        //tampilkan jam:menit:detik dengan menambahkan angka 0 jika angkanya cuma satu digit (0-9)
-        document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
-    }
-</script>
-<body onload="tampilkanwaktu();setInterval('tampilkanwaktu()', 1000);"> 
-  <center>
-<h1>              
-<span id="clock"></span></h1> 
-</center>
-<?php
-$hari = date('l');
-/*$new = date('l, F d, Y', strtotime($Today));*/
-if ($hari=="Sunday") {
-  echo "Minggu";
-}elseif ($hari=="Monday") {
-  echo "Senin";
-}elseif ($hari=="Tuesday") {
-  echo "Selasa";
-}elseif ($hari=="Wednesday") {
-  echo "Rabu";
-}elseif ($hari=="Thursday") {
-  echo("Kamis");
-}elseif ($hari=="Friday") {
-  echo "Jum'at";
-}elseif ($hari=="Saturday") {
-  echo "Sabtu";
-}
-?>,
-<?php
-$tgl =date('d');
-echo $tgl;
-$bulan =date('F');
-if ($bulan=="January") {
-  echo " Januari ";
-}elseif ($bulan=="February") {
-  echo " Februari ";
-}elseif ($bulan=="March") {
-  echo " Maret ";
-}elseif ($bulan=="April") {
-  echo " April ";
-}elseif ($bulan=="May") {
-  echo " Mei ";
-}elseif ($bulan=="June") {
-  echo " Juni ";
-}elseif ($bulan=="July") {
-  echo " Juli ";
-}elseif ($bulan=="August") {
-  echo " Agustus ";
-}elseif ($bulan=="September") {
-  echo " September ";
-}elseif ($bulan=="October") {
-  echo " Oktober ";
-}elseif ($bulan=="November") {
-  echo " November ";
-}elseif ($bulan=="December") {
-  echo " Desember ";
-}
-$tahun=date('Y');
-echo $tahun;
-?>
-</center>
-</body>
-</center>
-</section>
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="widget widget-metric_1 animate">
+            <span class="icon-wrapper custom-bg-orange"><i class="fa fa-area-chart"></i></span>
+            <div class="right">
+                <span class="value">$3642 <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+                <span class="title">PROFIT
+                    <span class="change text-indicator-green">(+ $254)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="widget widget-metric_1 animate">
+            <span class="icon-wrapper custom-bg-lightseagreen"><i class="fa fa-shopping-cart"></i></span>
+            <div class="right">
+                <span class="value">$8740 <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+                <span class="title">REVENUE
+                    <span class="change text-indicator-green">(+ $364)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="widget widget-metric_1 animate">
+            <span class="icon-wrapper custom-bg-blue2"><i class="fa fa-user"></i></span>
+            <div class="right">
+                <span class="value">5 <i class="change-icon change-down fa fa-sort-down text-indicator-red"></i></span>
+                <span class="title">TOTAL USER
+                    <span class="change text-indicator-red">(- 23)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="widget widget-metric_1 animate">
+            <span class="icon-wrapper custom-bg-purple"><i class="fa fa-envelope"></i></span>
+            <div class="right">
+                <span class="value">56.72% <i class="change-icon change-up fa fa-sort-up text-indicator-green"></i></span>
+                <span class="title">CLICK
+                    <span class="change text-indicator-green">(+ 12.64%)</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

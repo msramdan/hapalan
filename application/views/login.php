@@ -1,55 +1,80 @@
-<!DOCTYPE html>
-<html>
+
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Halaman | Log in</title>
-  <link rel="icon" type="image/png" href="<?php echo base_url('assets/') ?>/img/favicon.png"/>
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="<?=base_url()?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/bower_components/Ionicons/css/ionicons.min.css">
-
-  <link rel="stylesheet" href="<?=base_url()?>assets/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?=base_url()?>assets/plugins/iCheck/square/blue.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	<title>Aplikasi HQ</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- VENDOR CSS -->
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/vendor/linearicons/style.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url() ?>assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url() ?>assets/img/favicon.png">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <img style="width: 90%;height: auto;margin-top: 20px;" src="<?php echo base_url(); ?>assets/img/logo/logo.png">
-<!--     <a href="<?=base_url()?>assets/index2.html"><b>Manajemen</b> Sistem</a> -->
-  </div>
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
 
-    <form action="<?=site_url('auth/process')?>" method="post">
-      <div class="form-group has-feedback">
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-            <div class="form-group">
-        <select class="form-control" name="bahasa" required="">
-            <option value='1'>-- Pilih Bahasa --</option>
-          <?php foreach ($bahasa as $bahasa) { ?>
-            <option value="<?php echo $bahasa['bahasa_id']?>"><?php echo $bahasa['name'] ?></option>         
-          <?php } ?>
-        </select>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <a href="<?php echo base_url() ?>auth/lupa_password">I forgot my password</a><br>
-        </div>
-        <div class="col-xs-4">
-          <button type="submit" name="login" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
+<body>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+								
+								<h1><span style="color: #000000">Hafalan Al Quran</span></h1>
+								<p class="lead">Login to your account</p>
+							</div>
+							<?php
+					                $status_login = $this->session->userdata('status_login');
+					                if (empty($status_login)) {
+					                    $message = "Silahkan login untuk masuk ke aplikasi";
+					                } else {
+					                    $message = $status_login;
+					                }
+					                ?>
+					   <p class="login-box-msg" ><b><?php echo $status_login; ?></b></p>
+							<form class="form-auth-small" action="<?=site_url('auth/process')?>" method="post">
+								<div class="form-group">
+									<label for="signin-email" class="control-label sr-only">Username</label>
+									<input type="text" name="username" class="form-control" id="username"  placeholder="Username">
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Password</label>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Password">
+								</div>
+								<div class="form-group clearfix">
+									<label class="fancy-checkbox element-left">
+										<input type="checkbox">
+										<span>Remember me</span>
+									</label>
+								</div>
+								<button type="submit" name="login" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+							</form>
+						</div>
+					</div>
+					<div class="right">
+						<!-- <div class="overlay"></div> -->
+						<div class="content text">
+		<!-- 					<h1 class="heading" >Hello Sus !</h1>
+							<p></p> -->
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
 </body>
+
 </html>

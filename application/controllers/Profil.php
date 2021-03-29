@@ -1,18 +1,17 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Profil extends CI_Controller {
+class Profil extends CI_Controller
+{
 
-	function __construct()
+    function __construct()
     {
         parent::__construct();
-        check_not_login();
-        // check_admin();
-       
+        is_login();
     }
 
-	public function index()
-	{
-		$this->template->load('template','profil/profil');
-	}
+    public function index()
+    {
+        $this->template->load('template', 'profil/profil');
+    }
 }

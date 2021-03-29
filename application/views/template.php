@@ -1,202 +1,235 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+  <title>Webs Apps</title>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Manajemen Sistem</title>
-  <link rel="icon" type="image/png" href="<?php echo base_url('assets/') ?>/img/favicon.png" />
-
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/bower_components/Ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css">
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!-- VENDOR CSS -->
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/themify-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
+  <!-- MAIN CSS -->
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/main.min.css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/navbar3.css" type="text/css">
+  <!-- FOR DEMO PURPOSES ONLY. You should/may remove this in your project -->
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/demo.min.css">
+  <link rel="stylesheet" href="demo-panel/style-switcher.css">
+  <link rel="stylesheet" href="<?= base_url() ?>admin/assets/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!-- ICONS -->
+  <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>admin/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url() ?>admin/assets/img/favicon.png">
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
-  <div class="wrapper">
+<body>
+  <!-- WRAPPER -->
+  <div id="wrapper">
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('oke'); ?>"></div>
 
-    <header class="main-header">
-      <a href="<?= site_url('dashboard') ?>" class="logo">
-        <span class="logo-mini"><b>M</b>S</span>
-        <span class="logo-lg"><b>Manajemen</b>Sistem</span>
-      </a>
-      <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+    <?php if ($this->session->flashdata('oke')) : ?>
+
+    <?php endif; ?>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="brand">
+        <a href="index.html">
+          <img src="<?= base_url() ?>admin/assets/img/logo-white.png" alt="Klorofil Pro Logo" class="img-responsive logo">
         </a>
-
-        <div class="navbar-custom-menu">
-          <ul class="nav navbar-nav">
-            <li class="dropdown user user-menu">
+      </div>
+      <div class="container-fluid">
+        <div id="tour-fullwidth" class="navbar-btn">
+          <button type="button" class="btn-toggle-fullwidth"><i class="ti-arrow-circle-left"></i></button>
+        </div>
+        <form class="navbar-form navbar-left search-form">
+          <input type="text" value="" class="form-control" placeholder="Search dashboard...">
+          <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
+        </form>
+        <div id="navbar-menu">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <img src="<?= base_url() ?>assets/img/default-user.png" alt="Avatar">
+                <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
               </a>
-              <ul class="dropdown-menu">
-                <!-- User image -->
-                <li class="user-header">
-                  <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                  <p>
-                    <?= ucfirst($this->fungsi->user_login()->name) ?>
-                    <small><?= ucfirst($this->fungsi->user_login()->address) ?></small>
-                  </p>
-                </li>
-                <li class="user-footer">
-                  <div class="pull-left">
-                    <a href="<?= site_url('profil') ?>" class="btn btn-default btn-flat">Profile</a>
-                  </div>
-                  <div class="pull-right">
-                    <a href="<?= site_url('auth/logout') ?>" class="btn btn-danger btn-flat">Sign out</a>
-                  </div>
-                </li>
+              <ul class="dropdown-menu logged-user-menu">
+                <li><a href="<?= site_url('profil') ?>"><i class="ti-user"></i> <span>My Profile</span></a></li>
+                <li><a href="<?= site_url('auth/logout') ?>"><i class="ti-power-off"></i> <span>Logout</span></a></li>
               </ul>
             </li>
           </ul>
         </div>
-      </nav>
-    </header>
-
-    <!-- =============================================== -->
-
-    <!-- Left side column. contains the sidebar -->
-    <aside class="main-sidebar">
-      <!-- sidebar: style can be found in sidebar.less -->
-      <section class="sidebar">
-        <!-- Sidebar user panel -->
-        <div class="user-panel">
-          <div class="pull-left image">
-            <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+      </div>
+    </nav>
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar">
+      <nav>
+        <ul class="nav" id="sidebar-nav-menu">
+          <li class="menu-group">Main</li>
+          <li><a href="<?= base_url() ?>dashboard"><i class="ti-home"></i> <span class="title">Dashboard</span></a></li>
+          <li class="panel">
+            <?php if ($this->session->userdata()['level'] == '1') { ?>
+              <a href="#master" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
+              <div id="master" class="collapse ">
+                <ul class="submenu">
+                  <li><a href="<?= base_url() ?>Guru"">Data Guru</a></li>
+                  <li><a href=" <?= base_url() ?>Siswa"">Data Siswa</a></li>
+                  <li><a href="<?= base_url() ?>Kelas"">Data Kelas</a></li>
+                <li><a href=" <?= base_url() ?>tahunajaran"">Data Tahun Ajaran</a></li>
+                </ul>
+              </div>
+          </li>
+        <?php } ?>
+        <li class=" panel">
+          <a href="#penilaian" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Penilaian</span> <i class="icon-submenu ti-angle-left"></i></a>
+          <div id="penilaian" class="collapse ">
+            <ul class="submenu">
+              <li><a href="<?= base_url() ?>nilai">Harian</a></li>
+              <li><a href=" <?= base_url() ?>nilai/ujian">Ujian</a></li>
+            </ul>
           </div>
-          <div class="pull-left info">
-            <p><?= ucfirst($this->fungsi->user_login()->username) ?></p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </li>
+        <?php if ($this->session->userdata()['level'] == '1') { ?>
+          <li class="panel">
+            <a href="#pengatur" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="fa fa-gear"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
+            <div id="pengatur" class="collapse ">
+              <ul class="submenu">
+                <li><a href="<?= base_url() ?>user"">Pengaturan User</a></li>
+                  <li><a href=" <?= base_url() ?>user_role"">Pengaturan Level</a></li>
+                <li><a href="<?= base_url() ?>backup"">Backup Database</a></li>
+                  <li><a href=" <?= base_url() ?>History_karyawan"">History Login</a></li>
+              </ul>
+            </div>
+          </li>
+        <?php } ?>
+        </ul>
+        <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
+      </nav>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="content-heading clearfix">
+          <div class="heading-left">
+            <h1 class="page-title">Waktu Server</h1>
+            <p class="page-subtitle">
+              <script type="text/javascript">
+                //fungsi displayTime yang dipanggil di bodyOnLoad dieksekusi tiap 1000ms = 1detik
+                function tampilkanwaktu() {
+                  //buat object date berdasarkan waktu saat ini
+                  var waktu = new Date();
+                  //ambil nilai jam, 
+                  //tambahan script + "" supaya variable sh bertipe string sehingga bisa dihitung panjangnya : sh.length
+                  var sh = waktu.getHours() + "";
+                  //ambil nilai menit
+                  var sm = waktu.getMinutes() + "";
+                  //ambil nilai detik
+                  var ss = waktu.getSeconds() + "";
+                  //tampilkan jam:menit:detik dengan menambahkan angka 0 jika angkanya cuma satu digit (0-9)
+                  document.getElementById("clock").innerHTML = (sh.length == 1 ? "0" + sh : sh) + ":" + (sm.length == 1 ? "0" + sm : sm) + ":" + (ss.length == 1 ? "0" + ss : ss);
+                }
+              </script>
+
+              <body onload="tampilkanwaktu();setInterval('tampilkanwaktu()', 1000);">
+
+                <span id="clock"></span>
+                <?php
+                $hari = date('l');
+                /*$new = date('l, F d, Y', strtotime($Today));*/
+                if ($hari == "Sunday") {
+                  echo "Minggu";
+                } elseif ($hari == "Monday") {
+                  echo "Senin";
+                } elseif ($hari == "Tuesday") {
+                  echo "Selasa";
+                } elseif ($hari == "Wednesday") {
+                  echo "Rabu";
+                } elseif ($hari == "Thursday") {
+                  echo ("Kamis");
+                } elseif ($hari == "Friday") {
+                  echo "Jum'at";
+                } elseif ($hari == "Saturday") {
+                  echo "Sabtu";
+                }
+                ?>,
+                <?php
+                $tgl = date('d');
+                echo $tgl;
+                $bulan = date('F');
+                if ($bulan == "January") {
+                  echo " Januari ";
+                } elseif ($bulan == "February") {
+                  echo " Februari ";
+                } elseif ($bulan == "March") {
+                  echo " Maret ";
+                } elseif ($bulan == "April") {
+                  echo " April ";
+                } elseif ($bulan == "May") {
+                  echo " Mei ";
+                } elseif ($bulan == "June") {
+                  echo " Juni ";
+                } elseif ($bulan == "July") {
+                  echo " Juli ";
+                } elseif ($bulan == "August") {
+                  echo " Agustus ";
+                } elseif ($bulan == "September") {
+                  echo " September ";
+                } elseif ($bulan == "October") {
+                  echo " Oktober ";
+                } elseif ($bulan == "November") {
+                  echo " November ";
+                } elseif ($bulan == "December") {
+                  echo " Desember ";
+                }
+                $tahun = date('Y');
+                echo $tahun;
+                ?>
+                </center>
+            </p>
           </div>
         </div>
-        <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
-          <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search...">
-            <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
+        <div class="container-fluid">
+          <!-- OVERVIEW -->
+          <div class="panel panel-headline">
+            <div class="panel-body">
+              <?php echo $contents ?>
+            </div>
           </div>
-        </form>
-
-
-        <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">MAIN NAVIGATION</li>
-          <?php if ($this->fungsi->user_login()->level == 1 || $this->fungsi->user_login()->level == 2) { ?>
-            <li><a href="<?= base_url('dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <?php } else { ?>
-            <li><a href="<?= base_url('home') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-          <?php } ?>
-
-
-                    <?php
-          $session_role_id = $this->fungsi->user_login()->level;
-          $queryMenu = "SELECT `user_access_menu`.`id`,`role_id`,`user_menu`.`menu`,`user_menu`.`icon`,`user_menu`.`id` as id_menu
-    FROM `user_access_menu` JOIN `user_sub_menu` 
-      ON `user_access_menu`.`user_sub_menu` = `user_sub_menu`.`id`
-      JOIN `user_menu` 
-      ON `user_menu`.`id` = `user_sub_menu`.`menu_id`
-   WHERE `user_access_menu`.`role_id` = $session_role_id
-   GROUP BY `user_menu`.`id`
-      ORDER BY `user_menu`.`urutan` ASC
-   ";
-          $menu = $this->db->query($queryMenu)->result_array();
-          ?>
-
-          <!-- looping menu -->
-          <?php foreach ($menu as $m) : ?>
-            <!-- Heading -->
-            <li class="treeview">
-              <a href="#">
-                <i class="<?= $m['icon'] ?>"></i> <span><?= $m['menu'] ?></span>
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-
-                <?php
-                $menuId = $m['id_menu'];
-                $querySubMenu = "SELECT `user_access_menu`.`role_id`,`user_access_menu`.`user_sub_menu`,`user_sub_menu`.*
-                FROM `user_access_menu` JOIN `user_sub_menu` 
-                  ON `user_access_menu`.`user_sub_menu` = `user_sub_menu`.`id`
-               WHERE `user_sub_menu`.`menu_id` = $menuId
-               AND `user_sub_menu`.`is_active` = 1
-               AND `user_access_menu`.`role_id` = $session_role_id
-               
-               ";
-                $subMenu = $this->db->query($querySubMenu)->result_array();
-                ?>
-
-                <?php foreach ($subMenu as $sm) : ?>
-                  <!--  <?php if ($title == $sm['title']) : ?>
-            <li class="active">
-          <?php else : ?>
-            <li>
-          <?php endif; ?> -->
-                  <li><a href="<?= base_url($sm['url']) ?>"><i class="<?= $sm['icon'] ?>"></i><?= $sm['title'] ?></a></li>
-                <?php endforeach; ?>
-
-
-
-
-
-              </ul>
-            </li>
-          <?php endforeach ?>
-        </ul>
-
-      </section>
-    </aside>
-
-    <!-- =============================================== -->
-
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <?php echo $contents ?>
-    </div>
-    <footer class="main-footer">
-      <div class="pull-right hidden-xs">
-        <b>Version</b> 1.0
+        </div>
       </div>
-      <strong>Copyright &copy; <?php echo date("Y") ?> <a href="https://kangramdan.com" target="_blank">MsRamdan</a>.</strong> All rights
-      reserved.
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+      <!--         <div class="container-fluid">
+          <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com/" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+        </div> -->
     </footer>
-
-
-    <script src="<?= base_url() ?>assets/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="<?= base_url() ?>assets/bower_components/fastclick/lib/fastclick.js"></script>
-    <script src="<?= base_url() ?>assets/dist/js/adminlte.min.js"></script>
-    <script src="<?= base_url() ?>assets/dist/js/demo.js"></script>
-
-    <script src="<?= base_url() ?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="<?= base_url() ?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>assets/js/number_format.js"></script>
-    <script>
-      $(document).ready(function() {
-        $('#table1').DataTable()
-        $('#table2').DataTable()
-        $('#table3').DataTable()
-      })
-    </script>
-
-
-
+  </div>
+  <!-- END WRAPPER -->
+  <!-- Javascript -->
+  <script src="<?= base_url() ?>admin/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/vendor/pace/pace.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/scripts/klorofilpro-common.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>admin/assets/js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>admin/assets/js/sweetalert.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- untuk sweet alret -->
+  <script src="<?php echo base_url(); ?>admin/assets/js/dataflash.js"></script>
+  <script src="<?= base_url() ?>admin/assets/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#table1').DataTable()
+      $('#table2').DataTable()
+      $('#table3').DataTable()
+    })
+  </script>
 </body>
 
 </html>

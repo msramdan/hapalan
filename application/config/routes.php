@@ -49,22 +49,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Dashboard';
+$route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['user_absen'] = 'user_absen/login';
 
-$route['stock/in'] = 'stock/stock_in_data';
-$route['stockin/add'] = 'stock/stock_in_add';
-$route['stockin/del/(:num)/(:num)'] = 'stock/stock_in_del';
-$route['stockin/prosess'] = 'user_sub_menu/process';
-
-
-$route['stock/out'] = 'stock/stock_out_data';
-$route['stockout/add'] = 'stock/stock_out_add';
-$route['stockout/del/(:num)/(:num)'] = 'stock/stock_out_del';
-$route['stockout/prosess'] = 'user_sub_menu/process';
-
-
-// $route['user_menu/sub/add'] = 'user_sub_menu/add';
-// $route['user_menu/sub/prosess'] = 'user_sub_menu/process';
-// $route['user_menu/subdel/(:num)'] = 'user_sub_menu/del/(:num)';

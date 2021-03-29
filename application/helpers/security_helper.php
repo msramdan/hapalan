@@ -1,13 +1,14 @@
 <?php if (!defined("BASEPATH")) exit("No direct script access allowed");
 
-function encrypt_url($string) {
+function encrypt_url($string)
+{
 
     $output = false;
     /*
 
     * read security.ini file & get encryption_key | iv | encryption_mechanism value for generating encryption code
 
-    */        
+    */
     $security       = parse_ini_file("security.ini");
     $secret_key     = $security["encryption_key"];
     $secret_iv      = $security["iv"];
@@ -27,7 +28,8 @@ function encrypt_url($string) {
 
 
 
-function decrypt_url($string) {
+function decrypt_url($string)
+{
 
     $output = false;
     /*

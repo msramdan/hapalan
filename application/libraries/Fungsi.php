@@ -12,61 +12,21 @@ Class Fungsi{
         $user_data = $this->ci->user_m->get($user_id)->row();
         return $user_data;
     }
-    public function count_item(){
-        $this->ci->load->model('item_m');
-        $level = $this->ci->session->userdata('level');
-        if ($level==1) {
-            return $this->ci->item_m->get()->num_rows();
-        }else{
-            return $this->ci->item_m->get2($this->ci->session->userdata('perusahaan_id'))->num_rows();
-        }
+
+    public function count_karyawan(){
+        $this->ci->load->model('karyawan_model');
+        return $this->ci->karyawan_model->total_rows();
     }
-    public function count_supplier(){
-        $this->ci->load->model('supplier_m');
-        $level = $this->ci->session->userdata('level');
-        if ($level==1) {            
-            return $this->ci->supplier_m->get()->num_rows();
-        }else{
-            return $this->ci->supplier_m->view_supplier($this->ci->session->userdata('perusahaan_id'))->num_rows();
-        }
+    public function count_jabatan(){
+        $this->ci->load->model('jabatan_model');
+        return $this->ci->jabatan_model->total_rows();
     }
-
-
-    public function customer(){
-        $this->ci->load->model('customer_m');
-        return $this->ci->customer_m->get()->num_rows();
+    public function count_bank(){
+        $this->ci->load->model('bank_model');
+        return $this->ci->bank_model->total_rows();
     }
-    public function count_user(){
-        $this->ci->load->model('user_m');
-        return $this->ci->user_m->get()->num_rows();
+    public function count_status(){
+        $this->ci->load->model('status_karyawan_model');
+        return $this->ci->status_karyawan_model->total_rows();
     }
-
-
-    public function raker(){
-        $this->ci->load->model('raker_m');
-        $level = $this->ci->session->userdata('level');
-        if ($level==1) {            
-            return $this->ci->raker_m->get()->num_rows();
-        }else{
-            return $this->ci->raker_m->count_raker($this->ci->session->userdata('perusahaan_id'))->num_rows();
-
-        }
-    }
-
-    public function karyawan(){
-        $this->ci->load->model('karyawan_m');
-        $level = $this->ci->session->userdata('level');
-        if ($level==1) {
-            return $this->ci->karyawan_m->get()->num_rows();
-        }else{
-            return $this->ci->karyawan_m->view_karyawan($this->ci->session->userdata('perusahaan_id'))->num_rows();
-        }
-
-
-
-        
-    }
-
-
-
 }
