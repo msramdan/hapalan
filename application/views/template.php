@@ -105,6 +105,9 @@
             </div>
           </li>
         <?php } ?>
+        <?php if ($this->session->userdata()['level'] == '1' || $this->session->userdata()['level'] == '2') { ?>
+          <li><a href="<?= base_url() ?>laporan"><i class="ti-home"></i> <span class="title">Laporan</span></a></li>
+        <?php } ?>
         </ul>
         <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
       </nav>

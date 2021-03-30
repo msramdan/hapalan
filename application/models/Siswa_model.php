@@ -20,9 +20,6 @@ class Siswa_model extends CI_Model
         } else if ($this->session->userdata()['level'] == '3') {
             $this->db->where('akses_kelas_guru.user_id = ' . $this->session->userdata()['userid']);
             $this->akses = $this->db->get('akses_kelas_guru')->result();
-        } else if ($this->session->userdata()['level'] == '4') {
-            echo "Anda tidak punya akses!";
-            die;
         }
     }
 
@@ -44,6 +41,18 @@ class Siswa_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }
+
+    public function get_by_userid($id)
+    {
+        // 
+        $this->db->from('siswa');
+        $this->db->where('user_id', $id);
+
+        $query = $this->db->get()->row();
+
+        return $query;
+    }
+
 
     // get data by id
     function get_by_id($id)
