@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `akses_kelas_guru` (
   PRIMARY KEY (`akses_kelas_guru_id`),
   KEY `kelas_id` (`kelas_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hapalan.akses_kelas_guru: ~9 rows (approximately)
 DELETE FROM `akses_kelas_guru`;
@@ -33,7 +33,8 @@ INSERT INTO `akses_kelas_guru` (`akses_kelas_guru_id`, `user_id`, `kelas_id`) VA
 	(11, 25, 3),
 	(12, 26, 2),
 	(13, 38, 2),
-	(14, 39, 1);
+	(14, 39, 1),
+	(15, 25, 2);
 /*!40000 ALTER TABLE `akses_kelas_guru` ENABLE KEYS */;
 
 -- Dumping structure for table hapalan.akses_kelas_walikelas
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `akses_kelas_walikelas` (
   PRIMARY KEY (`akses_kelas_walikelas_id`),
   KEY `user_id` (`user_id`),
   KEY `kelas_id` (`kelas_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hapalan.akses_kelas_walikelas: ~4 rows (approximately)
 DELETE FROM `akses_kelas_walikelas`;
@@ -53,7 +54,8 @@ INSERT INTO `akses_kelas_walikelas` (`akses_kelas_walikelas_id`, `user_id`, `kel
 	(4, 22, 3),
 	(6, 25, 1),
 	(7, 41, 3),
-	(8, 41, 1);
+	(8, 41, 1),
+	(9, 25, 3);
 /*!40000 ALTER TABLE `akses_kelas_walikelas` ENABLE KEYS */;
 
 -- Dumping structure for table hapalan.guru
@@ -68,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `guru` (
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table hapalan.guru: ~3 rows (approximately)
+-- Dumping data for table hapalan.guru: ~2 rows (approximately)
 DELETE FROM `guru`;
 /*!40000 ALTER TABLE `guru` DISABLE KEYS */;
 INSERT INTO `guru` (`guru_id`, `nama_guru`, `jenis_kelamin`, `no_hp`, `alamat`, `user_id`) VALUES
@@ -86,9 +88,9 @@ CREATE TABLE IF NOT EXISTS `history_karyawan` (
   `user_id` int(11) NOT NULL,
   `user_agent` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
--- Dumping data for table hapalan.history_karyawan: ~8 rows (approximately)
+-- Dumping data for table hapalan.history_karyawan: ~20 rows (approximately)
 DELETE FROM `history_karyawan`;
 /*!40000 ALTER TABLE `history_karyawan` DISABLE KEYS */;
 INSERT INTO `history_karyawan` (`id`, `username`, `info`, `tanggal`, `user_id`, `user_agent`) VALUES
@@ -99,7 +101,22 @@ INSERT INTO `history_karyawan` (`id`, `username`, `info`, `tanggal`, `user_id`, 
 	(5, 'admin', 'admin Telah melakukan login', '26/03/2021 18:08:02', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
 	(6, 'walikelas123', 'walikelas123 Telah melakukan login', '26/03/2021 18:09:26', 41, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
 	(7, 'admin', 'admin Telah melakukan login', '26/03/2021 18:15:21', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
-	(8, 'walikelas123', 'walikelas123 Telah melakukan login', '26/03/2021 18:17:32', 41, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36');
+	(8, 'walikelas123', 'walikelas123 Telah melakukan login', '26/03/2021 18:17:32', 41, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(9, 'admin', 'admin Telah melakukan login', '28/03/2021 11:33:10', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(10, 'admin', 'admin Telah melakukan login', '29/03/2021 20:25:27', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(11, 'walikelas', 'walikelas Telah melakukan login', '29/03/2021 20:26:04', 25, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(12, 'admin', 'admin Telah melakukan login', '29/03/2021 20:26:32', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(13, 'walikelas', 'walikelas Telah melakukan login', '29/03/2021 20:27:06', 25, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(14, 'admin', 'admin Telah melakukan login', '30/03/2021 07:46:52', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(15, 'siswa', 'siswa Telah melakukan login', '30/03/2021 07:52:17', 37, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(16, 'admin', 'admin Telah melakukan login', '30/03/2021 07:53:43', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(17, 'siswa', 'siswa Telah melakukan login', '30/03/2021 07:56:11', 37, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(18, 'siswa_kelas1', 'siswa_kelas1 Telah melakukan login', '30/03/2021 08:27:50', 40, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(19, 'siswa', 'siswa Telah melakukan login', '30/03/2021 08:28:04', 37, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(20, 'admin', 'admin Telah melakukan login', '30/03/2021 08:34:04', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(21, 'siswa', 'siswa Telah melakukan login', '30/03/2021 08:35:12', 37, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(22, 'admin', 'admin Telah melakukan login', '30/03/2021 13:58:49', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'),
+	(23, 'admin', 'admin Telah melakukan login', '31/03/2021 08:52:31', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36');
 /*!40000 ALTER TABLE `history_karyawan` ENABLE KEYS */;
 
 -- Dumping structure for table hapalan.kelas
@@ -126,8 +143,8 @@ CREATE TABLE IF NOT EXISTS `nilai` (
   `ayat_selesai` int(11) DEFAULT NULL,
   `surat_id_mulai` int(11) DEFAULT NULL,
   `surat_id_selesai` int(11) DEFAULT NULL,
-  `juz` int(11) DEFAULT NULL,
-  `akumulasi` int(11) DEFAULT NULL,
+  `juz` varchar(250) DEFAULT NULL,
+  `akumulasi` varchar(250) DEFAULT NULL,
   `nilai` int(11) NOT NULL,
   `tipe` enum('1','2','') DEFAULT NULL COMMENT '1:harian;2:ujian;',
   `tanggal` date NOT NULL,
@@ -138,17 +155,19 @@ CREATE TABLE IF NOT EXISTS `nilai` (
   KEY `surat_id_selesai` (`surat_id_selesai`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table hapalan.nilai: ~2 rows (approximately)
+-- Dumping data for table hapalan.nilai: ~3 rows (approximately)
 DELETE FROM `nilai`;
 /*!40000 ALTER TABLE `nilai` DISABLE KEYS */;
 INSERT INTO `nilai` (`nilai_id`, `siswa_id`, `ayat_mulai`, `ayat_selesai`, `surat_id_mulai`, `surat_id_selesai`, `juz`, `akumulasi`, `nilai`, `tipe`, `tanggal`, `tahun_ajaran_id`) VALUES
-	(4, 7, 100, 123, 1, 1, NULL, NULL, 100, '1', '2021-03-26', 2),
-	(5, 7, 100, 120, 2, 3, NULL, NULL, 100, '1', '2021-03-26', 1);
+	(4, 6, 100, 123, 1, 1, NULL, NULL, 100, '1', '2021-03-26', 2),
+	(5, 6, 100, 120, 2, 3, NULL, NULL, 100, '1', '2021-03-26', 1),
+	(6, 6, NULL, NULL, NULL, NULL, '1', '10', 90, '2', '2021-03-30', 2);
 /*!40000 ALTER TABLE `nilai` ENABLE KEYS */;
 
 -- Dumping structure for table hapalan.siswa
 CREATE TABLE IF NOT EXISTS `siswa` (
   `siswa_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nis` varchar(200) DEFAULT NULL,
   `nama_siswa` varchar(200) NOT NULL,
   `jenis_kelamin` varchar(50) NOT NULL,
   `kelas_id` int(11) NOT NULL,
@@ -164,9 +183,9 @@ CREATE TABLE IF NOT EXISTS `siswa` (
 -- Dumping data for table hapalan.siswa: ~2 rows (approximately)
 DELETE FROM `siswa`;
 /*!40000 ALTER TABLE `siswa` DISABLE KEYS */;
-INSERT INTO `siswa` (`siswa_id`, `nama_siswa`, `jenis_kelamin`, `kelas_id`, `nama_ibu`, `nama_ayah`, `no_hp_wali_murid`, `user_id`) VALUES
-	(6, 'siswa', 'Laki Laki', 3, 'siswa ibu 1', 'siswa ayah 1', '312', '37'),
-	(7, 'siswa_kelas1', 'Laki Laki', 1, 'siswa_kelas1', 'siswa_kelas1', '123', '40');
+INSERT INTO `siswa` (`siswa_id`, `nis`, `nama_siswa`, `jenis_kelamin`, `kelas_id`, `nama_ibu`, `nama_ayah`, `no_hp_wali_murid`, `user_id`) VALUES
+	(6, '123', 'siswa', 'Laki Laki', 3, 'siswa ibu 1', 'siswa ayah 1', '312', '37'),
+	(7, '321', 'siswa_kelas1', 'Laki Laki', 1, 'siswa_kelas1', 'siswa_kelas1', '123', '40');
 /*!40000 ALTER TABLE `siswa` ENABLE KEYS */;
 
 -- Dumping structure for table hapalan.surat
