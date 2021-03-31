@@ -304,6 +304,23 @@ class Nilai_ujian extends CI_Controller
 
         $this->load->view('nilai_ujian/nilai_doc', $data);
     }
+    public function nilai_report($id)
+    {
+        $ujian = $this->Nilai_ujian_model->get_by_id($id);
+        $siswa = $this->Siswa_model->get_by_id($ujian->siswa_id);
+
+        header("Content-type: application/vnd.ms-word");
+        header("Content-Disposition: attachment;Filename=nilai-ujian-" . $siswa->nama_siswa . ".doc");
+
+
+        $data = array(
+            'siswa' => $siswa,
+            'ujian' => $ujian,
+            'start' => 0
+        );
+
+        $this->load->view('nilai_ujian/nilai_report', $data);
+    }
 }
 
 /* End of file Nilai_siswa.php */

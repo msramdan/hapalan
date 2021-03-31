@@ -6,6 +6,10 @@
                 <h2 style="margin-top:0px">Siswa Read</h2>
                 <table class="table">
                     <tr>
+                        <td>NIS</td>
+                        <td><?php echo $nis; ?></td>
+                    </tr>
+                    <tr>
                         <td>Nama Siswa</td>
                         <td><?php echo $nama_siswa; ?></td>
                     </tr>

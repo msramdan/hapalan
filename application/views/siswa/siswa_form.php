@@ -37,6 +37,10 @@
             </td>
           </tr>
           <tr>
+            <td width='200'>NIS Siswa <?php echo form_error('nis') ?></td>
+            <td><input type="text" class="form-control" name="nis" id="nis" placeholder="NIS Siswa" value="<?php echo $nis; ?>" /></td>
+          </tr>
+          <tr>
             <td width='200'>Nama Siswa <?php echo form_error('nama_siswa') ?></td>
             <td><input type="text" class="form-control" name="nama_siswa" id="nama_siswa" placeholder="Nama Siswa" value="<?php echo $nama_siswa; ?>" /></td>
           </tr>

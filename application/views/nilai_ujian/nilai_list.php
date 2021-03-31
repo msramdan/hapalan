@@ -78,6 +78,8 @@
                                                 <?php
                                                 echo anchor(site_url('nilai_ujian/read/' . $nilai_ujian->nilai_id . '/' . $kelas_id), '<i class="fa fa-eye" aria-hidden="true"></i>', 'class="btn btn-success btn-sm"');
                                                 echo '  ';
+                                                echo anchor(site_url('nilai_ujian/nilai_report/' . $nilai_ujian->nilai_id), '<i class="fa fa-print" aria-hidden="true"></i>', 'class="btn btn-warning btn-sm"');
+                                                echo '  ';
                                                 if ($this->session->userdata('level') != '1' || $this->session->userdata('level') != '3') {
                                                     if ($this->session->userdata('level') == '1' || check_access_guru($kelas_id) == true) {
                                                         echo anchor(site_url('nilai_ujian/update/' . $nilai_ujian->nilai_id . '/' . $kelas_id), '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', 'class="btn btn-primary btn-sm"');

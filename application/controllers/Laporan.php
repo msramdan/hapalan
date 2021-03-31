@@ -64,13 +64,14 @@ class Laporan extends CI_Controller
 
     public function nilai_read()
     {
+        $siswa = $this->siswa_model->get_by_id($this->input->post('siswa_id'));
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=laporan-nilai-" . date('Y-m-d') . ".doc");
+        header("Content-Disposition: attachment;Filename=laporan-nilai-" . $siswa->nama_siswa . ".doc");
 
         $data = array(
-            'siswa' => $this->siswa_model->get_by_id($this->input->post('siswa_id')),
-            'nilai_harian' => $this->laporan_model->nilai_harian($this->input->post('siswa_id')),
-            'nilai_ujian' => $this->laporan_model->nilai_ujian($this->input->post('siswa_id')),
+            'siswa' => $siswa,
+            'nilai_harian' => $this->laporan_model->nilai_harian($this->input->post('siswa_id'), $this->input->post('tahun_ajaran_id')),
+            'nilai_ujian' => $this->laporan_model->nilai_ujian($this->input->post('siswa_id'), $this->input->post('tahun_ajaran_id')),
             'tahun_ajaran' => $this->tahunajaran_model->get_by_id($this->input->post('tahun_ajaran_id')),
             'adab_quran' => $this->input->post('adab_quran'),
             'adab_guru' => $this->input->post('adab_guru'),

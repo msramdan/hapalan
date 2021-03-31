@@ -29,12 +29,15 @@
         .word-table tr td {
             border: 1px solid black;
             padding: 15px;
-
         }
 
         th {
             background-color: #C0C0C0;
             color: black;
+        }
+
+        .title {
+            text-align: left;
         }
     </style>
 </head>
@@ -42,16 +45,16 @@
 <body>
     <h3 class="header"><u>Laporan Perkembangan Hafalan Al-Quran</u></h3>
     <div class="flex-container">
-        <p>Nama : <?= $siswa->nama_siswa ?></p>
-        <p>Tahun Pelajaran : <?= $tahun_ajaran->tahun_ajaran ?></p>
+        <p><b>Nama : <?= $siswa->nama_siswa ?></b></p>
+        <p><b>NIS : <?= $siswa->nis ?></b></p>
     </div>
     <div class="flex-container">
-        <p>NIS : 123123123</p>
-        <p>Semester : <?= $tahun_ajaran->semester ?></p>
+        <p><b>Tahun Pelajaran : <?= $tahun_ajaran->tahun_ajaran ?></b></p>
+        <p><b>Semester : <?= $tahun_ajaran->semester ?></b></p>
     </div>
     <table class="word-table" style="margin-bottom: 10px">
         <tr>
-            <th colspan='2'>I. Pencapaian Per Semester</th>
+            <th colspan='2' class="title">I. Pencapaian Per Semester</th>
             <th>Nilai</th>
         </tr>
         <?php
@@ -62,12 +65,11 @@
                 <td width="5%" align="center"><?= $no++ ?></td>
                 <td width="75%">
                     <div class="flex-content">
-                        <p><?= "Mulai : " . $value->nama_surat1 ?></p>
-                        <p><?= " Ayat : " . $value->ayat_mulai ?></p>
+                        <p><?= "Mulai : " . $value->nama_surat1 . " Ayat : " . $value->ayat_mulai ?></p>
+                        <p></p>
                     </div>
                     <div class="flex-content">
-                        <p><?= "Selesai : " . $value->nama_surat2 ?></p>
-                        <p><?= " Ayat : " . $value->ayat_selesai ?></p>
+                        <p><?= "Selesai : " . $value->nama_surat2 . " Ayat : " . $value->ayat_selesai ?></p>
                     </div>
                 </td>
                 <td width="20%" align="center"><?= $value->nilai ?></td>
@@ -76,10 +78,10 @@
         }
         ?>
     </table>
-
+    <br>
     <table class="word-table" style="margin-bottom: 10px">
         <tr>
-            <th colspan='2'>II. Ujian dan Ijazah</th>
+            <th colspan='2' class="title">II. Ujian dan Ijazah</th>
             <th>Nilai</th>
         </tr>
         <?php
@@ -95,9 +97,10 @@
         }
         ?>
     </table>
+    <br>
     <table class="word-table" style="margin-bottom: 10px">
         <tr>
-            <th colspan='2'>III. Adab dan Akhlak</th>
+            <th colspan='2' class="title">III. Adab dan Akhlak</th>
             <th>Nilai</th>
         </tr>
         <tr>

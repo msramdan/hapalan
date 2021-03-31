@@ -56,6 +56,7 @@ class Siswa extends CI_Controller
         if ($row) {
             $data = array(
                 'siswa_id' => $row->siswa_id,
+                'nis' => $row->nis,
                 'nama_siswa' => $row->nama_siswa,
                 'jenis_kelamin' => $row->jenis_kelamin,
                 'nama_kelas' => $row->nama_kelas,
@@ -82,6 +83,7 @@ class Siswa extends CI_Controller
             'passconf' => set_value('passconf'),
             'email' => set_value('email'),
             'siswa_id' => set_value('siswa_id'),
+            'nis' => set_value('nis'),
             'nama_siswa' => set_value('nama_siswa'),
             'jenis_kelamin' => set_value('jenis_kelamin'),
             'kelas_id' => set_value('kelas_id'),
@@ -121,6 +123,7 @@ class Siswa extends CI_Controller
             $user_id = $this->db->insert_id();
 
             $data = array(
+                'nis' => $this->input->post('nis', TRUE),
                 'nama_siswa' => $this->input->post('nama_siswa', TRUE),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
                 'kelas_id' => $this->input->post('kelas_id', TRUE),
@@ -152,6 +155,7 @@ class Siswa extends CI_Controller
                 'password' => set_value('password'),
                 'passconf' => set_value('passconf'),
                 'email' => set_value('email'),
+                'nis' => set_value('nis', $row->nis),
                 'nama_siswa' => set_value('nama_siswa', $row->nama_siswa),
                 'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
                 'kelas_id' => set_value('kelas_id', $row->kelas_id),
@@ -211,6 +215,7 @@ class Siswa extends CI_Controller
             $this->db->update('user', $data);
 
             $data = array(
+                'nis' => $this->input->post('nis', TRUE),
                 'nama_siswa' => $this->input->post('nama_siswa', TRUE),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
                 'kelas_id' => $this->input->post('kelas_id', TRUE),
@@ -245,6 +250,7 @@ class Siswa extends CI_Controller
 
     public function _rules()
     {
+        $this->form_validation->set_rules('nis', 'nis siswa', 'trim|required');
         $this->form_validation->set_rules('nama_siswa', 'nama siswa', 'trim|required');
         $this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
         $this->form_validation->set_rules('kelas_id', 'kelas id', 'trim|required');
@@ -282,6 +288,7 @@ class Siswa extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "NIS");
         xlsWriteLabel($tablehead, $kolomhead++, "Nama Siswa");
         xlsWriteLabel($tablehead, $kolomhead++, "Jenis Kelamin");
         xlsWriteLabel($tablehead, $kolomhead++, "Kelas");
@@ -294,6 +301,7 @@ class Siswa extends CI_Controller
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nis);
             xlsWriteLabel($tablebody, $kolombody++, $data->nama_siswa);
             xlsWriteLabel($tablebody, $kolombody++, $data->jenis_kelamin);
             xlsWriteLabel($tablebody, $kolombody++, $data->nama_kelas);

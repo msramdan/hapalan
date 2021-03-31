@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <title>harviacode.com - codeigniter crud generator</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>" />
+    <title>Document</title>
     <style>
         .word-table {
             border: 1px solid black !important;

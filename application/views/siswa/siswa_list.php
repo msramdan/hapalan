@@ -52,6 +52,7 @@
                                 <table class="table table-bordered" style="margin-bottom: 10px">
                                     <tr>
                                         <th>No</th>
+                                        <th>NIS</th>
                                         <th>Nama Siswa</th>
                                         <th>Jenis Kelamin</th>
                                         <th>Kelas</th>
@@ -64,6 +65,7 @@
                                             ?>
                                         <tr>
                                             <td width="10px"><?php echo ++$start ?></td>
+                                            <td><?php echo $siswa->nis ?></td>
                                             <td><?php echo $siswa->nama_siswa ?></td>
                                             <td><?php echo $siswa->jenis_kelamin ?></td>
                                             <td><?php echo $siswa->nama_kelas ?></td>
