@@ -44,6 +44,10 @@
                         <td><input type="text" class="form-control" name="adab_guru" id="adab_guru" placeholder="Adab Guru" value="<?php echo $adab_guru; ?>" /></td>
                     </tr>
                     <tr>
+                        <td width='200'>Tertib dan Disiplin <?php echo form_error('tertib_disiplin') ?></td>
+                        <td><input type="text" class="form-control" name="tertib_disiplin" id="tertib_disiplin" placeholder="Tertib dan Disiplin" value="<?php echo $tertib_disiplin; ?>" /></td>
+                    </tr>
+                    <tr>
                         <td><button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button></td>
                         <td><a href="<?php echo site_url('laporan') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
                         </td>

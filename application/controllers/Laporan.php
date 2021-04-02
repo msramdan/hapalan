@@ -11,6 +11,7 @@ class Laporan extends CI_Controller
         $this->load->model('kelas_model');
         $this->load->model('nilai_model');
         $this->load->model('siswa_model');
+        $this->load->model('sekolah_model');
         $this->load->model('tahunajaran_model');
         $this->load->model('akses_kelas_guru_model');
         $this->load->model('akses_kelas_walikelas_model');
@@ -57,6 +58,7 @@ class Laporan extends CI_Controller
             'tahun_ajaran_id' => set_value('tahun_ajaran_id'),
             'adab_quran' => set_value('adab_quran'),
             'adab_guru' => set_value('adab_guru'),
+            'tertib_disiplin' => set_value('tertib_disiplin'),
             'kelas_id' => $kelas_id
         );
         $this->template->load('template', 'laporan/nilai', $data);
@@ -65,16 +67,29 @@ class Laporan extends CI_Controller
     public function nilai_read()
     {
         $siswa = $this->siswa_model->get_by_id($this->input->post('siswa_id'));
-        header("Content-type: application/vnd.ms-word");
+        $sekolah = $this->sekolah_model->get();
+
+        $this->db->select('nama_guru');
+        $this->db->where('kelas_id', $siswa->kelas_id);
+        $this->db->join('user', 'user.user_id = akses_kelas_walikelas.user_id', 'left');
+        $this->db->join('guru', 'guru.user_id = user.user_id', 'left');
+        $walikelas = $this->db->get('akses_kelas_walikelas')->row();
+
+        header("Content-type: application/vnd.ms-word;charset=utf-8");
         header("Content-Disposition: attachment;Filename=laporan-nilai-" . $siswa->nama_siswa . ".doc");
+        header("Pragma: no-cache");
+        header("Expires: 0");
 
         $data = array(
             'siswa' => $siswa,
+            'sekolah' => $sekolah,
+            'walikelas' => $walikelas,
             'nilai_harian' => $this->laporan_model->nilai_harian($this->input->post('siswa_id'), $this->input->post('tahun_ajaran_id')),
             'nilai_ujian' => $this->laporan_model->nilai_ujian($this->input->post('siswa_id'), $this->input->post('tahun_ajaran_id')),
             'tahun_ajaran' => $this->tahunajaran_model->get_by_id($this->input->post('tahun_ajaran_id')),
             'adab_quran' => $this->input->post('adab_quran'),
             'adab_guru' => $this->input->post('adab_guru'),
+            'tertib_disiplin' => $this->input->post('tertib_disiplin'),
             'start' => 0
         );
 

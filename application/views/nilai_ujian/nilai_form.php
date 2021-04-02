@@ -23,6 +23,20 @@
 							</select></td>
 					</tr>
 					<tr>
+						<td width='200'>Guru Penguji<?php echo form_error('guru_id') ?></td>
+						<td><select name="guru_id" class="form-control">
+								<option value="">-- Pilih -- </option>
+								<?php foreach ($guru_list as $key => $data) {
+								?>
+									<?php if ($data->guru_id == $guru_id) { ?>
+										<option value="<?php echo $data->guru_id ?>" selected><?php echo $data->nama_guru ?></option>
+									<?php } else { ?>
+										<option value="<?php echo $data->guru_id ?>"><?php echo $data->nama_guru ?></option>
+									<?php } ?>
+								<?php } ?>
+							</select></td>
+					</tr>
+					<tr>
 						<td width='200'>Juz <?php echo form_error('juz') ?></td>
 						<td><input type="text" class="form-control" name="juz" id="juz" placeholder="Juz" value="<?php echo $juz; ?>" /></td>
 					</tr>

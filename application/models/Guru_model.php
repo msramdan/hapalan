@@ -16,9 +16,16 @@ class Guru_model extends CI_Model
     }
 
     // get all
-    function get_all()
+    function get_all($kelas = null)
     {
         $this->db->join('user', 'user.user_id = guru.user_id');
+        if ($this->session->userdata('level') == '3') {
+            $this->db->where('guru.user_id', $this->session->userdata('userid'));
+        }
+        if ($kelas != null) {
+            $this->db->join('akses_kelas_guru', 'guru.user_id = akses_kelas_guru.user_id', 'left');
+            $this->db->where('akses_kelas_guru.kelas_id', $kelas);
+        }
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     }

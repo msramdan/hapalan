@@ -33,9 +33,10 @@ class Nilai_ujian_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('nilai.*, sq1.surat_indonesia as nama_surat1, sq2.surat_indonesia as nama_surat2,siswa.nama_siswa,tahun_ajaran.tahun_ajaran,tahun_ajaran.semester');
+        $this->db->select('nilai.*, sq1.surat_indonesia as nama_surat1, sq2.surat_indonesia as nama_surat2,siswa.nama_siswa,tahun_ajaran.tahun_ajaran,tahun_ajaran.semester, guru.nama_guru as nama_guru');
         $this->db->join('siswa', 'siswa.siswa_id = nilai.siswa_id', 'left');
         $this->db->join('kelas', 'kelas.kelas_id = siswa.kelas_id', 'left');
+        $this->db->join('guru', 'guru.guru_id = nilai.guru_id', 'left');
         $this->db->join('surat as sq1', 'sq1.surat_id = nilai.surat_id_mulai', 'left');
         $this->db->join('surat as sq2', 'sq2.surat_id = nilai.surat_id_selesai', 'left');
         $this->db->join('tahun_ajaran', 'tahun_ajaran.tahun_ajaran_id = nilai.tahun_ajaran_id', 'left');

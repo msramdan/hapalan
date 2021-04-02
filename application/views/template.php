@@ -75,41 +75,42 @@
               <a href="#master" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="master" class="collapse ">
                 <ul class="submenu">
-                  <li><a href="<?= base_url() ?>Guru"">Data Guru</a></li>
+                  <li><a href="<?= base_url() ?>sekolah"">Data Sekolah</a></li>
+                  <li><a href=" <?= base_url() ?>Guru"">Data Guru</a></li>
                   <li><a href=" <?= base_url() ?>Siswa"">Data Siswa</a></li>
-                  <li><a href="<?= base_url() ?>Kelas"">Data Kelas</a></li>
-                <li><a href=" <?= base_url() ?>tahunajaran"">Data Tahun Ajaran</a></li>
+                  <li><a href=" <?= base_url() ?>Kelas"">Data Kelas</a></li>
+                  <li><a href=" <?= base_url() ?>tahunajaran"">Data Tahun Ajaran</a></li>
                 </ul>
               </div>
           </li>
         <?php } ?>
         <li class=" panel">
-          <a href="#penilaian" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Penilaian</span> <i class="icon-submenu ti-angle-left"></i></a>
-          <div id="penilaian" class="collapse ">
-            <ul class="submenu">
-              <li><a href="<?= base_url() ?>nilai">Harian</a></li>
-              <li><a href=" <?= base_url() ?>nilai/ujian">Ujian</a></li>
-            </ul>
-          </div>
-        </li>
-        <?php if ($this->session->userdata()['level'] == '1') { ?>
-          <li class="panel">
-            <a href="#pengatur" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="fa fa-gear"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
-            <div id="pengatur" class="collapse ">
-              <ul class="submenu">
-                <li><a href="<?= base_url() ?>user"">Pengaturan User</a></li>
+                      <a href="#penilaian" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Penilaian</span> <i class="icon-submenu ti-angle-left"></i></a>
+                      <div id="penilaian" class="collapse ">
+                        <ul class="submenu">
+                          <li><a href="<?= base_url() ?>nilai">Harian</a></li>
+                          <li><a href=" <?= base_url() ?>nilai/ujian">Ujian</a></li>
+                        </ul>
+                      </div>
+                  </li>
+                  <?php if ($this->session->userdata()['level'] == '1') { ?>
+                    <li class="panel">
+                      <a href="#pengatur" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="fa fa-gear"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
+                      <div id="pengatur" class="collapse ">
+                        <ul class="submenu">
+                          <li><a href="<?= base_url() ?>user"">Pengaturan User</a></li>
                   <li><a href=" <?= base_url() ?>user_role"">Pengaturan Level</a></li>
-                <li><a href="<?= base_url() ?>backup"">Backup Database</a></li>
+                          <li><a href="<?= base_url() ?>backup"">Backup Database</a></li>
                   <li><a href=" <?= base_url() ?>History_karyawan"">History Login</a></li>
-              </ul>
-            </div>
-          </li>
-        <?php } ?>
-        <?php if ($this->session->userdata()['level'] == '1' || $this->session->userdata()['level'] == '2') { ?>
-          <li><a href="<?= base_url() ?>laporan"><i class="ti-home"></i> <span class="title">Laporan</span></a></li>
-        <?php } ?>
-        </ul>
-        <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
+                        </ul>
+                      </div>
+                    </li>
+                  <?php } ?>
+                  <?php if ($this->session->userdata()['level'] == '1' || $this->session->userdata()['level'] == '2') { ?>
+                    <li><a href="<?= base_url() ?>laporan"><i class="ti-home"></i> <span class="title">Laporan</span></a></li>
+                  <?php } ?>
+                </ul>
+                <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
       </nav>
     </div>
     <!-- END LEFT SIDEBAR -->

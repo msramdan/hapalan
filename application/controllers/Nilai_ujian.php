@@ -11,9 +11,11 @@ class Nilai_ujian extends CI_Controller
         is_login();
         $this->load->model('Nilai_ujian_model');
         $this->load->model('Siswa_model');
+        $this->load->model('Guru_model');
         $this->load->model('Surat_model');
         $this->load->model('Tahunajaran_model');
         $this->load->library('form_validation');
+        $this->load->model('sekolah_model');
     }
 
     public function index($kelas_id)
@@ -93,14 +95,16 @@ class Nilai_ujian extends CI_Controller
         }
 
         $siswa = $this->Siswa_model->get_all($kelas_id);
+        $guru = $this->Guru_model->get_all($kelas_id);
         $tahunajaran = $this->Tahunajaran_model->get_all();
-        $surat = $this->Surat_model->get_all();
         $data = array(
             'button' => 'Create',
             'action' => site_url('nilai_ujian/create_action'),
             'nilai_id' => set_value('nilai_id'),
             'siswa_list' => $siswa,
             'siswa_id' => set_value('siswa_id'),
+            'guru_list' => $guru,
+            'guru_id' => set_value('guru_id'),
             'juz' => set_value('juz'),
             'akumulasi' => set_value('akumulasi'),
             'tahunajaran_list' => $tahunajaran,
@@ -122,6 +126,7 @@ class Nilai_ujian extends CI_Controller
         } else {
             $data = array(
                 'siswa_id' => $this->input->post('siswa_id', TRUE),
+                'guru_id' => $this->input->post('guru_id', TRUE),
                 'juz' => $this->input->post('juz'),
                 'akumulasi' => $this->input->post('akumulasi'),
                 'tahun_ajaran_id' => $this->input->post('tahun_ajaran_id'),
@@ -147,8 +152,8 @@ class Nilai_ujian extends CI_Controller
 
         $row = $this->Nilai_ujian_model->get_by_id($id);
         $siswa = $this->Siswa_model->get_all($kelas_id);
+        $guru = $this->Guru_model->get_all($kelas_id);
         $tahunajaran = $this->Tahunajaran_model->get_all();
-        $surat = $this->Surat_model->get_all();
         if ($row) {
             $data = array(
                 'button' => 'Update',
@@ -156,7 +161,8 @@ class Nilai_ujian extends CI_Controller
                 'nilai_id' => set_value('nilai_id', $row->nilai_id),
                 'siswa_list' => $siswa,
                 'siswa_id' => set_value('siswa_id', $row->siswa_id),
-                'surat_list' => $surat,
+                'guru_list' => $guru,
+                'guru_id' => set_value('guru_id', $row->guru_id),
                 'juz' => set_value('juz', $row->juz),
                 'akumulasi' => set_value('akumulasi', $row->akumulasi),
                 'tahunajaran_list' => $tahunajaran,
@@ -183,6 +189,7 @@ class Nilai_ujian extends CI_Controller
         } else {
             $data = array(
                 'siswa_id' => $this->input->post('siswa_id', TRUE),
+                'guru_id' => $this->input->post('guru_id', TRUE),
                 'juz' => $this->input->post('juz'),
                 'akumulasi' => $this->input->post('akumulasi'),
                 'tahun_ajaran_id' => $this->input->post('tahun_ajaran_id'),
@@ -220,6 +227,7 @@ class Nilai_ujian extends CI_Controller
     public function _rules()
     {
         $this->form_validation->set_rules('siswa_id', 'Siswa', 'trim|required');
+        $this->form_validation->set_rules('guru_id', 'Guru', 'trim|required');
         $this->form_validation->set_rules('juz', 'Juz', 'trim|required');
         $this->form_validation->set_rules('akumulasi', 'Akumulasi', 'trim|required');
         $this->form_validation->set_rules('nilai', 'nilai', 'trim|required');
@@ -308,14 +316,17 @@ class Nilai_ujian extends CI_Controller
     {
         $ujian = $this->Nilai_ujian_model->get_by_id($id);
         $siswa = $this->Siswa_model->get_by_id($ujian->siswa_id);
+        $sekolah = $this->sekolah_model->get();
 
         header("Content-type: application/vnd.ms-word");
         header("Content-Disposition: attachment;Filename=nilai-ujian-" . $siswa->nama_siswa . ".doc");
-
+        header("Pragma: no-cache");
+        header("Expires: 0");
 
         $data = array(
             'siswa' => $siswa,
             'ujian' => $ujian,
+            'sekolah' => $sekolah,
             'start' => 0
         );
 
