@@ -12,7 +12,7 @@
 	    <tr><td>Nama Ayah</td><td><?php echo $nama_ayah; ?></td></tr>
 	    <tr><td>No Hp Wali Murid</td><td><?php echo $no_hp_wali_murid; ?></td></tr>
 	    <tr><td>User Id</td><td><?php echo $user_id; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('siswa') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('siswa/grup') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>
     </div>

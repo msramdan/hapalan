@@ -45,18 +45,22 @@ class Siswa_model extends CI_Model
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($kelas_id,$limit, $start = 0, $q = NULL) {
+        $this->db->join('kelas', 'siswa.kelas_id = kelas.kelas_id', 'left');
         $this->db->order_by($this->id, $this->order);
+        $this->db->group_start();
         $this->db->like('siswa_id', $q);
 	$this->db->or_like('nis', $q);
 	$this->db->or_like('nama_siswa', $q);
 	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('kelas_id', $q);
+	$this->db->or_like('kelas.nama_kelas', $q);
 	$this->db->or_like('nama_ibu', $q);
 	$this->db->or_like('nama_ayah', $q);
 	$this->db->or_like('no_hp_wali_murid', $q);
 	$this->db->or_like('user_id', $q);
+    $this->db->group_end();
 	$this->db->limit($limit, $start);
+    $this->db->where('siswa.kelas_id', $kelas_id);
         return $this->db->get($this->table)->result();
     }
 

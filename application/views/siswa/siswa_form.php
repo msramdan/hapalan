@@ -43,7 +43,7 @@
 	    <tr><td width='200'>User Id <?php echo form_error('user_id') ?></td><td><input type="text" class="form-control" name="user_id" id="user_id" placeholder="User Id" value="<?php echo $user_id; ?>" /></td></tr>
 	    <tr><td></td><td><input type="hidden" name="siswa_id" value="<?php echo $siswa_id; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
-	    <a href="<?php echo site_url('siswa') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a></td></tr>
+	    <a href="<?php echo site_url('siswa/grup') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a></td></tr>
 	</table></form>        </div>
 </div>
 </div>

@@ -18,28 +18,30 @@ class Siswa extends CI_Controller
 
     public function index()
     {
+        $kelas_id = $_GET['kelas_id'];
+
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->uri->segment(3));
         
         if ($q <> '') {
             $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/siswa2/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'index.php/siswa/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'index.php/siswa2/index/';
-            $config['first_url'] = base_url() . 'index.php/siswa2/index/';
+            $config['base_url'] = base_url() . 'index.php/siswa/index/';
+            $config['first_url'] = base_url() . 'index.php/siswa/index/';
         }
 
         $config['per_page'] = 10;
         $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Siswa2_model->total_rows($q);
-        $siswa2 = $this->Siswa2_model->get_limit_data($config['per_page'], $start, $q);
+        $config['total_rows'] = $this->Siswa_model->total_rows($q);
+        $siswa = $this->Siswa_model->get_limit_data($kelas_id,$config['per_page'], $start, $q);
         $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
         $config['full_tag_close'] = '</ul>';
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
-            'siswa2_data' => $siswa2,
+            'siswa_data' => $siswa,
             'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
@@ -56,7 +58,7 @@ class Siswa extends CI_Controller
             'tingkat_data' => $this->Tingkat_model->get_all(),
             'app_setting' =>$this->App_setting_model->get_by_id(1),
         );
-        $this->template->load('template','siswa/siswa_list', $data);
+        $this->template->load('template','siswa/siswa_group', $data);
     }
 
 
@@ -79,7 +81,7 @@ class Siswa extends CI_Controller
             $this->template->load('template','siswa/siswa_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         }
     }
 
@@ -123,7 +125,7 @@ class Siswa extends CI_Controller
 
             $this->Siswa_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success 2');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         }
     }
     
@@ -150,7 +152,7 @@ class Siswa extends CI_Controller
             $this->template->load('template','siswa/siswa_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         }
     }
     
@@ -174,7 +176,7 @@ class Siswa extends CI_Controller
 
             $this->Siswa_model->update($this->input->post('siswa_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         }
     }
     
@@ -185,10 +187,10 @@ class Siswa extends CI_Controller
         if ($row) {
             $this->Siswa_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('siswa'));
+            redirect(site_url('siswa/grup'));
         }
     }
 
