@@ -21,6 +21,7 @@ class App_setting extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('app_setting/update_action'),
         'id' => set_value('id', $row->id),
         'nama_aplikasi' => set_value('nama_aplikasi', $row->nama_aplikasi),

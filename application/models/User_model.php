@@ -100,6 +100,12 @@ class User_model extends CI_Model
         $this->db->delete($this->table);
     }
 
+    public function ubah_data($data, $id)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->update('user', $data);
+    }
+
 }
 
 /* End of file User_model.php */

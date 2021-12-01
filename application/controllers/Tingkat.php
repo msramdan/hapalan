@@ -9,38 +9,16 @@ class Tingkat extends CI_Controller
     {
         parent::__construct();
         is_login();
+        $this->load->model('App_setting_model');
         $this->load->model('Tingkat_model');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/tingkat/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'index.php/tingkat/index/';
-            $config['first_url'] = base_url() . 'index.php/tingkat/index/';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Tingkat_model->total_rows($q);
-        $tingkat = $this->Tingkat_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
-        $config['full_tag_close'] = '</ul>';
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
         $data = array(
-            'tingkat_data' => $tingkat,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
+            'tingkat_data' => $this->Tingkat_model->get_all(),
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
         );
         $this->template->load('template','tingkat/tingkat_list', $data);
     }
@@ -51,6 +29,7 @@ class Tingkat extends CI_Controller
         if ($row) {
             $data = array(
 		'tingkat_id' => $row->tingkat_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'nama_tingkat' => $row->nama_tingkat,
 	    );
             $this->template->load('template','tingkat/tingkat_read', $data);
@@ -64,6 +43,7 @@ class Tingkat extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('tingkat/create_action'),
 	    'tingkat_id' => set_value('tingkat_id'),
 	    'nama_tingkat' => set_value('nama_tingkat'),
@@ -83,7 +63,7 @@ class Tingkat extends CI_Controller
 	    );
 
             $this->Tingkat_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('tingkat'));
         }
     }
@@ -95,6 +75,7 @@ class Tingkat extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('tingkat/update_action'),
 		'tingkat_id' => set_value('tingkat_id', $row->tingkat_id),
 		'nama_tingkat' => set_value('nama_tingkat', $row->nama_tingkat),

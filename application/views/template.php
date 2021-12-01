@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Webs Apps</title>
+  <title><?= $app_setting->nama_aplikasi ?></title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -31,7 +31,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="brand">
         <a href="index.html">
-          <strong style="color: white; font-size: 18px">Aplikasi HQ</strong>
+          <strong style="color: white; font-size: 18px"><?= $app_setting->nama_aplikasi ?></strong>
         </a>
       </div>
       <div class="container-fluid">
@@ -42,7 +42,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= base_url() ?>admin/assets/img/<?= $this->fungsi->user_login()->photo ?>" alt="">
+                <img src="<?= base_url() ?>admin/assets/img/user/<?= $this->fungsi->user_login()->photo ?>" alt="">
                 <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
               </a>
               <ul class="dropdown-menu logged-user-menu">
@@ -63,7 +63,7 @@
               <div id="masterdata" class="collapse" aria-expanded="false" style="height: 0px;">
                 <ul class="submenu">
                   <li><a href="<?= base_url() ?>guru">Data Guru</a></li>
-                  <li><a href="<?= base_url() ?>siswa">Data Siswa</a></li>
+                  <li><a href="<?= base_url() ?>siswa/grup">Data Siswa</a></li>
                   <li><a href="<?= base_url() ?>tingkat">Data Kelas</a></li>
                   <li><a href="<?= base_url() ?>kelompok">Data Kelompok</a></li>
                   <li><a href="<?= base_url() ?>surat">Data Surat</a></li>

@@ -8,12 +8,17 @@ class Auth extends CI_Controller
   {
     parent::__construct();
     $this->load->model('User_model');
+    $this->load->model('App_setting_model');
   }
 
   public function index()
   {
     check_already_login();
-    $this->load->view('auth/login');
+
+    $data = array(
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
+        );
+    $this->load->view('auth/login',$data);
   }
 
   public function process()

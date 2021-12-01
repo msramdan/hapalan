@@ -4,7 +4,7 @@
 	
 <!-- Mirrored from demo.thedevelovers.com/dashboard/klorofilpro-v1.6/html/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Feb 2019 02:56:33 GMT -->
 <head>
-		<title>Login | Klorofil Pro - Bootstrap Admin Dashboard Template</title>
+		<title>Login | <?= $app_setting->nama_aplikasi ?></title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">

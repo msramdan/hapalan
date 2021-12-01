@@ -10,6 +10,7 @@ class History_login extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('History_login_model');
+        $this->load->model('App_setting_model');
         $this->load->library('form_validation');
     }
 
@@ -37,6 +38,7 @@ class History_login extends CI_Controller
 
         $data = array(
             'history_login_data' => $history_login,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
@@ -51,6 +53,7 @@ class History_login extends CI_Controller
         if ($row) {
             $data = array(
 		'id' => $row->id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'username' => $row->username,
 		'info' => $row->info,
 		'tanggal' => $row->tanggal,
@@ -67,6 +70,7 @@ class History_login extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('history_login/create_action'),
 	    'id' => set_value('id'),
 	    'user_id' => set_value('user_id'),
@@ -104,6 +108,7 @@ class History_login extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('history_login/update_action'),
 		'id' => set_value('id', $row->id),
 		'user_id' => set_value('user_id', $row->user_id),

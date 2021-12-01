@@ -8,7 +8,8 @@ class Tahun_ajaran extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        // is_login();
+        is_login();
+        $this->load->model('App_setting_model');
         $this->load->model('Tahun_ajaran_model');
         $this->load->library('form_validation');
     }
@@ -37,6 +38,7 @@ class Tahun_ajaran extends CI_Controller
 
         $data = array(
             'tahun_ajaran_data' => $tahun_ajaran,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
@@ -51,6 +53,7 @@ class Tahun_ajaran extends CI_Controller
         if ($row) {
             $data = array(
 		'tahun_ajaran_id' => $row->tahun_ajaran_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'tahun_ajaran' => $row->tahun_ajaran,
 		'status' => $row->status,
 	    );
@@ -65,6 +68,7 @@ class Tahun_ajaran extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('tahun_ajaran/create_action'),
 	    'tahun_ajaran_id' => set_value('tahun_ajaran_id'),
 	    'tahun_ajaran' => set_value('tahun_ajaran'),
@@ -98,6 +102,7 @@ class Tahun_ajaran extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('tahun_ajaran/update_action'),
 		'tahun_ajaran_id' => set_value('tahun_ajaran_id', $row->tahun_ajaran_id),
 		'tahun_ajaran' => set_value('tahun_ajaran', $row->tahun_ajaran),

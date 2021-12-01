@@ -10,6 +10,7 @@ class Guru extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Guru_model');
+        $this->load->model('App_setting_model');
         $this->load->library('form_validation');
     }
 
@@ -37,6 +38,7 @@ class Guru extends CI_Controller
 
         $data = array(
             'guru_data' => $guru,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
@@ -51,6 +53,7 @@ class Guru extends CI_Controller
         if ($row) {
             $data = array(
 		'guru_id' => $row->guru_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'nip' => $row->nip,
 		'nama_guru' => $row->nama_guru,
 		'jenis_kelamin' => $row->jenis_kelamin,
@@ -68,6 +71,7 @@ class Guru extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('guru/create_action'),
 	    'guru_id' => set_value('guru_id'),
 	    'nip' => set_value('nip'),
@@ -107,6 +111,7 @@ class Guru extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('guru/update_action'),
 		'guru_id' => set_value('guru_id', $row->guru_id),
 		'nip' => set_value('nip', $row->nip),

@@ -10,39 +10,9 @@ class Kelas extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Kelas_model');
+        $this->load->model('Tingkat_model');
+        $this->load->model('App_setting_model');
         $this->load->library('form_validation');
-    }
-
-    public function index()
-    {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->uri->segment(3));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/kelas/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'index.php/kelas/index/';
-            $config['first_url'] = base_url() . 'index.php/kelas/index/';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Kelas_model->total_rows($q);
-        $kelas = $this->Kelas_model->get_limit_data($config['per_page'], $start, $q);
-        $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
-        $config['full_tag_close'] = '</ul>';
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            'kelas_data' => $kelas,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
-        $this->template->load('template','kelas/kelas_list', $data);
     }
 
     public function read($id) 
@@ -51,13 +21,14 @@ class Kelas extends CI_Controller
         if ($row) {
             $data = array(
 		'kelas_id' => $row->kelas_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'tingkat_id' => $row->tingkat_id,
 		'nama_kelas' => $row->nama_kelas,
 	    );
             $this->template->load('template','kelas/kelas_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('kelas'));
+            redirect(site_url('tingkat'));
         }
     }
 
@@ -65,6 +36,8 @@ class Kelas extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'tingkat' => $this->Tingkat_model->get_all(),
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('kelas/create_action'),
 	    'kelas_id' => set_value('kelas_id'),
 	    'tingkat_id' => set_value('tingkat_id'),
@@ -86,8 +59,8 @@ class Kelas extends CI_Controller
 	    );
 
             $this->Kelas_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
-            redirect(site_url('kelas'));
+            $this->session->set_flashdata('message', 'Create Record Success');
+            redirect(site_url('tingkat'));
         }
     }
     
@@ -98,6 +71,8 @@ class Kelas extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'tingkat' => $this->Tingkat_model->get_all(),
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('kelas/update_action'),
 		'kelas_id' => set_value('kelas_id', $row->kelas_id),
 		'tingkat_id' => set_value('tingkat_id', $row->tingkat_id),
@@ -106,7 +81,7 @@ class Kelas extends CI_Controller
             $this->template->load('template','kelas/kelas_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('kelas'));
+            redirect(site_url('tingkat'));
         }
     }
     
@@ -124,7 +99,7 @@ class Kelas extends CI_Controller
 
             $this->Kelas_model->update($this->input->post('kelas_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('kelas'));
+            redirect(site_url('tingkat'));
         }
     }
     
@@ -135,10 +110,10 @@ class Kelas extends CI_Controller
         if ($row) {
             $this->Kelas_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('kelas'));
+            redirect(site_url('tingkat'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('kelas'));
+            redirect(site_url('tingkat'));
         }
     }
 

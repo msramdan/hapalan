@@ -9,6 +9,7 @@ class User extends CI_Controller
     {
         parent::__construct();
         is_login();
+        $this->load->model('App_setting_model');
         $this->load->model('User_model');
         $this->load->library('form_validation');
     }
@@ -37,6 +38,7 @@ class User extends CI_Controller
 
         $data = array(
             'user_data' => $user,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
@@ -51,6 +53,7 @@ class User extends CI_Controller
         if ($row) {
             $data = array(
 		'user_id' => $row->user_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'username' => $row->username,
 		'password' => $row->password,
 		'email' => $row->email,
@@ -68,6 +71,7 @@ class User extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('user/create_action'),
 	    'user_id' => set_value('user_id'),
 	    'username' => set_value('username'),
@@ -86,16 +90,26 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+            $config['upload_path']      = './admin/assets/img/user'; 
+            $config['allowed_types']    = 'jpg|png|jpeg'; 
+            $config['max_size']         = 10048; 
+            $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
+            $this->load->library('upload',$config);
+            $this->upload->initialize($config);
+            $this->upload->do_upload("photo");
+            $data = $this->upload->data();
+            $photo =$data['file_name'];
+
             $data = array(
-		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'photo' => $this->input->post('photo',TRUE),
-		'level' => $this->input->post('level',TRUE),
-	    );
+        		'username' => $this->input->post('username',TRUE),
+                'password' => sha1($this->input->post('password',TRUE)),
+        		'email' => $this->input->post('email',TRUE),
+        		'photo' => $photo,
+        		'level' => $this->input->post('level',TRUE),
+        	);
 
             $this->User_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('user'));
         }
     }
@@ -107,6 +121,7 @@ class User extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('user/update_action'),
 		'user_id' => set_value('user_id', $row->user_id),
 		'username' => set_value('username', $row->username),
@@ -129,13 +144,44 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('user_id', TRUE));
         } else {
-            $data = array(
-		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'photo' => $this->input->post('photo',TRUE),
-		'level' => $this->input->post('level',TRUE),
-	    );
+
+            $config['upload_path']      = './admin/assets/img/user'; 
+            $config['allowed_types']    = 'jpg|png|jpeg'; 
+            $config['max_size']         = 10048; 
+            $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
+            $this->load->library('upload',$config);
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload("photo")) {
+            $id = $this->input->post('user_id');
+            $row = $this->User_model->get_by_id($id);
+            $data = $this->upload->data();
+            $photo =$data['file_name'];
+            if($row->photo==null || $row->photo==''){
+            }else{
+            $target_file = './admin/assets/img/user/'.$row->photo;
+            unlink($target_file);
+            }
+                }else{
+                $photo = $this->input->post('photo_lama');
+            }
+
+            if ($this->input->post('password')==''||$this->input->post('password')==null) {            
+                 $data = array(
+                    'username' => $this->input->post('username',TRUE),
+                    'email' => $this->input->post('email',TRUE),
+                    'photo' => $photo,
+                    'level' => $this->input->post('level',TRUE),
+                );
+            }else{
+                $data = array(
+                'username' => $this->input->post('username',TRUE),
+                'password' => sha1($this->input->post('password',TRUE)),
+                'email' => $this->input->post('email',TRUE),
+                'photo' => $photo,
+                'level' => $this->input->post('level',TRUE),
+                );
+            }
 
             $this->User_model->update($this->input->post('user_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -148,6 +194,11 @@ class User extends CI_Controller
         $row = $this->User_model->get_by_id($id);
 
         if ($row) {
+            if($row->photo==null || $row->photo=='' ){
+                }else{
+                $target_file = './admin/assets/img/user/'.$row->photo;
+                unlink($target_file);
+                }
             $this->User_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('user'));
@@ -160,9 +211,8 @@ class User extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
+	// $this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
-	$this->form_validation->set_rules('photo', 'photo', 'trim|required');
 	$this->form_validation->set_rules('level', 'level', 'trim|required');
 
 	$this->form_validation->set_rules('user_id', 'user_id', 'trim');
@@ -214,6 +264,10 @@ class User extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+    public function download($gambar){
+        force_download('admin/assets/img/user/'.$gambar,NULL);
     }
 
 }

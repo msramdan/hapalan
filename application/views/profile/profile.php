@@ -9,7 +9,7 @@
         <div class="box box-primary">
           <center>
           <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url() ?>admin/assets/img/<?= $this->fungsi->user_login()->photo ?>" alt="">
+            <a href="#modal-dialog" data-bs-toggle="modal"><img style="width: 150px;height: 150px;border-radius: 5%;" src="<?php echo base_url().'/admin/assets/img/user/'.$this->fungsi->user_login()->photo ?>" /></a>
             <h3 class="profile-username text-center"><?= ucfirst($this->fungsi->user_login()->username) ?></h3>
             <p class="text-muted text-center"><?= $this->fungsi->user_login()->level ?>
             </p>
@@ -42,7 +42,7 @@
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="activity">
-              <form class="form-horizontal" action="<?php echo base_url() ?>user/edit_profil/<?= $this->fungsi->user_login()->user_id ?>" enctype="multipart/form-data" role="form" method="post">
+              <form class="form-horizontal" action="<?php echo base_url() ?>profile/edit_profil/<?= $this->fungsi->user_login()->user_id ?>" enctype="multipart/form-data" role="form" method="post">
                 <div class="form-group">
                   <label for="username" class="col-sm-2 control-label">Username*</label>
                   <div class="col-sm-10">
@@ -65,7 +65,7 @@
               </form>
             </div>
             <div class="tab-pane" id="settings">
-              <form class="form-horizontal" action="<?php echo base_url() ?>user/edit_password/<?= $this->fungsi->user_login()->user_id ?>" enctype="multipart/form-data" role="form" method="post">
+              <form class="form-horizontal" action="<?php echo base_url() ?>profile/edit_password/<?= $this->fungsi->user_login()->user_id ?>" enctype="multipart/form-data" role="form" method="post">
                 <div class="form-group">
                   <label for="inputName" class="col-sm-2 control-label">Old Password</label>
                   <div class="col-sm-10">
@@ -75,13 +75,13 @@
                 <div class="form-group">
                   <label for="inputName" class="col-sm-2 control-label">New Password</label>
                   <div class="col-sm-10">
-                    <input id="password" class="form-control" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Minimal 6 Karakter' : ''); if(this.checkValidity()) form.passcon.pattern = this.value;" placeholder="Password Baru" required>
+                    <input id="password" class="form-control" name="password" type="password" pattern="^\S{5,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Minimal 5 Karakter' : ''); if(this.checkValidity()) form.passcon.pattern = this.value;" placeholder="Password Baru" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputName" class="col-sm-2 control-label">Verify Password</label>
                   <div class="col-sm-10">
-                    <input class="form-control" id="passcon" name="passcon" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Masukkan Password Yang Sama' : '');" placeholder="Verify Password" required>
+                    <input class="form-control" id="passcon" name="passcon" type="password" pattern="^\S{5,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Masukkan Password Yang Sama' : '');" placeholder="Verify Password" required>
                   </div>
                 </div>
                 <div class="form-group">

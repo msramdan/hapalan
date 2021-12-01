@@ -40,7 +40,6 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                
             </div>
         </div>
         <div class="box-body" style="overflow-x: scroll;">
@@ -50,9 +49,10 @@
         		<th>Nip</th>
         		<th>Nama Guru</th>
         		<th>Jenis Kelamin</th>
-        		<th>Alamat</th>>
+        		<th>Alamat</th>
         		<th>Action</th>
-            </tr><?php
+            </tr>
+            <?php
             foreach ($guru_data as $guru) { ?>
                 <tr>
         			<td width="10px"><?php echo ++$start ?></td>

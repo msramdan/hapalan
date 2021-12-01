@@ -8,12 +8,16 @@ class Backup extends CI_Controller
 	{
 		parent::__construct();
 		is_login();
+		$this->load->model('App_setting_model');
 		// check_admin();
 	}
 
 	public function index()
 	{
-		$this->template->load('template', 'backup/view');
+		$data = array(
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
+        );
+		$this->template->load('template', 'backup/view',$data);
 	}
 
 	public function file()

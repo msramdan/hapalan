@@ -10,6 +10,8 @@ class Siswa extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Siswa_model');
+        $this->load->model('App_setting_model');
+        $this->load->model('Tingkat_model');
         $this->load->model('Kelas_model');
         $this->load->library('form_validation');
     }
@@ -21,23 +23,24 @@ class Siswa extends CI_Controller
         
         if ($q <> '') {
             $config['base_url'] = base_url() . '.php/c_url/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'index.php/siswa/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'index.php/siswa2/index.html?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 'index.php/siswa/index/';
-            $config['first_url'] = base_url() . 'index.php/siswa/index/';
+            $config['base_url'] = base_url() . 'index.php/siswa2/index/';
+            $config['first_url'] = base_url() . 'index.php/siswa2/index/';
         }
 
         $config['per_page'] = 10;
         $config['page_query_string'] = FALSE;
-        $config['total_rows'] = $this->Siswa_model->total_rows($q);
-        $siswa = $this->Siswa_model->get_limit_data($config['per_page'], $start, $q);
+        $config['total_rows'] = $this->Siswa2_model->total_rows($q);
+        $siswa2 = $this->Siswa2_model->get_limit_data($config['per_page'], $start, $q);
         $config['full_tag_open'] = '<ul class="pagination pagination-sm no-margin pull-right">';
         $config['full_tag_close'] = '</ul>';
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
-            'siswa_data' => $siswa,
+            'siswa2_data' => $siswa2,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
@@ -46,6 +49,17 @@ class Siswa extends CI_Controller
         $this->template->load('template','siswa/siswa_list', $data);
     }
 
+    public function grup()
+    {
+        $data = array(
+            'siswa_data' => $this->Siswa_model->get_all(),
+            'tingkat_data' => $this->Tingkat_model->get_all(),
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
+        );
+        $this->template->load('template','siswa/siswa_list', $data);
+    }
+
+
     public function read($id) 
     {
         $row = $this->Siswa_model->get_by_id($id);
@@ -53,6 +67,7 @@ class Siswa extends CI_Controller
             $data = array(
 		'siswa_id' => $row->siswa_id,
 		'nis' => $row->nis,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'nama_siswa' => $row->nama_siswa,
 		'jenis_kelamin' => $row->jenis_kelamin,
 		'kelas_id' => $row->kelas_id,
@@ -76,6 +91,7 @@ class Siswa extends CI_Controller
             'action' => site_url('siswa/create_action'),
 	    'siswa_id' => set_value('siswa_id'),
 	    'nis' => set_value('nis'),
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 	    'nama_siswa' => set_value('nama_siswa'),
 	    'jenis_kelamin' => set_value('jenis_kelamin'),
 	    'kelas_id' => set_value('kelas_id'),
@@ -118,6 +134,7 @@ class Siswa extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'kelas' => $this->Kelas_model->get_all(),
                 'action' => site_url('siswa/update_action'),
 		'siswa_id' => set_value('siswa_id', $row->siswa_id),

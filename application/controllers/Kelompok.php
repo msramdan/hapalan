@@ -10,6 +10,7 @@ class Kelompok extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Kelompok_model');
+        $this->load->model('App_setting_model');
         $this->load->model('Tahun_ajaran_model');
         $this->load->library('form_validation');
     }
@@ -42,6 +43,7 @@ class Kelompok extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
         );
         $this->template->load('template','kelompok/kelompok_list', $data);
     }
@@ -52,6 +54,7 @@ class Kelompok extends CI_Controller
         if ($row) {
             $data = array(
 		'kelompok_id' => $row->kelompok_id,
+        'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'nama_kelompok' => $row->nama_kelompok,
 		'tahun_ajaran' => $row->tahun_ajaran,
 	    );
@@ -66,6 +69,7 @@ class Kelompok extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
             'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all(),
             'action' => site_url('kelompok/create_action'),
 	    'kelompok_id' => set_value('kelompok_id'),
@@ -100,6 +104,7 @@ class Kelompok extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all(),
                 'action' => site_url('kelompok/update_action'),
 		'kelompok_id' => set_value('kelompok_id', $row->kelompok_id),
