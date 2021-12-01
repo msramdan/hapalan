@@ -16,8 +16,6 @@
 		<link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/main.min.css">
 		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 		<link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/demo.min.css">
-		<!-- GOOGLE FONTS -->
-		<link href="<?= base_url() ?>admin/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>admin/assets/img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="<?= base_url() ?>admin/assets/img/favicon.png">
@@ -32,7 +30,7 @@
 							<div class="content">
 								<div class="header">
 									<div class="logo text-center">
-										<img src="<?= base_url() ?>admin/assets/img/logo-dark.png" alt="Klorofil Logo">
+										<img style="width: 100%" src="<?= base_url() ?>admin/assets/img/salam.png" alt="">
 									</div>
 									<p class="lead">Login to your account</p>
 								</div>
@@ -56,10 +54,7 @@
 							</div>
 						</div>
 						<div class="right">
-							<div class="overlay"></div>
 							<div class="content text">
-								<h1 class="heading">Klorofil Pro - Bootstrap dashboard template</h1>
-								<p>by The Develovers</p>
 							</div>
 						</div>
 						<div class="clearfix"></div>

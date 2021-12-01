@@ -25,6 +25,7 @@ class History_login_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
+        $this->db->join('user', 'history_login.user_id = user.user_id', 'left');
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
@@ -42,9 +43,10 @@ class History_login_model extends CI_Model
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
+        $this->db->join('user', 'history_login.user_id = user.user_id', 'left');
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id', $q);
-	$this->db->or_like('user_id', $q);
+	$this->db->or_like('username', $q);
 	$this->db->or_like('info', $q);
 	$this->db->or_like('tanggal', $q);
 	$this->db->or_like('user_agent', $q);

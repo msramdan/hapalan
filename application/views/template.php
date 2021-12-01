@@ -6,32 +6,27 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <!-- VENDOR CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/themify-icons/css/themify-icons.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/vendor/pace/themes/orange/pace-theme-minimal.css">
-  <!-- MAIN CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/main.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/sidebar-nav-darkgray.css" type="text/css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/navbar3.css" type="text/css">
-  <!-- FOR DEMO PURPOSES ONLY. You should/may remove this in your project -->
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/demo.min.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- ICONS -->
   <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>admin/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url() ?>admin/assets/img/favicon.png">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 
 <body>
+  <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
+    <?php if ($this->session->flashdata('message') ) : ?>
+    <?php endif; ?>
+
   <!-- WRAPPER -->
   <div id="wrapper">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
-
-    <?php if ($this->session->flashdata('message')) : ?>
-
-    <?php endif; ?>
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="brand">
@@ -43,19 +38,15 @@
         <div id="tour-fullwidth" class="navbar-btn">
           <button type="button" class="btn-toggle-fullwidth"><i class="ti-arrow-circle-left"></i></button>
         </div>
-        <form class="navbar-form navbar-left search-form">
-          <input type="text" value="" class="form-control" placeholder="Search dashboard...">
-          <button type="button" class="btn btn-default"><i class="fa fa-search"></i></button>
-        </form>
         <div id="navbar-menu">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= base_url() ?>admin/assets/img/<?= $this->fungsi->user_login()->photo ?>" alt="Avatar">
+                <img src="<?= base_url() ?>admin/assets/img/<?= $this->fungsi->user_login()->photo ?>" alt="">
                 <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
               </a>
               <ul class="dropdown-menu logged-user-menu">
-                <li><a href="<?= site_url('profil') ?>"><i class="ti-user"></i> <span>My Profile</span></a></li>
+                <li><a href="<?= site_url('profile') ?>"><i class="ti-user"></i> <span>My Profile</span></a></li>
                 <li><a href="<?= site_url('auth/logout') ?>"><i class="ti-power-off"></i> <span>Logout</span></a></li>
               </ul>
             </li>
@@ -71,11 +62,11 @@
               <a href="#masterdata" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="ti-list"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="masterdata" class="collapse" aria-expanded="false" style="height: 0px;">
                 <ul class="submenu">
-                  <li><a href="">Data Guru</a></li>
-                  <li><a href="">Data Siswa</a></li>
-                  <li><a href="">Data Kelas</a></li>
-                  <li><a href="">Data Kelompok</a></li>
-                  <li><a href="">Data Surat</a></li>
+                  <li><a href="<?= base_url() ?>guru">Data Guru</a></li>
+                  <li><a href="<?= base_url() ?>siswa">Data Siswa</a></li>
+                  <li><a href="<?= base_url() ?>tingkat">Data Kelas</a></li>
+                  <li><a href="<?= base_url() ?>kelompok">Data Kelompok</a></li>
+                  <li><a href="<?= base_url() ?>surat">Data Surat</a></li>
                   <li><a href="<?= base_url() ?>tahun_ajaran">Data Tahun Ajar</a></li>
                   <li><a href="">Akses Kelas Guru</a></li>
                 </ul>
@@ -86,9 +77,9 @@
               <a href="#pengaturan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="fa fa-cogs"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="pengaturan" class="collapse" aria-expanded="false" style="height: 0px;">
                 <ul class="submenu">
-                  <li><a href="">Pengaturan Aplikasi</a></li>
+                  <li><a href="<?= base_url() ?>app_setting">Pengaturan Aplikasi</a></li>
                   <li><a href="<?= base_url() ?>history_login">History Login</a></li>
-                  <li><a href="">Backup Database</a></li>
+                  <li><a href="<?= base_url() ?>backup">Backup Database</a></li>
                   
                 </ul>
               </div>
@@ -182,7 +173,7 @@
         <div class="container-fluid">
           <!-- OVERVIEW -->
           <div class="panel panel-headline">
-            <div class="panel-body">
+            <div class="panel-body" style="overflow-x: scroll; ">
               <?php echo $contents ?>
             </div>
           </div>
@@ -192,22 +183,18 @@
     <!-- END MAIN -->
     <div class="clearfix"></div>
     <footer>
-      <!--         <div class="container-fluid">
-          <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com/" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
-        </div> -->
     </footer>
   </div>
   <!-- END WRAPPER -->
   <!-- Javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
   <script src="<?= base_url() ?>admin/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/vendor/pace/pace.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/scripts/klorofilpro-common.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url(); ?>admin/assets/js/sweetalert.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url(); ?>admin/assets/js/sweetalert.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> <!-- untuk sweet alret -->
-  <script src="<?php echo base_url(); ?>admin/assets/js/dataflash.js"></script>
   <script src="<?= base_url() ?>admin/assets/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/js/sweetalert2.all.min.js"></script>
+  <script src="<?= base_url() ?>admin/assets/js/my-script.js"></script>
   <script>
     $(document).ready(function() {
       $('#table1').DataTable()

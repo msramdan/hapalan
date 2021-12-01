@@ -37,9 +37,6 @@
    
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4 text-center">
-                <div style="margin-top: 8px" id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
             </div>
             <div class="col-md-1 text-right">
             </div>
@@ -51,7 +48,7 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>User Id</th>
+		<th>Username</th>
 		<th>Info</th>
 		<th>Tanggal</th>
 		<th>User Agent</th>
@@ -62,7 +59,7 @@
                 ?>
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
-			<td><?php echo $history_login->user_id ?></td>
+			<td><?php echo $history_login->username ?></td>
 			<td><?php echo $history_login->info ?></td>
 			<td><?php echo $history_login->tanggal ?></td>
 			<td><?php echo $history_login->user_agent ?></td>

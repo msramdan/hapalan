@@ -86,7 +86,7 @@ class Tahun_ajaran extends CI_Controller
 	    );
 
             $this->Tahun_ajaran_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('tahun_ajaran'));
         }
     }

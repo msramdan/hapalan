@@ -7,7 +7,7 @@
             </div>
             <form action="<?php echo $action; ?>" method="post">
             
-<table class='table table-bordered>'        
+<table class='table table-bordered'>       
 
 	    <tr><td width='200'>Tahun Ajaran <?php echo form_error('tahun_ajaran') ?></td><td><input type="text" class="form-control" name="tahun_ajaran" id="tahun_ajaran" placeholder="Tahun Ajaran" value="<?php echo $tahun_ajaran; ?>" /></td></tr>
 	    <tr><td width='200'>Status <?php echo form_error('status') ?></td><td><input type="text" class="form-control" name="status" id="status" placeholder="Status" value="<?php echo $status; ?>" /></td></tr>

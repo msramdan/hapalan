@@ -4,7 +4,7 @@
     <body>
         <h2 style="margin-top:0px">History_login Read</h2>
         <table class="table">
-	    <tr><td>User Id</td><td><?php echo $user_id; ?></td></tr>
+	    <tr><td>User Id</td><td><?php echo $username; ?></td></tr>
 	    <tr><td>Info</td><td><?php echo $info; ?></td></tr>
 	    <tr><td>Tanggal</td><td><?php echo $tanggal; ?></td></tr>
 	    <tr><td>User Agent</td><td><?php echo $user_agent; ?></td></tr>

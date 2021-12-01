@@ -38,9 +38,6 @@
    
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4 text-center">
-                <div style="margin-top: 8px" id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
             </div>
             <div class="col-md-1 text-right">
             </div>
@@ -62,7 +59,13 @@
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $tahun_ajaran->tahun_ajaran ?></td>
-			<td><?php echo $tahun_ajaran->status ?></td>
+            <?php
+            if ($tahun_ajaran->status ==1) { ?>
+                 <td>Aktif</td>
+             <?php }else{ ?>
+                <td>Non Aktif</td>
+             <?php } ?>
+			
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('tahun_ajaran/read/'.$tahun_ajaran->tahun_ajaran_id),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-success btn-sm"'); 

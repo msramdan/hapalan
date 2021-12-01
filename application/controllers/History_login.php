@@ -51,7 +51,7 @@ class History_login extends CI_Controller
         if ($row) {
             $data = array(
 		'id' => $row->id,
-		'user_id' => $row->user_id,
+		'username' => $row->username,
 		'info' => $row->info,
 		'tanggal' => $row->tanggal,
 		'user_agent' => $row->user_agent,
