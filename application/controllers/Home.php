@@ -5,19 +5,15 @@ class Home extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
-        is_login();    
+        is_login();
+        // check_admin();
     }
 
-	public function index()
+	function index()
 	{
-		$user_session = $this->session->userdata('userid');
-		if (!$user_session) {
-			redirect('auth/login');
-		}else if ($user_session==1 || $user_session==2 ) {
-			$this->template->load('template','dashboard');
-		}else{
-			$this->template->load('template','home');
-		}
-		
+		$data = array(
+            'bahan_baku_data' => 'Judul',
+        );
+		$this->template->load('template','home/index',$data);
 	}
 }

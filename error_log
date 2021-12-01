@@ -1,0 +1,16 @@
+[12-Apr-2021 18:38:37 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:38:41 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:38:44 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:38:56 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Akses_kelas_walikelas_model.php on line 37
+[12-Apr-2021 18:41:30 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:41:32 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:41:34 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:41:38 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:41:39 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Siswa_model.php on line 42
+[12-Apr-2021 18:41:41 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 18:41:45 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Siswa_model.php on line 42
+[12-Apr-2021 18:41:50 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Siswa_model.php on line 42
+[12-Apr-2021 18:41:53 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Siswa_model.php on line 42
+[12-Apr-2021 21:05:39 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 21:05:42 Asia/Jakarta] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/ptnhacom/public_html/hapalan/system/database/DB_query_builder.php on line 1429
+[12-Apr-2021 21:05:55 Asia/Jakarta] PHP Fatal error:  Call to a member function result() on boolean in /home2/ptnhacom/public_html/hapalan/application/models/Siswa_model.php on line 42

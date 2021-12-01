@@ -17,26 +17,26 @@
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/skins/navbar3.css" type="text/css">
   <!-- FOR DEMO PURPOSES ONLY. You should/may remove this in your project -->
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/css/demo.min.css">
-  <link rel="stylesheet" href="demo-panel/style-switcher.css">
   <link rel="stylesheet" href="<?= base_url() ?>admin/assets/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- ICONS -->
   <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>admin/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url() ?>admin/assets/img/favicon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 
 <body>
   <!-- WRAPPER -->
   <div id="wrapper">
-    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('oke'); ?>"></div>
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 
-    <?php if ($this->session->flashdata('oke')) : ?>
+    <?php if ($this->session->flashdata('message')) : ?>
 
     <?php endif; ?>
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="brand">
         <a href="index.html">
-          <img src="<?= base_url() ?>admin/assets/img/logo-white.png" alt="Klorofil Pro Logo" class="img-responsive logo">
+          <strong style="color: white; font-size: 18px">Aplikasi HQ</strong>
         </a>
       </div>
       <div class="container-fluid">
@@ -51,7 +51,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= base_url() ?>assets/img/default-user.png" alt="Avatar">
+                <img src="<?= base_url() ?>admin/assets/img/<?= $this->fungsi->user_login()->photo ?>" alt="Avatar">
                 <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
               </a>
               <ul class="dropdown-menu logged-user-menu">
@@ -63,58 +63,40 @@
         </div>
       </div>
     </nav>
-    <!-- END NAVBAR -->
-    <!-- LEFT SIDEBAR -->
     <div id="sidebar-nav" class="sidebar">
       <nav>
         <ul class="nav" id="sidebar-nav-menu">
-          <li class="menu-group">Main</li>
-          <li><a href="<?= base_url() ?>dashboard"><i class="ti-home"></i> <span class="title">Dashboard</span></a></li>
+          <li><a href="<?= base_url() ?>home"><i class="ti-home"></i> <span class="title">Home</span></a></li>
           <li class="panel">
-            <?php if ($this->session->userdata()['level'] == '1') { ?>
-              <a href="#master" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
-              <div id="master" class="collapse ">
+              <a href="#masterdata" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="ti-list"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
+              <div id="masterdata" class="collapse" aria-expanded="false" style="height: 0px;">
                 <ul class="submenu">
-                  <li><a href="<?= base_url() ?>sekolah"">Data Sekolah</a></li>
-                  <li><a href=" <?= base_url() ?>Guru"">Data Guru</a></li>
-                  <li><a href=" <?= base_url() ?>Siswa"">Data Siswa</a></li>
-                  <li><a href=" <?= base_url() ?>Kelas"">Data Kelas</a></li>
-                  <li><a href=" <?= base_url() ?>tahunajaran"">Data Tahun Ajaran</a></li>
+                  <li><a href="">Data Guru</a></li>
+                  <li><a href="">Data Siswa</a></li>
+                  <li><a href="">Data Kelas</a></li>
+                  <li><a href="">Data Kelompok</a></li>
+                  <li><a href="">Data Surat</a></li>
+                  <li><a href="<?= base_url() ?>tahun_ajaran">Data Tahun Ajar</a></li>
+                  <li><a href="">Akses Kelas Guru</a></li>
                 </ul>
               </div>
           </li>
-        <?php } ?>
-        <li class=" panel">
-                      <a href="#penilaian" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="ti-receipt"></i> <span class="title">Penilaian</span> <i class="icon-submenu ti-angle-left"></i></a>
-                      <div id="penilaian" class="collapse ">
-                        <ul class="submenu">
-                          <li><a href="<?= base_url() ?>nilai">Harian</a></li>
-                          <li><a href=" <?= base_url() ?>nilai/ujian">Ujian</a></li>
-                        </ul>
-                      </div>
-                  </li>
-                  <?php if ($this->session->userdata()['level'] == '1') { ?>
-                    <li class="panel">
-                      <a href="#pengatur" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed"><i class="fa fa-gear"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
-                      <div id="pengatur" class="collapse ">
-                        <ul class="submenu">
-                          <li><a href="<?= base_url() ?>user"">Pengaturan User</a></li>
-                  <li><a href=" <?= base_url() ?>user_role"">Pengaturan Level</a></li>
-                          <li><a href="<?= base_url() ?>backup"">Backup Database</a></li>
-                  <li><a href=" <?= base_url() ?>History_karyawan"">History Login</a></li>
-                        </ul>
-                      </div>
-                    </li>
-                  <?php } ?>
-                  <?php if ($this->session->userdata()['level'] == '1' || $this->session->userdata()['level'] == '2') { ?>
-                    <li><a href="<?= base_url() ?>laporan"><i class="ti-home"></i> <span class="title">Laporan</span></a></li>
-                  <?php } ?>
+          <li><a href="<?= base_url() ?>user"><i class="fa fa-users"></i> <span class="title">User</span></a></li>
+          <li class="panel">
+              <a href="#pengaturan" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="fa fa-cogs"></i> <span class="title">Pengaturan</span> <i class="icon-submenu ti-angle-left"></i></a>
+              <div id="pengaturan" class="collapse" aria-expanded="false" style="height: 0px;">
+                <ul class="submenu">
+                  <li><a href="">Pengaturan Aplikasi</a></li>
+                  <li><a href="<?= base_url() ?>history_login">History Login</a></li>
+                  <li><a href="">Backup Database</a></li>
+                  
                 </ul>
-                <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
+              </div>
+          </li>
+        </ul>
+        <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
       </nav>
     </div>
-    <!-- END LEFT SIDEBAR -->
-    <!-- MAIN -->
     <div class="main">
       <!-- MAIN CONTENT -->
       <div class="main-content">
@@ -217,7 +199,6 @@
   </div>
   <!-- END WRAPPER -->
   <!-- Javascript -->
-  <script src="<?= base_url() ?>admin/assets/vendor/jquery/jquery.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/vendor/pace/pace.min.js"></script>
   <script src="<?= base_url() ?>admin/assets/scripts/klorofilpro-common.min.js"></script>

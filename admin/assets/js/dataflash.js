@@ -4,7 +4,7 @@ const flasData = $('.flash-data').data('flashdata'); //dataflash ini harus di pa
 if(flasData){
 	Swal.fire(
 	  'Terima Kasih',
-	  'Data Berhasil ' + flasData,
+	   flasData,
 	  'success'
 	)
 }
