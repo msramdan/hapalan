@@ -9,7 +9,9 @@ class Guru extends CI_Controller
     {
         parent::__construct();
         is_login();
+        $this->load->model('Tahun_ajaran_model');
         $this->load->model('Guru_model');
+        $this->load->model('kelompok_model');
         $this->load->model('App_setting_model');
         $this->load->library('form_validation');
     }
@@ -219,6 +221,36 @@ class Guru extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+    function akses_kelompok($guru_id)
+    {
+
+        $data = array(
+            'Tahun_ajaran' => $this->Tahun_ajaran_model->get_all_aktif(),
+            'guru' => $this->db->get_where('guru', ['guru_id' =>$guru_id])->row_array(),
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
+        );
+
+        $this->template->load('template','guru/akses_kelompok',$data);
+    }
+
+    function changeaccess(){
+        $kelompok_id = $this->input->post('kelompok_id');
+        $guru_id = $this->input->post('guru_id');
+
+        $data=[
+            'guru_id' =>$guru_id,
+            'kelompok_id' =>$kelompok_id
+        ];
+
+        $result = $this->db->get_where('access_guru_to_kelompok', $data);
+        if ($result->num_rows() < 1) {
+            $this->db->insert('access_guru_to_kelompok', $data);
+        }else{
+            $this->db->delete('access_guru_to_kelompok', $data);
+        }
+
     }
 
 }

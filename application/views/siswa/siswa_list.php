@@ -5,14 +5,14 @@
                 <div class="box box-warning box-solid">
     
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA siswa</h3>
+                        <h3 class="box-title">KELOLA DATA SISWA</h3>
                     </div>
         
         <div class="box-body">
             <div class='row'>
             <div class='col-md-9'>
-            <div style="padding-bottom: 10px;">
-        <?php echo anchor(site_url('siswa/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?></div>
+            <div style="padding-bottom: 10px;">            
+        </div>
             </div>
             <div class='col-md-3'>
             <form action="<?php echo site_url('siswa/index'); ?>" class="form-inline" method="get">
@@ -58,7 +58,6 @@
         <th>Nama Ibu</th>
         <th>Nama Ayah</th>
         <th>No Hp Wali Murid</th>
-        <th>User Id</th>
         <th>Action</th>
             </tr><?php
             foreach ($siswa_data as $siswa)
@@ -73,7 +72,6 @@
             <td><?php echo $siswa->nama_ibu ?></td>
             <td><?php echo $siswa->nama_ayah ?></td>
             <td><?php echo $siswa->no_hp_wali_murid ?></td>
-            <td><?php echo $siswa->user_id ?></td>
             <td style="text-align:center" width="200px">
                 <?php 
                 echo anchor(site_url('siswa/read/'.$siswa->siswa_id),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-success btn-sm"'); 

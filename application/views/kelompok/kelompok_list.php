@@ -37,11 +37,6 @@
         
    
         <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4 text-center">
-                <div style="margin-top: 8px" id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
-            </div>
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
@@ -54,7 +49,8 @@
                 <th>No</th>
 		<th>Nama Kelompok</th>
 		<th>Tahun Ajaran</th>
-		<th>Action</th>
+        <th style="text-align:center">Anggota Kelompok</th>
+		<th style="text-align:center">Action</th>
             </tr><?php
             foreach ($kelompok_data as $kelompok)
             {
@@ -63,6 +59,8 @@
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $kelompok->nama_kelompok ?></td>
 			<td>TA <?php echo $kelompok->tahun_ajaran ?></td>
+            <td style="text-align:center">
+             <a href="<?= base_url() ?>kelompok/anggota_kelompok/<?php echo $kelompok->kelompok_id ?>" class="btn btn-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i>Lihat</a></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('kelompok/read/'.$kelompok->kelompok_id),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-success btn-sm"'); 

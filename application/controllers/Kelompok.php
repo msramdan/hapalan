@@ -9,6 +9,7 @@ class Kelompok extends CI_Controller
     {
         parent::__construct();
         is_login();
+        $this->load->model('Tingkat_model');
         $this->load->model('Kelompok_model');
         $this->load->model('App_setting_model');
         $this->load->model('Tahun_ajaran_model');
@@ -70,7 +71,7 @@ class Kelompok extends CI_Controller
         $data = array(
             'button' => 'Create',
             'app_setting' =>$this->App_setting_model->get_by_id(1),
-            'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all(),
+            'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all_aktif(),
             'action' => site_url('kelompok/create_action'),
 	    'kelompok_id' => set_value('kelompok_id'),
 	    'nama_kelompok' => set_value('nama_kelompok'),
@@ -92,7 +93,7 @@ class Kelompok extends CI_Controller
 	    );
 
             $this->Kelompok_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('kelompok'));
         }
     }
@@ -105,7 +106,7 @@ class Kelompok extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'app_setting' =>$this->App_setting_model->get_by_id(1),
-                'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all(),
+                'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all_aktif(),
                 'action' => site_url('kelompok/update_action'),
 		'kelompok_id' => set_value('kelompok_id', $row->kelompok_id),
 		'nama_kelompok' => set_value('nama_kelompok', $row->nama_kelompok),
@@ -198,6 +199,18 @@ class Kelompok extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+    function anggota_kelompok($kelompok_id)
+    {
+
+        $data = array(
+            'tingkat' => $this->Tingkat_model->get_all(),
+            'kelompok' => $this->db->get_where('kelompok', ['kelompok_id' =>$kelompok_id])->row_array(),
+            'app_setting' =>$this->App_setting_model->get_by_id(1),
+        );
+
+        $this->template->load('template','kelompok/anggota_kelompok',$data);
     }
 
 }

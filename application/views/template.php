@@ -18,6 +18,7 @@
   <!-- ICONS -->
   <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url() ?>admin/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" sizes="96x96" href="<?= base_url() ?>admin/assets/img/favicon.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 </head>
 
 <body>
@@ -68,7 +69,6 @@
                   <li><a href="<?= base_url() ?>kelompok">Data Kelompok</a></li>
                   <li><a href="<?= base_url() ?>surat">Data Surat</a></li>
                   <li><a href="<?= base_url() ?>tahun_ajaran">Data Tahun Ajar</a></li>
-                  <li><a href="">Akses Kelas Guru</a></li>
                 </ul>
               </div>
           </li>

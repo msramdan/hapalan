@@ -43,10 +43,13 @@ class Kelompok_model extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->join('tahun_ajaran', 'kelompok.tahun_ajaran_id = tahun_ajaran.tahun_ajaran_id', 'left');
         $this->db->order_by($this->id, $this->order);
+        $this->db->group_start();
         $this->db->like('kelompok_id', $q);
 	$this->db->or_like('nama_kelompok', $q);
 	$this->db->or_like('tahun_ajaran', $q);
+    $this->db->group_end();
 	$this->db->limit($limit, $start);
+    $this->db->where('tahun_ajaran.status','1');
         return $this->db->get($this->table)->result();
     }
 

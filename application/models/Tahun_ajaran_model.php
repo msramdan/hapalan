@@ -22,6 +22,13 @@ class Tahun_ajaran_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_all_aktif()
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('status', '1');
+        return $this->db->get($this->table)->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {

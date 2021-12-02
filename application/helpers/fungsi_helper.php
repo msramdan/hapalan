@@ -17,6 +17,17 @@ function is_login()
     }
 }
 
+function check_access($guru_id, $kelompok_id)
+{
+    $ci = get_instance();
+    $ci->db->where('guru_id', $guru_id);
+    $ci->db->where('kelompok_id', $kelompok_id);
+    $result = $ci->db->get('access_guru_to_kelompok');
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}
+
 
 // function check_admin()
 // {
@@ -28,11 +39,11 @@ function is_login()
 // }
 
 
-// function check_access($user_id, $kelas_id)
+// function check_access($guru_id, $kelompok_id)
 // {
 //     $ci = get_instance();
-//     $ci->db->where('user_id', $user_id);
-//     $ci->db->where('kelas_id', $kelas_id);
+//     $ci->db->where('guru_id', $guru_id);
+//     $ci->db->where('kelompok_id', $kelompok_id);
 //     $result = $ci->db->get('akses_kelas_guru');
 //     if ($result->num_rows() > 0) {
 //         return "checked='checked'";
@@ -43,8 +54,8 @@ function is_login()
 // {
 //     $ci = get_instance();
 //     if ($ci->session->userdata('level') != '1') {
-//         $ci->db->where('kelas_id', $kelasid);
-//         $ci->db->where('user_id', $ci->session->userdata('userid'));
+//         $ci->db->where('kelompok_id', $kelasid);
+//         $ci->db->where('guru_id', $ci->session->userdata('userid'));
 //         $result = $ci->db->get('akses_kelas_guru');
 //         if ($result->num_rows() == 0) {
 //             return false;
