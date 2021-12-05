@@ -22,6 +22,14 @@ class Siswa_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    // get all
+    function get_all_kelas($kelas_id)
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('kelas_id', $kelas_id);
+        return $this->db->get($this->table)->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {

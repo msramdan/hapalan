@@ -29,14 +29,14 @@ function check_access($guru_id, $kelompok_id)
 }
 
 
-// function check_admin()
-// {
-//     $ci = &get_instance();
-//     $ci->load->library('fungsi');
-//     if ($ci->fungsi->user_login()->level != 'ADMIN') {
-//         redirect('home');
-//     }
-// }
+function check_admin()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 'ADMIN') {
+        redirect('home');
+    }
+}
 
 
 // function check_access($guru_id, $kelompok_id)

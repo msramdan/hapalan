@@ -47,8 +47,9 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Nama Kelompok</th>
 		<th>Tahun Ajaran</th>
+        <th>Tingkat</th>
+        <th>Nama Kelompok</th>
         <th style="text-align:center">Anggota Kelompok</th>
 		<th style="text-align:center">Action</th>
             </tr><?php
@@ -57,8 +58,10 @@
                 ?>
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
-			<td><?php echo $kelompok->nama_kelompok ?></td>
 			<td>TA <?php echo $kelompok->tahun_ajaran ?></td>
+            <td><?php echo $kelompok->nama_tingkat ?></td>
+            <td><?php echo $kelompok->nama_kelompok ?></td>
+            
             <td style="text-align:center">
              <a href="<?= base_url() ?>kelompok/anggota_kelompok/<?php echo $kelompok->kelompok_id ?>" class="btn btn-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i>Lihat</a></td>
 			<td style="text-align:center" width="200px">

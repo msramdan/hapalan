@@ -23,23 +23,27 @@
             </div>
         </div>
         <div class="box-body" style="overflow-x: scroll; ">
-        
-        <table class='table table-bordered'>       
+          <input type="hidden" name="tingkat_id"  id="tingkat_id" value="<?php echo $kelompok['tingkat_id'] ?>">
+          <input type="hidden" name="kelompok_id"  id="kelompok_id" value="<?php echo $kelompok['kelompok_id'] ?>">
 
-        <tr>
-            <td width='200'>Tingkat <?php echo form_error('tingkat_id') ?></td>
-            <td><select name="tingkat_id" class="form-control">
-                <option value="">-- Pilih -- </option>
-                <?php foreach ($tingkat as $key => $data) { ?>
-                  <?php if ($tingkat_id == $data->tingkat_id) { ?>
-                    <option value="<?php echo $data->tingkat_id ?>" selected><?php echo $data->nama_tingkat ?></option>
-                  <?php } else { ?>
-                    <option value="<?php echo $data->tingkat_id ?>"><?php echo $data->nama_tingkat ?></option>
-                  <?php } ?>
-                <?php } ?>
-              </select></td>
-          </tr>
+    <table class='table table-bordered'>
+    <tr>
+      <td class="text-center">
+        Daftar Siswa
+      </td>
+      <td class="text-center">Anggota Member</td>
+    </tr>      
+              <tr>
+                <td width="50%">
+                  <div id="daftar_kelas"></div>
+                </td>
+                <td width="50%">
+                  <div id="daftar_kelompok"></div>
+                </td>
+                  
+              </tr>
     </table>
+
 
 
         </div>
@@ -49,22 +53,27 @@
     </section>
 </div>
 
-    <script type="text/javascript">
-      $('.form-check-input').on('click', function() {
-        const kelompok_id = $(this).data('kelompok_id');
-        const kelompok_id = $(this).data('kelompok_id');
-        $.ajax({
-          url: "<?= base_url('kelompok/changeaccess'); ?>",
-          type: "post",
-          data: {
-            kelompok_id: kelompok_id,
-            kelompok_id: kelompok_id,
-          },
-          success: function() {
-            document.location.href = "<?= base_url('kelompok/akses_kelompok/') ?>" + kelompok_id;
-          }
+<script type="text/javascript">
 
-        });
+  $(document).ready(function(){
+    var tingkat_id = $("#tingkat_id").val();
+    var kelompok_id = $("#kelompok_id").val();
+    $.ajax({
+           url:"<?php echo base_url(); ?>kelompok/daftar_kelas",
+           method:"POST",
+           data:{tingkat_id:tingkat_id,kelompok_id:kelompok_id},
+           success:function(data){
+            $('#daftar_kelas').html(data);
+           }
+          })
 
-      })
-    </script>
+    $.ajax({
+           url:"<?php echo base_url(); ?>kelompok/daftar_kelompok",
+           method:"POST",
+           data:{kelompok_id:kelompok_id},
+           success:function(data){
+            $('#daftar_kelompok').html(data);
+           }
+          })
+  });
+</script>

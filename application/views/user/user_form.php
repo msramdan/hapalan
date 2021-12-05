@@ -24,7 +24,18 @@
                      <tr><td >Photo <?php echo form_error('photo') ?></td><td><input type="file" class="form-control" name="photo" id="photo" placeholder="photo" required="" value="" onchange="return validasiEkstensi()" />
                      </td></tr>
         <?php }else{ ?>
-                  <div class="form-group">
+            <?php if ($photo == 'default.jpg') { ?>
+                <tr>
+                        <td >Photo <?php echo form_error('photo') ?></td>
+                        <td>
+                            <a href="#modal-dialog" data-bs-toggle="modal"><img  src="<?php echo base_url();?>admin/assets/img/sal.jpg" style="width: 150px;height: 150px;border-radius: 5%;"></img></a>
+                            <input type="hidden" name="photo_lama" value="<?=$photo?>">
+                            <p style="color: red">Note :Pilih photo Jika Ingin Merubah photo</p>
+                            <input type="file" class="form-control" name="photo" id="photo" placeholder="photo" value="" onchange="return validasiEkstensi()" />
+                        </td>
+                    </tr>
+            <?php }else{ ?>
+                <div class="form-group">
                     <tr>
                         <td >Photo <?php echo form_error('photo') ?></td>
                         <td>
@@ -35,6 +46,7 @@
                         </td>
                     </tr>
                   </div>
+            <?php } ?>                 
         <?php } ?>
 
 	    <tr>

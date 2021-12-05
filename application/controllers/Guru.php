@@ -10,6 +10,7 @@ class Guru extends CI_Controller
         parent::__construct();
         is_login();
         $this->load->model('Tahun_ajaran_model');
+        $this->load->model('User_model');
         $this->load->model('Guru_model');
         $this->load->model('kelompok_model');
         $this->load->model('App_setting_model');
@@ -73,6 +74,7 @@ class Guru extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
+            'user' => $this->User_model->get_all(),
             'app_setting' =>$this->App_setting_model->get_by_id(1),
             'action' => site_url('guru/create_action'),
 	    'guru_id' => set_value('guru_id'),
@@ -101,7 +103,7 @@ class Guru extends CI_Controller
 	    );
 
             $this->Guru_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('guru'));
         }
     }
@@ -113,6 +115,7 @@ class Guru extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
+                'user' => $this->User_model->get_all(),
                 'app_setting' =>$this->App_setting_model->get_by_id(1),
                 'action' => site_url('guru/update_action'),
 		'guru_id' => set_value('guru_id', $row->guru_id),
@@ -124,7 +127,7 @@ class Guru extends CI_Controller
 	    );
             $this->template->load('template','guru/guru_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('guru'));
         }
     }
@@ -155,11 +158,17 @@ class Guru extends CI_Controller
         $row = $this->Guru_model->get_by_id($id);
 
         if ($row) {
+
             $this->Guru_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $error = $this->db->error();
+            if ($error['code'] != 0) {
+                 $this->session->set_flashdata('error', 'Tidak dapat dihapus data sudah berrelasi');
+            }else{
+                $this->session->set_flashdata('message', 'Delete Record Success');
+            }
             redirect(site_url('guru'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('error', 'Record Not Found');
             redirect(site_url('guru'));
         }
     }
@@ -215,7 +224,7 @@ class Guru extends CI_Controller
 	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->user_id);
 
-	    $tablebody++;
+	   $tablebody++;
             $nourut++;
         }
 

@@ -15,6 +15,16 @@ class Guru_model extends CI_Model
         parent::__construct();
     }
 
+    public function get($id)
+    {
+        $this->db->select('guru.*');
+        $this->db->from('guru');
+        $this->db->where('user_id', $id);
+        $query = $this->db->get();
+        return $query;
+    }
+
+
     // get all
     function get_all()
     {

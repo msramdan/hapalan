@@ -26,6 +26,10 @@
     <?php if ($this->session->flashdata('message') ) : ?>
     <?php endif; ?>
 
+    <div class="flash-data2" data-flashdata2="<?= $this->session->flashdata('error'); ?>"></div>
+    <?php if ($this->session->flashdata('error') ) : ?>
+    <?php endif; ?>
+
   <!-- WRAPPER -->
   <div id="wrapper">
     <!-- NAVBAR -->
@@ -42,10 +46,20 @@
         <div id="navbar-menu">
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= base_url() ?>admin/assets/img/user/<?= $this->fungsi->user_login()->photo ?>" alt="">
-                <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
-              </a>
+              
+              <?php if ($this->fungsi->user_login()->photo =='default.jpg') { ?>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="<?= base_url() ?>admin/assets/img/sal.jpg ?>" alt="">
+                    <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
+                  </a>
+              <?php }else{ ?>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="<?= base_url() ?>admin/assets/img/user/<?= $this->fungsi->user_login()->photo ?>" alt="">
+                    <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
+                  </a>
+
+              <?php } ?>
+
               <ul class="dropdown-menu logged-user-menu">
                 <li><a href="<?= site_url('profile') ?>"><i class="ti-user"></i> <span>My Profile</span></a></li>
                 <li><a href="<?= site_url('auth/logout') ?>"><i class="ti-power-off"></i> <span>Logout</span></a></li>
@@ -59,7 +73,9 @@
       <nav>
         <ul class="nav" id="sidebar-nav-menu">
           <li><a href="<?= base_url() ?>home"><i class="ti-home"></i> <span class="title">Home</span></a></li>
-          <li class="panel">
+          <li><a href="<?= base_url() ?>penilaian"><i class="ti-pencil"></i> <span class="title">Penilaian</span></a></li>
+          <?php if ($this->fungsi->user_login()->level =="ADMIN") { ?>
+            <li class="panel">
               <a href="#masterdata" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="ti-list"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
               <div id="masterdata" class="collapse" aria-expanded="false" style="height: 0px;">
                 <ul class="submenu">
@@ -84,6 +100,7 @@
                 </ul>
               </div>
           </li>
+          <?php } ?>
         </ul>
         <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
       </nav>

@@ -194,13 +194,19 @@ class User extends CI_Controller
         $row = $this->User_model->get_by_id($id);
 
         if ($row) {
-            if($row->photo==null || $row->photo=='' ){
+            $this->User_model->delete($id);
+            $error = $this->db->error();
+            if ($error['code'] != 0) {
+                 $this->session->set_flashdata('error', 'Tidak dapat dihapus data sudah berrelasi');
+            }else{
+                if($row->photo==null || $row->photo=='' ){
                 }else{
                 $target_file = './admin/assets/img/user/'.$row->photo;
                 unlink($target_file);
                 }
-            $this->User_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+                $this->session->set_flashdata('message', 'Delete Record Success');
+            }
+
             redirect(site_url('user'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');

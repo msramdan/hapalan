@@ -11,7 +11,7 @@
             <div style="padding-bottom: 10px;">
         <?php echo anchor(site_url('guru/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
 		<?php echo anchor(site_url('guru/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-      <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_add_new"> Import Data</a>         
+      <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-upload" aria-hidden="true"></i> Import</a>         
         </div>
             </div>
             <div class='col-md-3'>

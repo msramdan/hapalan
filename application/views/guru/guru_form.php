@@ -22,7 +22,54 @@
           </tr>
 	    
         <tr><td width='200'>Alamat <?php echo form_error('alamat') ?></td><td> <textarea class="form-control" rows="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td></tr>
-	    <tr><td width='200'>User Id <?php echo form_error('user_id') ?></td><td><input type="text" class="form-control" name="user_id" id="user_id" placeholder="User Id" value="<?php echo $user_id; ?>" /></td></tr>
+
+        <?php if ($this->uri->segment(2) == 'create' || $this->uri->segment(2) == 'create_action') { ?>
+          <?php
+          $queryData = "SELECT user.*,guru.guru_id
+                      FROM user
+                      LEFT OUTER JOIN guru
+                      ON user.user_id = guru.user_id
+                      WHERE guru.guru_id IS NULL
+                      and level='GURU'";
+            $data_user = $this->db->query($queryData); ?>
+            <tr>
+                <td width='200'>User <?php echo form_error('user_id') ?></td>
+                <td>
+                  <select name="user_id" class="form-control">
+                    <option value="">-- Pilih -- </option>
+                    <?php foreach ($data_user->result() as $data) { ?>
+                        <option value="<?php echo $data->user_id ?>"><?php echo $data->username ?></option>
+                    <?php } ?>
+                  </select>
+                </td>
+            </tr>          
+        <?php }else{ ?>
+
+          <?php
+          $queryData = "SELECT user.*,guru.guru_id
+                      FROM user
+                      LEFT OUTER JOIN guru
+                      ON user.user_id = guru.user_id
+                      WHERE guru.guru_id IS NULL
+                      and level='GURU' or user.user_id='$user_id'";
+            $data_user = $this->db->query($queryData); ?>
+          <tr>
+            <td width='200'>User <?php echo form_error('user_id') ?></td>
+            <td>
+              <select name="user_id" class="form-control">
+                <option value="">-- Pilih -- </option>
+                <?php foreach ($data_user->result() as $data) { ?>
+                  <?php if ($user_id == $data->user_id) { ?>
+                    <option value="<?php echo $data->user_id ?>" selected><?php echo $data->username ?></option>
+                  <?php } else { ?>
+                    <option value="<?php echo $data->user_id ?>"><?php echo $data->username ?></option>
+                  <?php } ?>
+                <?php } ?>
+              </select>
+            </td>
+          </tr>
+        <?php } ?>    
+
 	    <tr><td></td><td><input type="hidden" name="guru_id" value="<?php echo $guru_id; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
 	    <a href="<?php echo site_url('guru') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a></td></tr>
