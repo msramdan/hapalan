@@ -21,4 +21,23 @@ Class Fungsi{
         return $result;
     }
 
+    function count_guru(){
+        $this->ci->load->model('Guru_model');
+        return $this->ci->Guru_model->get_total()->num_rows();
+    }
+
+    function count_siswa(){
+            $this->ci->load->model('Siswa_model');
+            return $this->ci->Siswa_model->get_total()->num_rows();
+        }
+    function count_kelompok(){
+            $this->ci->load->model('Kelompok_model');
+            return $this->ci->Kelompok_model->get_total()->num_rows();
+        }
+
+    function count_user(){
+            $this->ci->load->model('User_model');
+            return $this->ci->User_model->get_total()->num_rows();
+        }
+
 }

@@ -24,6 +24,13 @@ class Guru_model extends CI_Model
         return $query;
     }
 
+    // get all
+    function get_total()
+    {
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table);
+    }
+
 
     // get all
     function get_all()

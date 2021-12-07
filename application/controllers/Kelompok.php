@@ -222,6 +222,7 @@ class Kelompok extends CI_Controller
     function daftar_kelas(){
         $tingkat_id = $this->input->post('tingkat_id');
         $kelompok_id = $this->input->post('kelompok_id');
+        $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $output = '';
         if($tingkat_id=='pilih')
           {
@@ -278,7 +279,12 @@ class Kelompok extends CI_Controller
           {
            echo "Silahkan Pilih Tingkat terlebih dahulu";
           }else{
-            $queryData = "SELECT * from kelompok_member join kelompok on kelompok.kelompok_id=kelompok_member.kelompok_id join siswa on siswa.siswa_id = kelompok_member.siswa_id";
+            $queryData = "SELECT siswa.nama_siswa,siswa.siswa_id,kelompok_member.kelompok_id from
+            kelompok_member join kelompok on kelompok.kelompok_id=kelompok_member.kelompok_id
+            join siswa on siswa.siswa_id = kelompok_member.siswa_id where kelompok_member.kelompok_id='$kelompok_id'";
+
+
+
             $data = $this->db->query($queryData);
               if($data->num_rows() > 0)
               {

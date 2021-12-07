@@ -93,9 +93,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                 <h3 class="modal-title" id="myModalLabel">Import Nilai Sikap</h3>
-                <a href="<?= base_url() ?>penilaian/excel_sikap"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Klik untuk Generate Format</a>
+                <a href="<?= base_url() ?>penilaian/excel_sikap/<?= $this->uri->segment(3) ?>"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Klik untuk Generate Format</a>
             </div>
-            <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
+            <form method="post" enctype="multipart/form-data" action="<?= base_url() ?>import/import_nilai_sikap">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputFile">File Upload</label>

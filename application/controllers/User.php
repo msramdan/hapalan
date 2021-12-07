@@ -56,7 +56,6 @@ class User extends CI_Controller
         'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'username' => $row->username,
 		'password' => $row->password,
-		'email' => $row->email,
 		'photo' => $row->photo,
 		'level' => $row->level,
 	    );
@@ -76,7 +75,6 @@ class User extends CI_Controller
 	    'user_id' => set_value('user_id'),
 	    'username' => set_value('username'),
 	    'password' => set_value('password'),
-	    'email' => set_value('email'),
 	    'photo' => set_value('photo'),
 	    'level' => set_value('level'),
 	);
@@ -103,7 +101,6 @@ class User extends CI_Controller
             $data = array(
         		'username' => $this->input->post('username',TRUE),
                 'password' => sha1($this->input->post('password',TRUE)),
-        		'email' => $this->input->post('email',TRUE),
         		'photo' => $photo,
         		'level' => $this->input->post('level',TRUE),
         	);
@@ -126,7 +123,6 @@ class User extends CI_Controller
 		'user_id' => set_value('user_id', $row->user_id),
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
-		'email' => set_value('email', $row->email),
 		'photo' => set_value('photo', $row->photo),
 		'level' => set_value('level', $row->level),
 	    );
@@ -169,7 +165,6 @@ class User extends CI_Controller
             if ($this->input->post('password')==''||$this->input->post('password')==null) {            
                  $data = array(
                     'username' => $this->input->post('username',TRUE),
-                    'email' => $this->input->post('email',TRUE),
                     'photo' => $photo,
                     'level' => $this->input->post('level',TRUE),
                 );
@@ -177,7 +172,6 @@ class User extends CI_Controller
                 $data = array(
                 'username' => $this->input->post('username',TRUE),
                 'password' => sha1($this->input->post('password',TRUE)),
-                'email' => $this->input->post('email',TRUE),
                 'photo' => $photo,
                 'level' => $this->input->post('level',TRUE),
                 );
@@ -218,7 +212,6 @@ class User extends CI_Controller
     {
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	// $this->form_validation->set_rules('password', 'password', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('level', 'level', 'trim|required');
 
 	$this->form_validation->set_rules('user_id', 'user_id', 'trim');
@@ -249,7 +242,6 @@ class User extends CI_Controller
         xlsWriteLabel($tablehead, $kolomhead++, "No");
 	xlsWriteLabel($tablehead, $kolomhead++, "Username");
 	xlsWriteLabel($tablehead, $kolomhead++, "Password");
-	xlsWriteLabel($tablehead, $kolomhead++, "Email");
 	xlsWriteLabel($tablehead, $kolomhead++, "Photo");
 	xlsWriteLabel($tablehead, $kolomhead++, "Level");
 
@@ -260,7 +252,6 @@ class User extends CI_Controller
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->username);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->password);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->email);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->photo);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->level);
 

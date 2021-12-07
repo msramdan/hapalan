@@ -28,17 +28,6 @@
         <!-- /.box -->
 
         <!-- About Me Box -->
-        <div class="box box-primary">
-          <!-- /.box-header -->
-          <div class="box-body">
-            <strong><i class="fa fa-envelope margin-r-5"></i> Email</strong>
-
-            <p class="text-muted"><?= ucfirst($this->fungsi->user_login()->email) ?></p>
-
-            <hr>
-          </div>
-          <!-- /.box-body -->
-        </div>
         <!-- /.box -->
       </div>
       <!-- /.col -->

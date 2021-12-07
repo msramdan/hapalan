@@ -48,7 +48,6 @@
             <tr>
                 <th>No</th>
 		<th>Username</th>
-		<th>Email</th>
 		<th>Photo</th>
 		<th>Level</th>
 		<th>Action</th>
@@ -59,8 +58,6 @@
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $user->username ?></td>
-			<td><?php echo $user->email ?></td>
-			<!-- <td><?php echo $user->photo ?></td> -->
             <td><a href="<?= base_url() ?>user/download/<?php echo $user->photo ?>"><i class="fa fa-download"></i> Download Photo</a></td>
 			<td><?php echo $user->level ?></td>
 			<td style="text-align:center" width="200px">

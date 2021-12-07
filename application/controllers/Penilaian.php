@@ -3,6 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+require 'vendor/autoload.php';
+
 class Penilaian extends CI_Controller
 {
     function __construct()
@@ -36,63 +41,66 @@ class Penilaian extends CI_Controller
 
     public function data($siswa_id)
     {
-        $data = array(
-            'app_setting' =>$this->App_setting_model->get_by_id(1),
-        );
-        $this->template->load('template','penilaian/nilai', $data);
+      $data = array(
+              'siswa_id' =>$siswa_id,
+              'app_setting' =>$this->App_setting_model->get_by_id(1),
+      );
+      $this->template->load('template','penilaian/nilai', $data);
     }
 
-    public function excel_sikap()
+    public function del_sikap($sikap_id,$siswa_id)
     {
-        $this->load->helper('exportexcel');
-        $namaFile = "Format_upload_nilai_sikap.xls";
-        $judul = "Format Upload";
-        $tablehead = 0;
-        $tablebody = 1;
-        $nourut = 1;
-        //penulisan header
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $namaFile . "");
-        header("Content-Transfer-Encoding: binary ");
+      $this->Penilaian_model->delete_sikap($sikap_id);
+      $this->session->set_flashdata('message', 'Delete Record Success');
+      redirect(site_url('penilaian/data/' .$siswa_id));
 
-        xlsBOF();
-
-        $kolomhead = 0;
-            xlsWriteLabel($tablehead, $kolomhead++, "No");
-        xlsWriteLabel($tablehead, $kolomhead++, "TA ID");
-        xlsWriteLabel($tablehead, $kolomhead++, "Tahun Ajaran");
-        xlsWriteLabel($tablehead, $kolomhead++, "Semester");
-        xlsWriteLabel($tablehead, $kolomhead++, "No");
-        xlsWriteLabel($tablehead, $kolomhead++, "SISWA ID");
-        xlsWriteLabel($tablehead, $kolomhead++, "NIS");
-        xlsWriteLabel($tablehead, $kolomhead++, "Nama Siswa");
-        xlsWriteLabel($tablehead, $kolomhead++, "Tertib");
-        xlsWriteLabel($tablehead, $kolomhead++, "Disiplin");
-        xlsWriteLabel($tablehead, $kolomhead++, "Motivasi");
-        xlsWriteLabel($tablehead, $kolomhead++, "Keterangan");
-
-        foreach ($this->Guru_model->get_all() as $data) {
-            $kolombody = 0;
-
-            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-            xlsWriteNumber($tablebody, $kolombody++, $nourut);
-        xlsWriteLabel($tablebody, $kolombody++, $data->nip);
-        xlsWriteLabel($tablebody, $kolombody++, $data->nama_guru);
-        xlsWriteLabel($tablebody, $kolombody++, $data->jenis_kelamin);
-        xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-        xlsWriteNumber($tablebody, $kolombody++, $data->user_id);
-
-       $tablebody++;
-            $nourut++;
-        }
-
-        xlsEOF();
-        exit();
     }
+    
+     public function excel_sikap($kelompok_id)
+     {
+
+          $spreadsheet = new Spreadsheet;
+
+          $spreadsheet->setActiveSheetIndex(0)
+                      ->setCellValue('A1', 'No')
+                      ->setCellValue('B1', 'TA ID')
+                      ->setCellValue('C1', 'Tahun Ajaran')
+                      ->setCellValue('D1', 'Semester')
+                      ->setCellValue('E1', 'Kelas')
+                      ->setCellValue('F1', 'NIS')
+                      ->setCellValue('G1', 'Nama Siswa')
+                      ->setCellValue('H1', 'Tertib')
+                      ->setCellValue('I1', 'Disiplin')
+                      ->setCellValue('J1', 'Motivasi')
+                      ->setCellValue('K1', 'Keterangan');
+
+          $kolom = 2;
+          $nomor = 1;
+          foreach($this->Penilaian_model->get_all_kelompok($kelompok_id) as $data) {
+               $spreadsheet->setActiveSheetIndex(0)
+                           ->setCellValue('A' . $kolom, $nomor)
+                           ->setCellValue('B' . $kolom, $data->tahun_ajaran_id)
+                           ->setCellValue('C' . $kolom, $data->tahun_ajaran)
+                           ->setCellValue('D' . $kolom, '')
+                           ->setCellValue('E' . $kolom, $data->nama_kelas)
+                           ->setCellValue('F' . $kolom, $data->nis)
+                           ->setCellValue('G' . $kolom, $data->nama_siswa)
+                           ->setCellValue('H' . $kolom, '')
+                           ->setCellValue('I' . $kolom, '')
+                           ->setCellValue('J' . $kolom, '')
+                           ->setCellValue('J' . $kolom, '');
+
+               $kolom++;
+               $nomor++;
+
+          }
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+      header('Content-Disposition: attachment;filename="Format upload nilai sikap.xlsx"');
+      header('Cache-Control: max-age=0');
+      $writer->save('php://output');
+     }
  
 }

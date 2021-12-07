@@ -25,6 +25,7 @@
         <div class="box-body" style="overflow-x: scroll; ">
           <input type="hidden" name="tingkat_id"  id="tingkat_id" value="<?php echo $kelompok['tingkat_id'] ?>">
           <input type="hidden" name="kelompok_id"  id="kelompok_id" value="<?php echo $kelompok['kelompok_id'] ?>">
+          <input type="hidden" name="tahun_ajaran_id"  id="kelompok_id" value="<?php echo $kelompok['tahun_ajaran_id'] ?>">
 
     <table class='table table-bordered'>
     <tr>
@@ -58,10 +59,11 @@
   $(document).ready(function(){
     var tingkat_id = $("#tingkat_id").val();
     var kelompok_id = $("#kelompok_id").val();
+    var tahun_ajaran_id = $("#tahun_ajaran_id").val();
     $.ajax({
            url:"<?php echo base_url(); ?>kelompok/daftar_kelas",
            method:"POST",
-           data:{tingkat_id:tingkat_id,kelompok_id:kelompok_id},
+           data:{tingkat_id:tingkat_id,kelompok_id:kelompok_id,tahun_ajaran_id:tahun_ajaran_id},
            success:function(data){
             $('#daftar_kelas').html(data);
            }

@@ -39,32 +39,6 @@ function check_admin()
 }
 
 
-// function check_access($guru_id, $kelompok_id)
-// {
-//     $ci = get_instance();
-//     $ci->db->where('guru_id', $guru_id);
-//     $ci->db->where('kelompok_id', $kelompok_id);
-//     $result = $ci->db->get('akses_kelas_guru');
-//     if ($result->num_rows() > 0) {
-//         return "checked='checked'";
-//     }
-// }
-
-// function check_access_guru($kelasid)
-// {
-//     $ci = get_instance();
-//     if ($ci->session->userdata('level') != '1') {
-//         $ci->db->where('kelompok_id', $kelasid);
-//         $ci->db->where('guru_id', $ci->session->userdata('userid'));
-//         $result = $ci->db->get('akses_kelas_guru');
-//         if ($result->num_rows() == 0) {
-//             return false;
-//         } else {
-//             return true;
-//         }
-//     }
-// }
-
 
 
 

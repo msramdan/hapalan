@@ -30,25 +30,117 @@
         </table>
 	</div>
 	<div class="tab-pane fade active" id="chart3">
-		<table class="table table-bordered" style="margin-bottom: 10px">
-			<tr>
-                <th style="text-align:center">Sikap</th>
-                <th style="text-align:center">Nilai</th>
+        <?php
+            $queryData = "SELECT * from sikap where siswa_id='$siswa_id' and semester='1'";
+            $data = $this->db->query($queryData)->row();
+        ?>
+
+        <h3>Semester 1</h3>
+
+        <?php if ($data==NUll) { ?>
+            <table class="table table-bordered table-xs" style="margin-bottom: 10px">
+            <tr>
+                <th style="text-align:center; width: 20%">Sikap</th>
+                <th style="text-align:center; width: 10%">Nilai</th>
                 <th style="text-align:center">Keterangan</th>
             </tr>
             <tr>
                 <th>Tertib</th>
-                <th style="text-align:center">A</th>
-                <th style="vertical-align: middle;" rowspan="3"> Lorem</th>
+                <th style="text-align:center">-</th>
+                <th style="vertical-align: middle;" rowspan="3"> -</th>
             </tr>
             <tr>
                 <th>Disiplin</th>
-                <th style="text-align:center">A</th>
+                <th style="text-align:center">-</th>
             </tr>
             <tr>
                 <th>Motivasi</th>
-                <th style="text-align:center">A</th>
+                <th style="text-align:center">-</th>
+            </tr>
+        </table><br>
+
+        <?php }else{ ?>
+            <table class="table table-bordered table-xs" style="margin-bottom: 10px">
+            <tr style="width: 20%">
+                <th style="text-align:center; width: 20%">Sikap</th>
+                <th style="text-align:center; width: 10%">Nilai</th>
+                <th style="text-align:center">Keterangan</th>
+                <th style="text-align:center">Action</th>
+            </tr>
+            <tr>
+                <th>Tertib</th>
+                <th style="text-align:center"><?= $data->tertib ?></th>
+                <th style="vertical-align: middle;" rowspan="3"> <?= $data->keterangan ?></th>
+                <th style="vertical-align: middle;" rowspan="3"> <a href="<?= base_url() ?>penilaian/del_sikap/<?= $data->sikap_id  ?>/<?= $this->uri->segment(3) ?>" class="btn btn-danger btn-sm" delete=""><i class="fa fa-trash-o" aria-hidden="true"></i></a></th>
+            </tr>
+            <tr>
+                <th>Disiplin</th>
+                <th style="text-align:center"><?= $data->disiplin ?></th>
+            </tr>
+            <tr>
+                <th>Motivasi</th>
+                <th style="text-align:center"><?= $data->motivasi ?></th>
+            </tr>
+        </table><br>
+
+        <?php } ?>
+
+
+		
+        <h3>Semester 2</h3>
+        <?php
+            $queryData2 = "SELECT * from sikap where siswa_id='$siswa_id' and semester='2'";
+            $data2 = $this->db->query($queryData2)->row();
+
+        ?>
+
+        <?php if ($data2==NUll) { ?>
+            <table class="table table-bordered table-xs" style="margin-bottom: 10px">
+            <tr style="width: 20%">
+                <th style="text-align:center; width: 20%">Sikap</th>
+                <th style="text-align:center; width: 10%">Nilai</th>
+                <th style="text-align:center">Keterangan</th>
+            </tr>
+            <tr>
+                <th>Tertib</th>
+                <th style="text-align:center">-</th>
+                <th style="vertical-align: middle;" rowspan="3"> -</th>
+            </tr>
+            <tr>
+                <th>Disiplin</th>
+                <th style="text-align:center">-</th>
+            </tr>
+            <tr>
+                <th>Motivasi</th>
+                <th style="text-align:center">-</th>
             </tr>
         </table>
+           
+        <?php }else{ ?>
+            <table class="table table-bordered table-xs" style="margin-bottom: 10px">
+            <tr  style="width: 20%">
+                <th style="text-align:center; width: 20%">Sikap</th>
+                <th style="text-align:center; width: 10%">Nilai</th>
+                <th style="text-align:center">Keterangan</th>
+                <th style="text-align:center">Action</th>
+            </tr>
+            <tr>
+                <th>Tertib</th>
+                <th style="text-align:center"><?= $data2->tertib ?></th>
+                <th style="vertical-align: middle;" rowspan="3"> <?= $data2->keterangan ?></th>
+                <th style="vertical-align: middle;" rowspan="3"><a href="<?php base_url() ?>penilaian/del_sikap/<?= $data->sikap_id  ?>/<?= $this->uri->segment(3) ?>" class="btn btn-danger btn-sm" delete=""><i class="fa fa-trash-o" aria-hidden="true"></i></a></th>
+            </tr>
+            <tr>
+                <th>Disiplin</th>
+                <th style="text-align:center"><?= $data2->disiplin ?></th>
+            </tr>
+            <tr>
+                <th>Motivasi</th>
+                <th style="text-align:center"><?= $data2->motivasi ?></th>
+            </tr>
+        </table>
+
+        <?php } ?>
+        
 	</div>
 </div>

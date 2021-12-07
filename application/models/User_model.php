@@ -15,6 +15,12 @@ class User_model extends CI_Model
         parent::__construct();
     }
 
+    function get_total()
+    {
+        $this->db->order_by($this->id, $this->order);
+        return $this->db->get($this->table);
+    }
+
     public function login($post)
     {
         $this->db->select('*');
@@ -60,7 +66,6 @@ class User_model extends CI_Model
         $this->db->like('user_id', $q);
 	$this->db->or_like('username', $q);
 	$this->db->or_like('password', $q);
-	$this->db->or_like('email', $q);
 	$this->db->or_like('photo', $q);
 	$this->db->or_like('level', $q);
 	$this->db->from($this->table);
@@ -73,7 +78,6 @@ class User_model extends CI_Model
         $this->db->like('user_id', $q);
 	$this->db->or_like('username', $q);
 	$this->db->or_like('password', $q);
-	$this->db->or_like('email', $q);
 	$this->db->or_like('photo', $q);
 	$this->db->or_like('level', $q);
 	$this->db->limit($limit, $start);
