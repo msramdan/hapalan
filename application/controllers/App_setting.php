@@ -28,6 +28,7 @@ class App_setting extends CI_Controller
         'nama_sekolah' => set_value('nama_sekolah', $row->nama_sekolah),
         'alamat_sekolah' => set_value('alamat_sekolah', $row->alamat_sekolah),
         'logo_sekolah' => set_value('logo_sekolah', $row->logo_sekolah),
+        'ttd_kepsek' => set_value('ttd_kepsek', $row->ttd_kepsek),
         'author' => set_value('author', $row->author),
         );
             $this->template->load('template','app_setting/app_setting_form', $data);
@@ -44,32 +45,59 @@ class App_setting extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         }else {
-            $config['upload_path']      = './admin/assets/img/sekolah'; 
-            $config['allowed_types']    = 'jpg|png|jpeg'; 
-            $config['max_size']         = 10048; 
-            $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
-            $this->load->library('upload',$config);
-            $this->upload->initialize($config);
 
-            if ($this->upload->do_upload("logo_sekolah")) {
-            $id = $this->input->post('id');
-            $row = $this->App_setting_model->get_by_id($id);
-            $data = $this->upload->data();
-            $logo_sekolah =$data['file_name'];
-            if($row->logo_sekolah==null || $row->logo_sekolah=='' ){
+                $config['upload_path']      = './admin/assets/img/sekolah'; 
+                $config['allowed_types']    = 'jpg|png|jpeg'; 
+                $config['max_size']         = 10048; 
+                $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
+                $this->load->library('upload',$config);
+                $this->upload->initialize($config);
 
-            }else{
-            $target_file = './admin/assets/img/sekolah/'.$row->logo_sekolah;
-            unlink($target_file);
-            }
+            //lgoo sekolah
+            if ($this->upload->do_upload("logo_sekolah")) 
+            {
+                
+
+                $id = $this->input->post('id');
+                $row = $this->App_setting_model->get_by_id($id);
+                $data = $this->upload->data();
+                $logo_sekolah =$data['file_name'];
+                if($row->logo_sekolah==null || $row->logo_sekolah=='' ){
+
                 }else{
+                $target_file = './admin/assets/img/sekolah/'.$row->logo_sekolah;
+                unlink($target_file);
+                }
+            }else{
                 $logo_sekolah = $this->input->post('logo_sekolah_lama');
             }
+
+            // ttd_kepsek
+            if ($this->upload->do_upload("ttd_kepsek")) 
+            {
+
+                    $id = $this->input->post('id');
+                    $row = $this->App_setting_model->get_by_id($id);
+                    $data2 = $this->upload->data();
+                    $ttd_kepsek =$data2['file_name'];
+                    if($row->ttd_kepsek==null || $row->ttd_kepsek=='' ){
+
+                    }else{
+                    $target_file = './admin/assets/img/sekolah/'.$row->ttd_kepsek;
+                    unlink($target_file);
+                    }
+            }else{
+                $ttd_kepsek = $this->input->post('ttd_kepsek_lama');
+            }
+
+
+
             $data = array(
         		'nama_aplikasi' => $this->input->post('nama_aplikasi',TRUE),
         		'nama_sekolah' => $this->input->post('nama_sekolah',TRUE),
         		'alamat_sekolah' => $this->input->post('alamat_sekolah',TRUE),
         		'logo_sekolah' => $logo_sekolah,
+                'ttd_kepsek' => $ttd_kepsek,
         		'author' => $this->input->post('author',TRUE),
 	           );
 

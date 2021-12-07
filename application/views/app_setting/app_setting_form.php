@@ -25,9 +25,26 @@
                         </td>
                     </tr>
                   </div>
-         <?php } ?>            
+         <?php } ?>     
+
+
 
 	    <tr><td width='200'>Kepala Sekolah <?php echo form_error('author') ?></td><td><input type="text" class="form-control" name="author" id="author" placeholder="Author" value="<?php echo $author; ?>" /></td></tr>
+
+        <?php if ($this->uri->segment(2) == '' || $this->uri->segment(2) == 'update_action' ) { ?>
+            <div class="form-group">
+                    <tr>
+                        <td >Tanda Tangan Kepsek <?php echo form_error('ttd_kepsek') ?></td>
+                        <td>
+                            <a href="" data-bs-toggle="modal"><img  src="<?php echo base_url();?>admin/assets/img/sekolah/<?=$ttd_kepsek?>" style="width: 150px;height: 150px;border-radius: 5%;"></img></a>
+                            <input type="hidden" name="ttd_kepsek_lama" value="<?=$ttd_kepsek?>">
+                            <p style="color: red">Note :Pilih Tanda Tangan Kepala Sekolah Jika Ingin Merubahnya</p>
+                            <input type="file" class="form-control" name="ttd_kepsek" id="ttd_kepsek" placeholder="ttd_kepsek" value="" onchange="return validasiEkstensi()" />
+                        </td>
+                    </tr>
+                  </div>
+         <?php } ?>     
+
 	    <tr><td></td><td><input type="hidden" name="id" value="<?php echo $id; ?>" /> 
 	    <button type="submit" class="btn btn-danger"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button> 
 	</td></tr>

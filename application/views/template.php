@@ -73,7 +73,7 @@
       <nav>
         <ul class="nav" id="sidebar-nav-menu">
           <li><a href="<?= base_url() ?>home"><i class="ti-home"></i> <span class="title">Home</span></a></li>
-          <li><a href="<?= base_url() ?>penilaian"><i class="ti-pencil"></i> <span class="title">Penilaian</span></a></li>
+          <li><a href="<?= base_url() ?>penilaian"><i class="ti-pencil-alt"></i> <span class="title">Penilaian</span></a></li>
           <?php if ($this->fungsi->user_login()->level =="ADMIN") { ?>
             <li class="panel">
               <a href="#masterdata" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="ti-list"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>
@@ -101,7 +101,13 @@
               </div>
           </li>
           <?php } ?>
-          <li><a href="<?= site_url('profile') ?>"><i class="fa fa-user"></i> <span class="title">Tanda Tangan</span></a></li>
+
+          <?php if ($this->fungsi->user_login()->level =="GURU") { ?>
+            <li><a href="<?= site_url('guru/ttd') ?>"><i class="ti-marker-alt"></i> <span class="title">Tanda Tangan</span></a></li>
+          <?php } ?>
+
+          
+
           <li><a href="<?= site_url('profile') ?>"><i class="fa fa-user"></i> <span class="title">Edit Profile</span></a></li>
           <li><a href="<?= site_url('auth/logout') ?>"><i class="fa fa-sign-out"></i> <span class="title">Logout</span></a></li>
 
