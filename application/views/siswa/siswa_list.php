@@ -46,7 +46,8 @@
             <tr>
                 <th>No</th>
                 <th><input type='checkbox' id='checkAll' > Cek All</th>
-                <th>Nis</th>
+                <th>NIS</th>
+                <th>NISN</th>
                 <th>Nama Siswa</th>
                 <th>Jenis Kelamin</th>
                 <th>Nama Ibu</th>
@@ -62,6 +63,7 @@
             <td width="10px"><?php echo ++$start ?></td>
             <td><input type="checkbox" name="update[]" value="<?= $siswa->siswa_id ?>"></td>
             <td><?php echo $siswa->nis ?></td>
+            <td><?php echo $siswa->nisn ?></td>
             <td><?php echo $siswa->nama_siswa ?></td>
             <td><?php echo $siswa->jenis_kelamin ?></td>
             <td><?php echo $siswa->nama_ibu ?></td>

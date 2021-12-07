@@ -10,7 +10,8 @@
 <table class='table table-bordered'> 
   <input type="hidden" name="kelas_id_asal" value="<?= $this->uri->segment(4) ?>">      
 
-	    <tr><td width='200'>Nis <?php echo form_error('nis') ?></td><td><input type="text" class="form-control" name="nis" id="nis" placeholder="Nis" value="<?php echo $nis; ?>" /></td></tr>
+	    <tr><td width='200'>NIS <?php echo form_error('nis') ?></td><td><input type="text" class="form-control" name="nis" id="nis" placeholder="Nis" value="<?php echo $nis; ?>" /></td></tr>
+      <tr><td width='200'>NISN <?php echo form_error('nisn') ?></td><td><input type="text" class="form-control" name="nisn" id="nisn" placeholder="NISN" value="<?php echo $nisn; ?>" /></td></tr>
 	    <tr><td width='200'>Nama Siswa <?php echo form_error('nama_siswa') ?></td><td><input type="text" class="form-control" name="nama_siswa" id="nama_siswa" placeholder="Nama Siswa" value="<?php echo $nama_siswa; ?>" /></td></tr>
 	    
 	    <tr>

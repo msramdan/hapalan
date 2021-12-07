@@ -61,7 +61,7 @@
               <?php } ?>
 
               <ul class="dropdown-menu logged-user-menu">
-                <li><a href="<?= site_url('profile') ?>"><i class="ti-user"></i> <span>My Profile</span></a></li>
+                <li><a href="<?= site_url('profile') ?>"><i class="ti-user"></i> <span>Edit Profile</span></a></li>
                 <li><a href="<?= site_url('auth/logout') ?>"><i class="ti-power-off"></i> <span>Logout</span></a></li>
               </ul>
             </li>
@@ -101,6 +101,11 @@
               </div>
           </li>
           <?php } ?>
+          <li><a href="<?= site_url('profile') ?>"><i class="fa fa-user"></i> <span class="title">Tanda Tangan</span></a></li>
+          <li><a href="<?= site_url('profile') ?>"><i class="fa fa-user"></i> <span class="title">Edit Profile</span></a></li>
+          <li><a href="<?= site_url('auth/logout') ?>"><i class="fa fa-sign-out"></i> <span class="title">Logout</span></a></li>
+
+
         </ul>
         <button type="button" class="btn-toggle-minified" title="Toggle Minified Menu"><i class="ti-arrows-horizontal"></i></button>
       </nav>

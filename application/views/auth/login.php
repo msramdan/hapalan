@@ -43,12 +43,12 @@
 										<label for="signin-password" class="control-label sr-only">Password</label>
 										<input type="password" class="form-control" name="password" id="signin-password" value="" placeholder="Password">
 									</div>
-									<div class="form-group clearfix">
+									<!-- <div class="form-group clearfix">
 										<label class="fancy-checkbox element-left custom-bgcolor-blue">
 											<input type="checkbox">
 											<span class="text-muted">Show Password</span>
 										</label>
-									</div>
+									</div> -->
 									<button type="submit" name="login" class="btn btn-primary btn-lg btn-block">LOGIN</button>
 								</form>
 							</div>

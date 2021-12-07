@@ -23,7 +23,6 @@ class Profile extends CI_Controller
     public function edit_profil($id)
     {
         $data = array(
-            'email'         => $this->input->post('email', true),
             'no_hp'         => $this->input->post('no_hp', true),
         );
         $this->User_model->ubah_data($data, $id);

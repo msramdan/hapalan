@@ -49,6 +49,7 @@ class Siswa extends CI_Controller
             $data = array(
 		'siswa_id' => $row->siswa_id,
 		'nis' => $row->nis,
+        'nisn' => $row->nisn,
         'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'nama_siswa' => $row->nama_siswa,
 		'jenis_kelamin' => $row->jenis_kelamin,
@@ -74,6 +75,7 @@ class Siswa extends CI_Controller
             'action' => site_url('siswa/create_action'),
 	    'siswa_id' => set_value('siswa_id'),
 	    'nis' => set_value('nis'),
+        'nisn' => set_value('nisn'),
         'app_setting' =>$this->App_setting_model->get_by_id(1),
 	    'nama_siswa' => set_value('nama_siswa'),
 	    'jenis_kelamin' => set_value('jenis_kelamin'),
@@ -95,6 +97,7 @@ class Siswa extends CI_Controller
         } else {
             $data = array(
 		'nis' => $this->input->post('nis',TRUE),
+        'nisn' => $this->input->post('nisn',TRUE),
 		'nama_siswa' => $this->input->post('nama_siswa',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'kelas_id' => $this->input->post('kelas_id',TRUE),
@@ -105,7 +108,7 @@ class Siswa extends CI_Controller
 	    );
 
             $this->Siswa_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success 2');
+            $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('siswa/grup'));
         }
     }
@@ -123,6 +126,7 @@ class Siswa extends CI_Controller
                 'action' => site_url('siswa/update_action'),
 		'siswa_id' => set_value('siswa_id', $row->siswa_id),
 		'nis' => set_value('nis', $row->nis),
+        'nisn' => set_value('nisn', $row->nisn),
 		'nama_siswa' => set_value('nama_siswa', $row->nama_siswa),
 		'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
 		'kelas_id' => set_value('kelas_id', $row->kelas_id),
@@ -148,6 +152,7 @@ class Siswa extends CI_Controller
         } else {
             $data = array(
 		'nis' => $this->input->post('nis',TRUE),
+        'nisn' => $this->input->post('nisn',TRUE),
 		'nama_siswa' => $this->input->post('nama_siswa',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'kelas_id' => $this->input->post('kelas_id',TRUE),
@@ -180,13 +185,14 @@ class Siswa extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('nis', 'nis', 'trim|required');
+    $this->form_validation->set_rules('nisn', 'nisn', 'trim|required');
 	$this->form_validation->set_rules('nama_siswa', 'nama siswa', 'trim|required');
 	$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
 	$this->form_validation->set_rules('kelas_id', 'kelas id', 'trim|required');
 	$this->form_validation->set_rules('nama_ibu', 'nama ibu', 'trim|required');
 	$this->form_validation->set_rules('nama_ayah', 'nama ayah', 'trim|required');
 	$this->form_validation->set_rules('no_hp_wali_murid', 'no hp wali murid', 'trim|required');
-	$this->form_validation->set_rules('user_id', 'user id', 'trim|required');
+	// $this->form_validation->set_rules('user_id', 'user id', 'trim|required');
 
 	$this->form_validation->set_rules('siswa_id', 'siswa_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
