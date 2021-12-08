@@ -17,15 +17,17 @@ class Penilaian_model extends CI_Model
 
     function get_all_kelompok($kelompok_id)
     {
-        $this->db->select('kelompok_member.*,siswa.nis,siswa.nama_siswa,kelas.nama_kelas,tahun_ajaran.*');
+        $this->db->select('kelompok_member.*,siswa.nis,siswa.nama_siswa,kelas.nama_kelas,tahun_ajaran.*,kelompok.nama_kelompok');
         $this->db->from('kelompok_member');
         $this->db->join('siswa', 'siswa.siswa_id = kelompok_member.siswa_id');
         $this->db->join('kelas', 'kelas.kelas_id = siswa.kelas_id');
+        
         $this->db->join('kelompok', 'kelompok.kelompok_id = kelompok_member.kelompok_id');
         $this->db->join('tahun_ajaran', 'tahun_ajaran.tahun_ajaran_id = kelompok.tahun_ajaran_id');
         $this->db->where('kelompok_member.kelompok_id', $kelompok_id);
         return $this->db->get()->result();
     }
+
 
     function sikap($siswa_id,$semester)
     {

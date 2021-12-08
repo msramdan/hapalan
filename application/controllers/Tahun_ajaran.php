@@ -90,6 +90,21 @@ class Tahun_ajaran extends CI_Controller
 	    );
 
             $this->Tahun_ajaran_model->insert($data);
+            $last_id = $this->db->insert_id();
+            $tahun_ajaran_detail = array(
+                    array(
+                            'tahun_ajaran_id' => $last_id,
+                            'status' => 'Aktif',
+                            'semester' => '1'
+                    ),
+                    array(
+                            'tahun_ajaran_id' => $last_id,
+                            'status' => 'Aktif',
+                            'semester' => '2'
+                    )
+            );
+
+            $this->db->insert_batch('tahun_ajaran_detail', $tahun_ajaran_detail);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('tahun_ajaran'));
         }
@@ -200,6 +215,21 @@ class Tahun_ajaran extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+    function changeaktif(){
+        $tahun_ajaran_detail_id = $this->input->post('tahun_ajaran_detail_id');
+
+        $this->db->where('tahun_ajaran_detail_id', $tahun_ajaran_detail_id);
+        $data = $this->db->get('tahun_ajaran_detail')->row();
+        if ($data->status =='Aktif')
+        {
+            $queryUpdate = "UPDATE tahun_ajaran_detail SET status='Non Aktif' WHERE tahun_ajaran_detail_id='$tahun_ajaran_detail_id'";
+            $this->db->query($queryUpdate);
+        }else{
+            $queryUpdate = "UPDATE tahun_ajaran_detail SET status='Aktif' WHERE tahun_ajaran_detail_id='$tahun_ajaran_detail_id'";
+            $this->db->query($queryUpdate);
+        }
     }
 
 }

@@ -28,6 +28,16 @@ function check_access($guru_id, $kelompok_id)
     }
 }
 
+function check_aktif_semester($tahun_ajaran_detail_id)
+{
+    $ci = get_instance();
+    $ci->db->where('tahun_ajaran_detail_id', $tahun_ajaran_detail_id);
+    $data = $ci->db->get('tahun_ajaran_detail')->row();
+    if ($data->status =='Aktif') {
+        return "checked='checked'";
+    }
+}
+
 
 function check_admin()
 {

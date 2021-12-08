@@ -51,6 +51,7 @@
                 <th>No</th>
         		<th>Tahun Ajaran</th>
         		<th>Status</th>
+                <th>Semester</th>
         		<th>Action</th>
             </tr><?php
             foreach ($tahun_ajaran_data as $tahun_ajaran)
@@ -65,6 +66,20 @@
              <?php }else{ ?>
                 <td>Non Aktif</td>
              <?php } ?>
+
+            <td>
+                        <?php
+                            $queryKelompok = "SELECT * from tahun_ajaran_detail where tahun_ajaran_id='$tahun_ajaran->tahun_ajaran_id'";
+                            $tahun_ajaran_detail = $this->db->query($queryKelompok)->result();
+                         ?>
+                         <?php foreach ($tahun_ajaran_detail as $t) : ?>
+                            <input class="form-check-input" type="checkbox" <?= check_aktif_semester($t->tahun_ajaran_detail_id); ?>
+                                    data-tahun_ajaran_detail_id="<?= $t->tahun_ajaran_detail_id ?>">Semester 
+                                    <?= $t->semester ?><br>
+                        <?php endforeach ?>
+                        
+
+            </td>
 			
 			<td style="text-align:center" width="200px">
 				<?php 
@@ -94,3 +109,22 @@
             </div>
     </section>
 </div>
+
+
+    <script type="text/javascript">
+      $('.form-check-input').on('click', function() {
+        const tahun_ajaran_detail_id = $(this).data('tahun_ajaran_detail_id');
+        $.ajax({
+          url: "<?= base_url('tahun_ajaran/changeaktif'); ?>",
+          type: "post",
+          data: {
+            tahun_ajaran_detail_id: tahun_ajaran_detail_id,
+          },
+          success: function() {
+            document.location.href = "<?= base_url('tahun_ajaran') ?>"
+          }
+
+        });
+
+      })
+    </script>
