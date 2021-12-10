@@ -76,6 +76,8 @@
                                         $ambil_tahun_ajaran = "SELECT * from tahun_ajaran_detail where tahun_ajaran_detail_id='$tahun_ajaran_detail_id'";
                                         $hasil = $this->db->query($ambil_tahun_ajaran)->row();
                                         $fix = $hasil->tahun_ajaran_id;
+                                        $fix2 = $hasil->semester;
+
 
                                         if ($this->fungsi->user_login()->level =="ADMIN") {
                                             $sql = "SELECT * from kelompok where tahun_ajaran_id='$fix '";
@@ -113,7 +115,10 @@
                                             <td><?=$no++?></td>
                                             <td><?= $list['nama_kelompok'] ?></td>
                                             <td style="text-align:center">
-                                                <a href="<?= base_url() ?>penilaian/show/<?= $list['kelompok_id'] ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+
+                                                <a href="<?= base_url() ?>penilaian/show/<?= $list['kelompok_id'] ?>/<?= $fix ?>/<?= $fix2 ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+
+
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -166,8 +171,8 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                 <h3 class="modal-title" id="myModalLabel">Import Nilai Tahfizh</h3>
-                <a class="btn btn-success" href=""><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Klik untuk Generate Format Tahfizh</a>
-                <a class="btn btn-danger" href=""><i class="fa fa-trash faa-pulse animated"></i> &nbsp;Hapus semua nilai Tahfizh</a>
+                <a class="btn btn-success" href="<?= base_url() ?>penilaian/excel_tahfizh/<?= $_GET['tahun_ajaran_id'] ?>"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Klik untuk Generate Format Tahfizh</a>
+                <a class="btn btn-danger" href="<?= base_url() ?>penilaian/hapus_nilai_tahfizh/<?= $_GET['tahun_ajaran_id'] ?>"><i class="fa fa-trash faa-pulse animated"></i> &nbsp;Hapus semua nilai Tahfizh</a>
             </div>
             <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
             <div class="modal-body">

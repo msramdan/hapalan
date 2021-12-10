@@ -223,6 +223,7 @@ class Kelompok extends CI_Controller
         $tingkat_id = $this->input->post('tingkat_id');
         $kelompok_id = $this->input->post('kelompok_id');
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
+
         $output = '';
         if($tingkat_id=='pilih')
           {
@@ -242,11 +243,12 @@ class Kelompok extends CI_Controller
                             </h4>
                         </div>
                         <div id='collapse".$row->kelas_id."' class='panel-collapse collapse in'>";
-                $querySiswa = "SELECT siswa.*,kelompok_member.kelompok_member_id
+                $querySiswa = " SELECT siswa.*,siswa.siswa_id as oke,kelompok_member_with_kelompok.*
                                 FROM siswa
-                                LEFT OUTER JOIN kelompok_member
-                                ON siswa.siswa_id = kelompok_member.siswa_id
-                                WHERE kelompok_member.kelompok_member_id IS NULL
+                                LEFT OUTER JOIN kelompok_member_with_kelompok
+                                ON siswa.siswa_id = kelompok_member_with_kelompok.siswa_id
+                                AND tahun_ajaran_id='$tahun_ajaran_id'
+                                WHERE kelompok_member_with_kelompok.kelompok_id IS NULL
                                 and kelas_id='$row->kelas_id'";
 
                 $siswa = $this->db->query($querySiswa);
@@ -255,7 +257,7 @@ class Kelompok extends CI_Controller
                             $output .="<div class='input-group' style='margin-bottom: 5px;margin-left: 25px; margin-right: 25px'>
                                         <input readonly='' class='form-control' type='text' value='".$data->nama_siswa."'>
                                         <span class='input-group-btn'>
-                                            <a href='".base_url('kelompok/add_kelompok/').$data->siswa_id.'/'.$kelompok_id."' class='btn btn-primary'><i class='fa fa-plus' aria-hidden='true'></i></a></span>
+                                            <a href='".base_url('kelompok/add_kelompok/').$data->oke.'/'.$kelompok_id."' class='btn btn-primary'><i class='fa fa-plus' aria-hidden='true'></i></a></span>
                                     </div>";
                         }            
                 $output .="
@@ -282,8 +284,6 @@ class Kelompok extends CI_Controller
             $queryData = "SELECT siswa.nama_siswa,siswa.siswa_id,kelompok_member.kelompok_id from
             kelompok_member join kelompok on kelompok.kelompok_id=kelompok_member.kelompok_id
             join siswa on siswa.siswa_id = kelompok_member.siswa_id where kelompok_member.kelompok_id='$kelompok_id'";
-
-
 
             $data = $this->db->query($queryData);
               if($data->num_rows() > 0)

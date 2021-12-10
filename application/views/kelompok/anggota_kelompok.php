@@ -25,7 +25,7 @@
         <div class="box-body" style="overflow-x: scroll; ">
           <input type="hidden" name="tingkat_id"  id="tingkat_id" value="<?php echo $kelompok['tingkat_id'] ?>">
           <input type="hidden" name="kelompok_id"  id="kelompok_id" value="<?php echo $kelompok['kelompok_id'] ?>">
-          <input type="hidden" name="tahun_ajaran_id"  id="kelompok_id" value="<?php echo $kelompok['tahun_ajaran_id'] ?>">
+          <input type="hidden" name="tahun_ajaran_id"  id="tahun_ajaran_id" value="<?php echo $kelompok['tahun_ajaran_id'] ?>">
 
     <table class='table table-bordered'>
     <tr>

@@ -172,7 +172,6 @@ public function import(){
 			    	$tahun_ajaran_id     = $sheetData[$i]['1'];
 			        $semester     = $sheetData[$i]['3'];
 			        $nis    = $sheetData[$i]['5'];
-
 			        $jilid = $sheetData[$i]['7'];
 			        $halaman = $sheetData[$i]['8'];
 			        $tartil = $sheetData[$i]['9'];

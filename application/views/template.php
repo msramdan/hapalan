@@ -74,6 +74,7 @@
         <ul class="nav" id="sidebar-nav-menu">
           <li><a href="<?= base_url() ?>home"><i class="ti-home"></i> <span class="title">Home</span></a></li>
           <li><a href="<?= base_url() ?>penilaian"><i class="ti-pencil-alt"></i> <span class="title">Penilaian</span></a></li>
+          <li><a href="<?= base_url() ?>Surat_siswa"><i class="ti-book"></i> <span class="title">Surat Siswa</span></a></li>
           <?php if ($this->fungsi->user_login()->level =="ADMIN") { ?>
             <li class="panel">
               <a href="#masterdata" data-toggle="collapse" data-parent="#sidebar-nav-menu" class="collapsed" aria-expanded="false"><i class="ti-list"></i> <span class="title">Master Data</span> <i class="icon-submenu ti-angle-left"></i></a>

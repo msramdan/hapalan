@@ -3,10 +3,6 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-warning box-solid">
-    
-                    <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA SISWA</h3>
-                    </div>
         
         <div class="box-body">
             <div class='row'>
@@ -43,8 +39,7 @@
                     <td><?php echo $siswa->nis ?></td>
                     <td><?php echo $siswa->nama_siswa ?></td>
                     <td><?php echo $siswa->nama_kelas ?></td>
-                    <td><a href="<?= base_url() ?>penilaian/data/<?php echo $siswa->siswa_id ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Nilai</a>
-                    <!-- <a href="<?= base_url() ?>penilaian/data/<?php echo $siswa->siswa_id ?>" class="btn btn-default btn-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</a> -->
+                    <td><a href="<?= base_url() ?>penilaian/data/<?php echo $siswa->siswa_id ?>/<?= $this->uri->segment(4) ?>/<?= $this->uri->segment(5) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Nilai</a>
                 </td>
                 </tr>
             <?php } ?> 
