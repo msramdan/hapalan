@@ -55,12 +55,22 @@ class Penilaian extends CI_Controller
             'siswa' =>$this->db->get_where('siswa', array('siswa_id' => $siswa_id))->row(),
             'tahun_ajaran' =>$this->db->get_where('tahun_ajaran', array('tahun_ajaran_id' => $tahun_ajaran_id))->row(),
             'semester' =>$semester,
+            'kelas' =>$this->db->get_where('history_kelas', array(
+              'siswa_id' => $siswa_id,
+              'tahun_ajaran_id' => $tahun_ajaran_id,
+            ))->row(),
             'hasil' =>$hasil,
             'sikap'=> $this->db->get_where('sikap', array(
               'siswa_id' => $siswa_id,
               'tahun_ajaran_id' => $tahun_ajaran_id,
               'semester' => $semester,
             ))->row(),
+
+            'tahfizh'=> $this->db->get_where('tahfizh', array(
+              'siswa_id' => $siswa_id,
+              'tahun_ajaran_id' => $tahun_ajaran_id,
+              'semester' => $semester,
+            ))->result(),
 
             'tahzin'=> $this->db->get_where('tahzin', array(
               'siswa_id' => $siswa_id,
@@ -113,25 +123,7 @@ class Penilaian extends CI_Controller
             $data_kel= $this->db->query($query_kelompok)->result();
           }
 
-          $data = 100 ;
-          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-
-          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          
 
             foreach ($data_kel as $value) {
               foreach($this->Penilaian_model->get_all_kelompok($value->kelompok_id) as $row) {
@@ -151,7 +143,27 @@ class Penilaian extends CI_Controller
                $kolom++;
                $nomor++;
           }
-        }   
+        }
+
+          $data =  $kolom - 1;
+          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.ms-excel');
@@ -174,10 +186,11 @@ class Penilaian extends CI_Controller
                       ->setCellValue('E1', 'Kelas')
                       ->setCellValue('F1', 'NIS')
                       ->setCellValue('G1', 'Nama Siswa')
-                      ->setCellValue('H1', 'Surah')
-                      ->setCellValue('I1', 'Tartil')
-                      ->setCellValue('J1', 'Pemahaman')
-                      ->setCellValue('K1', 'Pashohah');
+                      ->setCellValue('H1', 'Surah ID')
+                      ->setCellValue('I1', 'Surah')
+                      ->setCellValue('J1', 'Tartil')
+                      ->setCellValue('K1', 'Pemahaman')
+                      ->setCellValue('L1', 'Pashohah');
           $kolom = 2;
           $mulai = 2;
           $nomor = 1;
@@ -191,32 +204,15 @@ class Penilaian extends CI_Controller
             $data_kel= $this->db->query($query_kelompok)->result();
           }
 
-          $data = 100 ;
-
-          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          
 
             foreach ($data_kel as $value) {
-            $query_siswa = "SELECT surat_siswa.siswa_id,surat_siswa.semester,siswa.nis,siswa.nama_siswa,kelas.nama_kelas,tahun_ajaran.tahun_ajaran,kelompok_member_with_kelompok.kelompok_id,kelompok_member_with_kelompok.tahun_ajaran_id from surat_siswa join siswa on siswa.siswa_id = surat_siswa.siswa_id join kelas on kelas.kelas_id = siswa.kelas_id join kelompok_member_with_kelompok on kelompok_member_with_kelompok.siswa_id= siswa.siswa_id JOIN tahun_ajaran on tahun_ajaran.tahun_ajaran_id = kelompok_member_with_kelompok.tahun_ajaran_id WHERE surat_siswa.tahun_ajaran_id='$tahun_ajaran_id' AND semester='$semester' GROUP BY surat_siswa.siswa_id";
+            $query_siswa = "SELECT surat_siswa.siswa_id,surat_siswa.semester,siswa.nis,siswa.nama_siswa,kelas.nama_kelas,tahun_ajaran.tahun_ajaran,kelompok_member_with_kelompok.kelompok_id,kelompok_member_with_kelompok.tahun_ajaran_id from surat_siswa join siswa on siswa.siswa_id = surat_siswa.siswa_id join kelas on kelas.kelas_id = siswa.kelas_id join kelompok_member_with_kelompok on kelompok_member_with_kelompok.siswa_id= siswa.siswa_id JOIN tahun_ajaran on tahun_ajaran.tahun_ajaran_id = kelompok_member_with_kelompok.tahun_ajaran_id WHERE surat_siswa.tahun_ajaran_id='$tahun_ajaran_id' AND semester='$semester' and kelompok_id='$value->kelompok_id' GROUP BY surat_siswa.siswa_id";
 
-              foreach ($this->db->query($query_siswa)->result()as $siswa) {
+              foreach ($this->db->query($query_siswa)->result() as $siswa) {
 
                 $jml = $this->db->query("SELECT * from surat_siswa where siswa_id='$siswa->siswa_id'");
                 $jml_data= $jml->num_rows();
-
                 $data = $kolom + $jml_data - 1; 
                 $spreadsheet->setActiveSheetIndex(0)
                              ->setCellValue('A' . $kolom, $nomor)
@@ -227,16 +223,16 @@ class Penilaian extends CI_Controller
                              ->setCellValue('F' . $kolom, $siswa->nis)
                              ->setCellValue('G' . $kolom, $siswa->nama_siswa);
 
-
-                             $daftarSurah="SELECT surat.nama_surat from surat_siswa join surat on surat.surat_id = surat_siswa.surat_id where siswa_id='$siswa->siswa_id'";
+                             $daftarSurah="SELECT surat.nama_surat,surat.surat_id from surat_siswa join surat on surat.surat_id = surat_siswa.surat_id where siswa_id='$siswa->siswa_id'";
                              $daftarSurah2= $this->db->query($daftarSurah)->result();
 
                              foreach ($daftarSurah2 as $daftar_surah) {
                                 $spreadsheet->setActiveSheetIndex(0)
-                                   ->setCellValue('H' .$mulai, $daftar_surah->nama_surat)
-                                   ->setCellValue('I' .$mulai, '')
+                                   ->setCellValue('H' .$mulai, $daftar_surah->surat_id)
+                                   ->setCellValue('I' .$mulai, $daftar_surah->nama_surat)
                                    ->setCellValue('J' .$mulai, '')
-                                   ->setCellValue('K' .$mulai, '');
+                                   ->setCellValue('K' .$mulai, '')
+                                   ->setCellValue('L' .$mulai, '');
                                 $mulai++;
                              }
                 $spreadsheet->getActiveSheet()->mergeCells('A' .$kolom.':A'.$data);
@@ -251,11 +247,29 @@ class Penilaian extends CI_Controller
                 $nomor++;
 
               }
-        }   
+        }
+
+          $data =  $kolom - 1;
+          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');   
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="Format upload nilai tahzin.xlsx"');
+        header('Content-Disposition: attachment;filename="Format upload nilai tahfizh.xlsx"');
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
      }
@@ -296,26 +310,6 @@ class Penilaian extends CI_Controller
             $data_kel= $this->db->query($query_kelompok)->result();
           }
 
-          $data = 100 ;
-          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-
-          
-          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-
             foreach ($data_kel as $value) {
               foreach($this->Penilaian_model->get_all_kelompok($value->kelompok_id) as $row) {
                $spreadsheet->setActiveSheetIndex(0)
@@ -335,7 +329,29 @@ class Penilaian extends CI_Controller
                $kolom++;
                $nomor++;
           }
-        }   
+        }
+
+          $data =  $kolom - 1;
+          $spreadsheet->getActiveSheet()->getStyle('A1:A'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('B1:B'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('C1:C'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('D1:D'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('E1:E'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('F1:F'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+          
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
+
+
 
           $writer = new Xlsx($spreadsheet);
 

@@ -68,9 +68,20 @@
                             </div>
                             <form action="<?= base_url() ?>import/import_siswa" method="post" enctype="multipart/form-data">
                                     <div class="modal-body">
-                                        <div class="form-group">
+
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Tahun Ajaran</label>
+                                    <select name="tahun_ajaran_id" class="form-control" required=" ">
+                                        <option value="">-- Pilih -- </option>
+                                        <?php foreach ($tahun_ajaran as $key => $data) { ?>
+                                            <option value="<?php echo $data->tahun_ajaran_id ?>"><?php echo $data->tahun_ajaran ?></option>
+                                        <?php } ?>
+                                      </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="exampleInputFile">Kelas</label>
-                                    <select name="kelas_id" class="form-control">
+                                    <select name="kelas_id" class="form-control" required="">
                                         <option value="">-- Pilih -- </option>
                                         <?php foreach ($kelas as $key => $data) { ?>
                                           <?php if ($kelas_id == $data->kelas_id) { ?>

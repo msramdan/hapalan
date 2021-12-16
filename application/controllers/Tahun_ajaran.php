@@ -9,6 +9,7 @@ class Tahun_ajaran extends CI_Controller
     {
         parent::__construct();
         is_login();
+        check_admin();
         $this->load->model('App_setting_model');
         $this->load->model('Tahun_ajaran_model');
         $this->load->library('form_validation');

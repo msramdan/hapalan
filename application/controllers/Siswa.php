@@ -9,10 +9,12 @@ class Siswa extends CI_Controller
     {
         parent::__construct();
         is_login();
+        check_admin();
         $this->load->model('Siswa_model');
         $this->load->model('User_model');
         $this->load->model('App_setting_model');
         $this->load->model('Tingkat_model');
+        $this->load->model('Tahun_ajaran_model');
         $this->load->model('Kelas_model');
         $this->load->library('form_validation');
     }
@@ -23,6 +25,7 @@ class Siswa extends CI_Controller
         $data = array(
             'siswa_data' => $this->Siswa_model->get_all_kelas($kelas_id),
             'kelas_id' =>$kelas_id,
+            'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all_aktif(),
             'app_setting' =>$this->App_setting_model->get_by_id(1),
             'start' => 0,
             'kelas' => $this->Kelas_model->get_all(),
@@ -34,6 +37,7 @@ class Siswa extends CI_Controller
     {
         $data = array(
             'kelas' => $this->Kelas_model->get_all(),
+            'tahun_ajaran' =>$this->Tahun_ajaran_model->get_all_aktif(),
             'siswa_data' => $this->Siswa_model->get_all(),
             'tingkat_data' => $this->Tingkat_model->get_all(),
             'app_setting' =>$this->App_setting_model->get_by_id(1),
@@ -261,9 +265,23 @@ class Siswa extends CI_Controller
                   window.location='" . site_url('siswa?kelas_id='.$kelas_id) . "'</script>";
             } else {
               $ket    = $_POST['kelas_id'];
-              $jumlah_data = count($siswa_id);
+              $tahun_ajaran_id    = $_POST['tahun_ajaran_id'];
+              $jumlah_data = count($siswa_id); 
               for($i = 0; $i < $jumlah_data;$i++)
-                {     
+                {   
+                    //cek jika belum ada data
+                    $query = $this->db->query("SELECT * From history_kelas where siswa_id='$siswa_id[$i]' and tahun_ajaran_id='$tahun_ajaran_id'");
+                    $jml = $query->num_rows();
+                    if ($jml > 0) {
+                        $update = "Update history_kelas set kelas_id='$ket' where siswa_id='$siswa_id[$i]' and tahun_ajaran_id='$tahun_ajaran_id'";
+                        $this->db->query($update);
+                        
+                    }else{
+                        $tambah = "insert into history_kelas (history_kelas_id,tahun_ajaran_id,siswa_id,kelas_id) values ('','$tahun_ajaran_id','$siswa_id[$i]','$ket')";
+                        $this->db->query($tambah);
+                    }
+
+                    //update kelas siswa  
                     $sql = "Update siswa set kelas_id='$ket' where siswa_id='$siswa_id[$i]'";
                     $this->db->query($sql);
                 }

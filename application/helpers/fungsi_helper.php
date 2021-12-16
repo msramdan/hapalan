@@ -49,6 +49,29 @@ function check_admin()
 }
 
 
+function check_siswa()
+{
+    $ci = &get_instance();
+    $ci->load->library('fungsi');
+    if ($ci->fungsi->user_login()->level != 'SISWA') {
+        redirect('home');
+    }
+}
+
+
+function nama_surat($surat_id){
+        $ci = &get_instance();
+        $result = $ci->db->get_where('surat', array('surat_id' => $surat_id))->row();
+        return $result->nama_surat;
+    }
+
+    function nama_kelas($kelas_id){
+        $ci = &get_instance();
+        $result = $ci->db->get_where('kelas', array('kelas_id' => $kelas_id))->row();
+        return $result->nama_kelas;
+    }
+
+
 
 
 

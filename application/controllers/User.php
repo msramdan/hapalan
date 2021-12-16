@@ -16,6 +16,7 @@ class User extends CI_Controller
 
     public function index()
     {
+        check_admin();
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->uri->segment(3));
         
@@ -49,6 +50,7 @@ class User extends CI_Controller
 
     public function read($id) 
     {
+        check_admin();
         $row = $this->User_model->get_by_id($id);
         if ($row) {
             $data = array(
@@ -68,6 +70,7 @@ class User extends CI_Controller
 
     public function create() 
     {
+        check_admin();
         $data = array(
             'button' => 'Create',
             'app_setting' =>$this->App_setting_model->get_by_id(1),
@@ -83,6 +86,7 @@ class User extends CI_Controller
     
     public function create_action() 
     {
+        check_admin();
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -113,6 +117,7 @@ class User extends CI_Controller
     
     public function update($id) 
     {
+        check_admin();
         $row = $this->User_model->get_by_id($id);
 
         if ($row) {
@@ -135,6 +140,7 @@ class User extends CI_Controller
     
     public function update_action() 
     {
+        check_admin();
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -185,6 +191,7 @@ class User extends CI_Controller
     
     public function delete($id) 
     {
+        check_admin();
         $row = $this->User_model->get_by_id($id);
 
         if ($row) {
@@ -264,6 +271,7 @@ class User extends CI_Controller
     }
 
     public function download($gambar){
+        check_admin();
         force_download('admin/assets/img/user/'.$gambar,NULL);
     }
 

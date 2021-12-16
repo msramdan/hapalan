@@ -35,8 +35,12 @@ class Auth extends CI_Controller
         );
         $this->session->set_userdata($params);
         $this->User_model->addHistory($this->fungsi->user_login()->user_id, $this->fungsi->user_login()->username.' Telah melakukan login', date('d/m/Y H:i:s'), $_SERVER['HTTP_USER_AGENT']);
-        
+        if ($this->session->userdata('level') =='ADMIN' || $this->session->userdata('level') =='GURU') {
           echo "<script>window.location='".site_url('home')."'</script>";
+        }else{
+          echo "<script>window.location='".site_url('pannel_siswa')."'</script>";
+        }
+  
       } else{
         echo "<script>
         alert('Login Gagal');

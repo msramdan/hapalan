@@ -21,6 +21,17 @@ Class Fungsi{
         return $result;
     }
 
+
+    function siswa_login(){
+        $ci = &get_instance();
+        $user_session = $ci->session->userdata('userid');
+        $ci->db->where('user_id', $user_session);
+        $result = $ci->db->get('siswa')->row();
+        return $result;
+    }
+
+    
+
     function count_guru(){
         $this->ci->load->model('Guru_model');
         return $this->ci->Guru_model->get_total()->num_rows();

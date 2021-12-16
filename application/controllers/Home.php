@@ -7,14 +7,19 @@ class Home extends CI_Controller {
         parent::__construct();
         is_login();
         $this->load->model('App_setting_model');
-        // check_admin();
     }
 
 	function index()
 	{
-		$data = array(
+
+        if ($this->fungsi->user_login()->level=="ADMIN" || $this->fungsi->user_login()->level=="GURU" ) {
+            $data = array(
             'app_setting' =>$this->App_setting_model->get_by_id(1),
         );
-		$this->template->load('template','home/index',$data);
+        $this->template->load('template','home/index',$data);
+        }else{
+            redirect('pannel_siswa');
+        }
+		
 	}
 }

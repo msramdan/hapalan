@@ -9,6 +9,7 @@ class Kelas extends CI_Controller
     {
         parent::__construct();
         is_login();
+        check_admin();
         $this->load->model('Kelas_model');
         $this->load->model('Tingkat_model');
         $this->load->model('App_setting_model');

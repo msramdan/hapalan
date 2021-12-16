@@ -59,7 +59,7 @@
                     
                 </tr>
                 <tr>
-                    <td style="border: 0 !important;">Kelas :</td>
+                    <td style="border: 0 !important;">Kelas : <?= nama_kelas($kelas->kelas_id) ?> </td>
                     <td style="border: 0 !important;" width="350px"></td>
                     <td style="border: 0 !important;"><span style="margin-left: 180px">Tahun Ajaran : <?= $tahun_ajaran->tahun_ajaran ?></span></td>
                 </tr>
@@ -76,7 +76,7 @@
                     <th>Nilai Rata Rata</th>
                 </tr>
                 <tr>
-                    <td scope="row">Pemahaman</td>
+                    <td scope="row"><?= $tahzin  != null ? $tahzin->jilid_alquran.' / ' .$tahzin->halaman_juz  : '' ?></td>
                     <td><?= $tahzin  != null ? $tahzin->tartil : '' ?></td>
                     <td><?= $tahzin  != null ? $tahzin->pemahaman : '' ?></td>
                     <td><?= $tahzin  != null ? $tahzin->pashohah : '' ?></td>
@@ -101,14 +101,34 @@
                     <th>Fashohah</th>
                     <th>Nilai Rata Rata</th>
                 </tr>
-                <tr>
-                    <td scope="row">1</td>
-                    <td>Kacang</td>
-                    <td>90</td>
-                    <td>90</td>
-                    <td>90</td>
-                    <td>90</td>
-                </tr>
+
+                <?php 
+                $no=1;
+                $counter = 0;
+                foreach ($tahfizh as $a) {
+                $counter++; ?>
+                    <tr>
+                        <td scope="row"><?= $no++ ?></td>
+                        <td><?= nama_surat($a->surat_id) ?></td>
+                        <td><?= $a->tartil ?></td>
+                        <td><?= $a->pemahaman ?></td>
+                        <td><?= $a->pashohah ?></td>
+                        <td><?= round(($a->tartil + $a->pemahaman + $a->pashohah)/3,2);  ?></td>
+                    </tr>
+                <?php } ?>
+
+                <?php if ($counter < 10) {
+                    for ($x = $counter+1; $x <=10; $x++) {
+                      echo "<tr>
+                                <td>".$x."</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>";
+                    }
+                 } ?>                                 
         </table>
         <br>
         <br>
@@ -146,11 +166,14 @@
                 </tr>
                 <tr>
                     <td style="border: 0 !important;" height="70px"></td>
-                    <td style="border: 0 !important;" height="70px"><img src="admin/assets/img/ttd/<?= $hasil  != null ? $hasil->tanda_tangan : '' ?>" width="110px"></td>
+                    <td style="border: 0 !important;" height="70px">
+                        <?php if ($hasil != null) { ?>
+                           <img src="admin/assets/img/ttd/<?= $hasil  != null ? $hasil->tanda_tangan : '' ?>" width="110px"></td>
+                        <?php } ?>
                 </tr>
                 <tr>
                     <td style="border: 0 !important;" width="50%">__________________</td>
-                    <td style="border: 0 !important;" width="50%"><?= $hasil  != null ? $hasil->nama_guru : '' ?></td>
+                    <td style="border: 0 !important;" width="50%"><u><?= $hasil  != null ? $hasil->nama_guru : '' ?></u></td>
                 </tr>
         </table>
         <table id="table">
@@ -161,7 +184,7 @@
                     <td style="border: 0 !important;" height="70px"><img src="admin/assets/img/sekolah/<?= $app_setting->ttd_kepsek ?>" width="110px"></td>
                 </tr>
                 <tr>
-                    <td style="border: 0 !important;" width="50%"><?= $app_setting->author ?></td>
+                    <td style="border: 0 !important;" width="50%"><u><?= $app_setting->author ?></u></td>
                 </tr>
         </table>
 

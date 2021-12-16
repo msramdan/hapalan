@@ -9,7 +9,7 @@ class Backup extends CI_Controller
 		parent::__construct();
 		is_login();
 		$this->load->model('App_setting_model');
-		// check_admin();
+		check_admin();
 	}
 
 	public function index()

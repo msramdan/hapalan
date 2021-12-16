@@ -28,8 +28,20 @@
         </div>
         <div class="box-body" style="overflow-x: scroll; ">
         <form action="<?= base_url() ?>siswa/update_kelas/<?= $kelas_id ?>" method="POST">
-            <div style="display: inline-block; width:20%;" class="form-group">
-                                <label for="tanggal" class="control-label">Pindahkan Siswa</label>
+            <div class="form-group" >
+                                    <label for="exampleInputFile">Tahun Ajaran</label>
+                                    <select name="tahun_ajaran_id" class="form-control" required=" ">
+                                        <option value="">-- Pilih -- </option>
+                                        <?php foreach ($tahun_ajaran as $key => $data) { ?>
+                                            <option value="<?php echo $data->tahun_ajaran_id ?>"><?php echo $data->tahun_ajaran ?></option>
+                                        <?php } ?>
+                                      </select>
+                                </div>
+
+
+
+            <div class="form-group">
+                                <label for="exampleInputFile">Pindahkan Ke Kelas</label>
                                 <select name="kelas_id" class="form-control" required="">
                                 <option value="">-- Pilih -- </option>
                                 <?php foreach ($kelas as $key => $data) { ?>
@@ -37,7 +49,7 @@
                                 <?php } ?>
                               </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <button class="btn btn-primary" type="submit" ><i class="fa fa-save" aria-hidden="true"></i> Update</button>
                                 <a style="float: right;" href="<?= base_url('siswa/grup') ?>" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                             </div>

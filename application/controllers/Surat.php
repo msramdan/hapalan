@@ -9,6 +9,7 @@ class Surat extends CI_Controller
     {
         parent::__construct();
         is_login();
+        check_admin();
         $this->load->model('App_setting_model');
         $this->load->model('Surat_model');
         $this->load->library('form_validation');

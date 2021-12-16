@@ -9,6 +9,7 @@ class Guru extends CI_Controller
     {
         parent::__construct();
         is_login();
+        // check_admin();
         $this->load->model('Tahun_ajaran_model');
         $this->load->model('User_model');
         $this->load->model('Guru_model');

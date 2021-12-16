@@ -92,7 +92,7 @@
 
                         <?php if(isset($_GET['tahun_ajaran_id'])){ ?>
                             <div class="form-group">
-                                <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-upload" aria-hidden="true"></i> Import Nilai Tahzi </a>
+                                <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_add_new"><i class="fa fa-upload" aria-hidden="true"></i> Import Nilai Tahzin </a>
 
                                 <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal_add_new2"><i class="fa fa-upload" aria-hidden="true"></i> Import Nilai Tahfizh </a>  
 
@@ -174,7 +174,7 @@
                 <a class="btn btn-success" href="<?= base_url() ?>penilaian/excel_tahfizh/<?= $_GET['tahun_ajaran_id'] ?>"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Klik untuk Generate Format Tahfizh</a>
                 <a class="btn btn-danger" href="<?= base_url() ?>penilaian/hapus_nilai_tahfizh/<?= $_GET['tahun_ajaran_id'] ?>"><i class="fa fa-trash faa-pulse animated"></i> &nbsp;Hapus semua nilai Tahfizh</a>
             </div>
-            <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
+            <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import_nilai_tahfizh">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputFile">File Upload</label>
