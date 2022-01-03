@@ -352,10 +352,10 @@ class Import extends CI_Controller {
 				    	$tahun_ajaran_id     = $sheetData[$i]['0'];
 				        $semester     = $sheetData[$i]['2'];
 				        $nis    = $sheetData[$i]['5'];
-				        $tertib = $sheetData[$i]['7'];
-				        $disiplin = $sheetData[$i]['8'];
-				        $motivasi = $sheetData[$i]['9'];
-				        $keterangan = $sheetData[$i]['10'];
+				        $tertib = strtoupper($sheetData[$i]['7']);
+				        $disiplin = strtoupper($sheetData[$i]['8']);
+				        $motivasi = strtoupper($sheetData[$i]['9']);
+				        $keterangan = ucfirst($sheetData[$i]['10']);
 
 						$query = "SELECT * from siswa where nis='$nis'";
 						$data = $this->db->query($query);

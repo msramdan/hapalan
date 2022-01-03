@@ -108,7 +108,7 @@ class Surat_siswa extends CI_Controller
 
         $output = '';
 
-            $queryData = "SELECT siswa.nama_siswa,siswa.siswa_id,surat_siswa.tahun_ajaran_id,surat_siswa.surat_siswa_id, surat_siswa.semester, surat.nama_surat from
+            $queryData = "SELECT siswa.nama_siswa,siswa.siswa_id,surat_siswa.surat_id,surat_siswa.tahun_ajaran_id,surat_siswa.surat_siswa_id, surat_siswa.semester, surat.nama_surat from
             surat_siswa join siswa on siswa.siswa_id = surat_siswa.siswa_id
             join surat on surat.surat_id = surat_siswa.surat_id
             where surat_siswa.siswa_id='$siswa_id' and tahun_ajaran_id='$tahun_ajaran_id' and semester='$semester'";
@@ -120,6 +120,7 @@ class Surat_siswa extends CI_Controller
                 $output .="<form action='".base_url('surat_siswa/hapus_surat/' .$row->surat_siswa_id)."' method='post'>
                     <div class='input-group' style='margin-bottom: 5px'>
                         <input readonly='' class='form-control' type='text' value='".$row->nama_surat."'>
+						<input class='form-control' type='hidden' name='surat_id' value='".$row->surat_id."'>
                         <input class='form-control' type='hidden' name='siswa_id' value='".$siswa_id."'>
                         <input class='form-control' type='hidden' name='tahun_ajaran_id' value='".$tahun_ajaran_id."'>
                         <input class='form-control' type='hidden' name='semester' value='".$semester."'>
@@ -154,14 +155,20 @@ class Surat_siswa extends CI_Controller
     }
     function hapus_surat($id){
         $siswa_id = $this->input->post('siswa_id');
-        $surat_id = $this->input->post('surat_id');
+		$surat_id = $this->input->post('surat_id');
+		// var_dump($surat_id);
+		// die();
+        
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $semester = $this->input->post('semester');
 		$kelompok_id = $this->input->post('kelompok_id');
 
-
         $sql = "DELETE FROM surat_siswa WHERE surat_siswa_id ='$id'";
-        $this->db->query($sql);
+        $cek = $this->db->query($sql);
+		if($cek){
+			$sql2 = "DELETE FROM tahfizh WHERE siswa_id ='$siswa_id' and surat_id='$surat_id'";
+			$this->db->query($sql2);
+		}
         redirect(site_url('surat_siswa/daftar_surah/'.$siswa_id.'/'.$tahun_ajaran_id.'/'.$semester.'/' .$kelompok_id));
 
     }

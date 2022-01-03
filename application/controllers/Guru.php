@@ -308,4 +308,8 @@ class Guru extends CI_Controller
 
     }
 
+	public function download($gambar){
+        force_download('files/'.$gambar,NULL);
+    }
+
 }

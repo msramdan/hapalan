@@ -91,7 +91,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                 <h3 class="modal-title" id="myModalLabel">Import Data Guru</h3>
-                <a class="btn btn-success" href="files/Format Import Guru.xlsx"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Download Format Import Guru</a>
+                <a class="btn btn-success" href="<?= base_url() ?>guru/download/Format_Import_guru.xlsx"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Download Format Import Guru</a>
             </div>
             <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
             <div class="modal-body">
