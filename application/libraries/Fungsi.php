@@ -31,7 +31,6 @@ Class Fungsi{
     }
 
     
-
     function count_guru(){
         $this->ci->load->model('Guru_model');
         return $this->ci->Guru_model->get_total()->num_rows();
@@ -41,11 +40,23 @@ Class Fungsi{
             $this->ci->load->model('Siswa_model');
             return $this->ci->Siswa_model->get_total()->num_rows();
         }
+
+    function count_siswa_guru(){
+            $ci = &get_instance();
+            $id = $ci->fungsi->guru_login()->guru_id;
+            $this->ci->load->model('Access_guru_to_kelompok_model');
+            return $this->ci->Access_guru_to_kelompok_model->get_total_siswa($id)->num_rows();
+        }
     function count_kelompok(){
             $this->ci->load->model('Kelompok_model');
             return $this->ci->Kelompok_model->get_total()->num_rows();
         }
-
+    function count_kelompok_guru(){
+            $ci = &get_instance();
+            $id = $ci->fungsi->guru_login()->guru_id;
+            $this->ci->load->model('Access_guru_to_kelompok_model');
+            return $this->ci->Access_guru_to_kelompok_model->get_total($id)->num_rows();
+        }
     function count_user(){
             $this->ci->load->model('User_model');
             return $this->ci->User_model->get_total()->num_rows();

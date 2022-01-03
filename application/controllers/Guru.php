@@ -61,7 +61,6 @@ class Guru extends CI_Controller
 		'nip' => $row->nip,
 		'nama_guru' => $row->nama_guru,
 		'jenis_kelamin' => $row->jenis_kelamin,
-		'alamat' => $row->alamat,
 		'user_id' => $row->user_id,
 	    );
             $this->template->load('template','guru/guru_read', $data);
@@ -82,7 +81,6 @@ class Guru extends CI_Controller
 	    'nip' => set_value('nip'),
 	    'nama_guru' => set_value('nama_guru'),
 	    'jenis_kelamin' => set_value('jenis_kelamin'),
-	    'alamat' => set_value('alamat'),
 	    'user_id' => set_value('user_id'),
 	);
         $this->template->load('template','guru/guru_form', $data);
@@ -99,7 +97,6 @@ class Guru extends CI_Controller
 		'nip' => $this->input->post('nip',TRUE),
 		'nama_guru' => $this->input->post('nama_guru',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
 		'user_id' => $this->input->post('user_id',TRUE),
 	    );
 
@@ -123,7 +120,6 @@ class Guru extends CI_Controller
 		'nip' => set_value('nip', $row->nip),
 		'nama_guru' => set_value('nama_guru', $row->nama_guru),
 		'jenis_kelamin' => set_value('jenis_kelamin', $row->jenis_kelamin),
-		'alamat' => set_value('alamat', $row->alamat),
 		'user_id' => set_value('user_id', $row->user_id),
 	    );
             $this->template->load('template','guru/guru_form', $data);
@@ -144,7 +140,6 @@ class Guru extends CI_Controller
 		'nip' => $this->input->post('nip',TRUE),
 		'nama_guru' => $this->input->post('nama_guru',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
-		'alamat' => $this->input->post('alamat',TRUE),
 		'user_id' => $this->input->post('user_id',TRUE),
 	    );
 
@@ -179,7 +174,6 @@ class Guru extends CI_Controller
 	$this->form_validation->set_rules('nip', 'nip', 'trim|required');
 	$this->form_validation->set_rules('nama_guru', 'nama guru', 'trim|required');
 	$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
-	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 	$this->form_validation->set_rules('user_id', 'user id', 'trim|required');
 
 	$this->form_validation->set_rules('guru_id', 'guru_id', 'trim');
@@ -208,22 +202,18 @@ class Guru extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Guru");
 	xlsWriteLabel($tablehead, $kolomhead++, "Nip");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Guru");
 	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Kelamin");
-	xlsWriteLabel($tablehead, $kolomhead++, "Alamat");
-	xlsWriteLabel($tablehead, $kolomhead++, "User Id");
 
 	foreach ($this->Guru_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama_guru);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->nip);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_guru);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->jenis_kelamin);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->alamat);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->user_id);
 
 	   $tablebody++;
             $nourut++;

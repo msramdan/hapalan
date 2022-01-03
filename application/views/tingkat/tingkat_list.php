@@ -20,7 +20,7 @@
                                                         <?php 
                 echo anchor(site_url('tingkat/update/'.$tingkat->tingkat_id),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-primary"'); 
                 echo '  '; 
-                echo anchor(site_url('tingkat/delete/'.$tingkat->tingkat_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                echo anchor(site_url('tingkat/delete/'.$tingkat->tingkat_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','onclick="return confirm('."'Yakin Hapus Data ?'".')" class="btn btn-danger" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
                 ?>
                                                     </span>
                                                 </div>
@@ -65,7 +65,7 @@
                                                             <?php 
                 echo anchor(site_url('kelas/update/'.$d->kelas_id),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-primary"'); 
                 echo '  '; 
-                echo anchor(site_url('kelas/delete/'.$d->kelas_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                echo anchor(site_url('kelas/delete/'.$d->kelas_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','onclick="return confirm('."'Yakin Hapus Data ?'".')" class="btn btn-danger" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
                 ?>
                                                         </span>
                                                     </div>

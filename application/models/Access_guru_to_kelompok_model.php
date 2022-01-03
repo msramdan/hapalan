@@ -22,6 +22,26 @@ class Access_guru_to_kelompok_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_total($id)
+    {
+        $this->db->where('guru_id', $id);
+        return $this->db->get($this->table);
+    }
+    function get_total_siswa($id)
+    {
+
+        $query  = "SELECT * from access_guru_to_kelompok where guru_id='$id'";
+        $result = $this->db->query($query);
+        foreach ($result->result() as $row) {
+            $list[] = $row->kelompok_id;
+        }
+
+        $array = implode("','",$list);
+        $data = "SELECT * from kelompok_member join access_guru_to_kelompok on access_guru_to_kelompok.kelompok_id = kelompok_member.kelompok_id where access_guru_to_kelompok.kelompok_id IN('$array') ";
+        return $this->db->query($data);
+
+    }
+
 
 }
 

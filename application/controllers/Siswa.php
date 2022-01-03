@@ -224,28 +224,26 @@ class Siswa extends CI_Controller
 
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Siswa");
 	xlsWriteLabel($tablehead, $kolomhead++, "Nis");
-	xlsWriteLabel($tablehead, $kolomhead++, "Nama Siswa");
 	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Kelamin");
 	xlsWriteLabel($tablehead, $kolomhead++, "Kelas Id");
 	xlsWriteLabel($tablehead, $kolomhead++, "Nama Ibu");
 	xlsWriteLabel($tablehead, $kolomhead++, "Nama Ayah");
 	xlsWriteLabel($tablehead, $kolomhead++, "No Hp Wali Murid");
-	xlsWriteLabel($tablehead, $kolomhead++, "User Id");
 
 	foreach ($this->Siswa_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
+            xlsWriteLabel($tablebody, $kolombody++, $data->nama_siswa);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->nis);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_siswa);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->jenis_kelamin);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->kelas_id);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_ibu);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->nama_ayah);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->no_hp_wali_murid);
-	    xlsWriteNumber($tablebody, $kolombody++, $data->user_id);
 
 	    $tablebody++;
             $nourut++;

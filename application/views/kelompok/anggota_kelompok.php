@@ -2,6 +2,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
+						<a href="<?= base_url() ?>kelompok" class="btn btn-warning btn-sm" style="margin-bottom: 10px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
                 <div class="box box-warning box-solid">
                      <div class="box-header with-border">
                

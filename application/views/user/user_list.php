@@ -48,7 +48,6 @@
             <tr>
                 <th>No</th>
 		<th>Username</th>
-		<th>Photo</th>
 		<th>Level</th>
 		<th>Action</th>
             </tr><?php
@@ -58,15 +57,14 @@
                 <tr>
 			<td width="10px"><?php echo ++$start ?></td>
 			<td><?php echo $user->username ?></td>
-            <td><a href="<?= base_url() ?>user/download/<?php echo $user->photo ?>"><i class="fa fa-download"></i> Download Photo</a></td>
-			<td><?php echo $user->level ?></td>
+            <td><?php echo $user->level ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('user/read/'.$user->user_id),'<i class="fa fa-eye" aria-hidden="true"></i>','class="btn btn-success btn-sm"'); 
 				echo '  '; 
 				echo anchor(site_url('user/update/'.$user->user_id),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-primary btn-sm"'); 
 				echo '  '; 
-				echo anchor(site_url('user/delete/'.$user->user_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('user/delete/'.$user->user_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','onclick="return confirm('."'Yakin Hapus Data ?'".')" class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>

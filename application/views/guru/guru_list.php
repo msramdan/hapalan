@@ -2,9 +2,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-warning box-solid">
-                    <a href="files/Format Import Guru.xlsx"><i class="fa fa-file-pdf-o faa-pulse animated"></i> &nbsp;Download Format Import Guru</a>
-        
+                <div class="box box-warning box-solid">        
         <div class="box-body">
             <div class='row'>
             <div class='col-md-9'>
@@ -48,7 +46,6 @@
         		<th>Nip</th>
         		<th>Nama Guru</th>
         		<th>Jenis Kelamin</th>
-        		<th>Alamat</th>
                 <th>Akses Kelompok</th>
         		<th>Action</th>
             </tr>
@@ -59,7 +56,6 @@
         			<td><?php echo $guru->nip ?></td>
         			<td><?php echo $guru->nama_guru ?></td>
         			<td><?php echo $guru->jenis_kelamin ?></td>
-        			<td><?php echo $guru->alamat ?></td>
                     <td style="text-align:center"><a href="<?= base_url() ?>guru/akses_kelompok/<?php echo $guru->guru_id ?>" class="btn btn-success btn-sm"><i class="fa fa-unlock" aria-hidden="true"></i>Lihat Akses</a></td>
         			<td style="text-align:center" width="200px">
         				<?php 
@@ -67,7 +63,7 @@
         				echo '  '; 
         				echo anchor(site_url('guru/update/'.$guru->guru_id),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-primary btn-sm"'); 
         				echo '  '; 
-        				echo anchor(site_url('guru/delete/'.$guru->guru_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+        				echo anchor(site_url('guru/delete/'.$guru->guru_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','onclick="return confirm('."'Yakin Hapus Data ?'".')" class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
         				?>
         			</td>
         		</tr>
@@ -95,6 +91,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                 <h3 class="modal-title" id="myModalLabel">Import Data Guru</h3>
+                <a class="btn btn-success" href="files/Format Import Guru.xlsx"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Download Format Import Guru</a>
             </div>
             <form method="post" enctype="multipart/form-data" action="<?php base_url() ?>import/import">
             <div class="modal-body">

@@ -87,7 +87,7 @@
 				echo '  '; 
 				echo anchor(site_url('tahun_ajaran/update/'.$tahun_ajaran->tahun_ajaran_id),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>','class="btn btn-primary btn-sm"'); 
 				echo '  '; 
-				echo anchor(site_url('tahun_ajaran/delete/'.$tahun_ajaran->tahun_ajaran_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('tahun_ajaran/delete/'.$tahun_ajaran->tahun_ajaran_id),'<i class="fa fa-trash-o" aria-hidden="true"></i>','onclick="return confirm('."'Yakin Hapus Data ?'".')" class="btn btn-danger btn-sm" Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>

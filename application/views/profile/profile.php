@@ -11,11 +11,7 @@
 
           <div class="box-body box-profile">
 
-            <?php if ($this->fungsi->user_login()->photo =='default.jpg') { ?>
-              <a href="#modal-dialog" data-bs-toggle="modal"><img style="width: 150px;height: 150px;border-radius: 5%;" src="<?php echo base_url().'/admin/assets/img/sal.jpg' ?>" /></a>
-            <?php }else{ ?>
-              <a href="#modal-dialog" data-bs-toggle="modal"><img style="width: 150px;height: 150px;border-radius: 5%;" src="<?php echo base_url().'/admin/assets/img/user/'.$this->fungsi->user_login()->photo ?>" /></a>
-            <?php } ?>
+            <a href="#modal-dialog" data-bs-toggle="modal"><img style="width: 150px;height: 150px;border-radius: 5%;" src="<?php echo base_url().'/admin/assets/img/sal.jpg' ?>" /></a>
 
             <h3 class="profile-username text-center"><?= ucfirst($this->fungsi->user_login()->username) ?></h3>
             <p class="text-muted text-center"><?= $this->fungsi->user_login()->level ?>

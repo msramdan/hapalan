@@ -64,6 +64,7 @@ class Surat_siswa extends CI_Controller
         $siswa_id = $this->input->post('siswa_id');
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $semester = $this->input->post('semester');
+		$kelompok_id = $this->input->post('kelompok_id');
         $output = '';
 
             $queryData = "SELECT surat.nama_surat,surat.surat_id as from_surat_id ,surat_siswa.surat_id,surat_siswa.tahun_ajaran_id,surat_siswa.semester,surat_siswa.siswa_id FROM surat LEFT JOIN surat_siswa ON surat_siswa.surat_id = surat.surat_id and siswa_id='$siswa_id ' AND tahun_ajaran_id='$tahun_ajaran_id' AND semester='$semester' where siswa_id IS null;";
@@ -81,6 +82,7 @@ class Surat_siswa extends CI_Controller
                         <input class='form-control' type='hidden' name='surat_id' value='".$row->from_surat_id."'>
                         <input class='form-control' type='hidden' name='tahun_ajaran_id' value='".$tahun_ajaran_id."'>
                         <input class='form-control' type='hidden' name='semester' value='".$semester."'>
+						<input class='form-control' type='hidden' name='kelompok_id' value='".$kelompok_id."'>
                             <span class='input-group-btn'>
                                 <button type='submit' class='btn btn-primary'><i class='fa fa-plus'></i></button>
                             </span>
@@ -102,6 +104,7 @@ class Surat_siswa extends CI_Controller
         $siswa_id = $this->input->post('siswa_id');
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $semester = $this->input->post('semester');
+		$kelompok_id = $this->input->post('kelompok_id');
 
         $output = '';
 
@@ -109,7 +112,6 @@ class Surat_siswa extends CI_Controller
             surat_siswa join siswa on siswa.siswa_id = surat_siswa.siswa_id
             join surat on surat.surat_id = surat_siswa.surat_id
             where surat_siswa.siswa_id='$siswa_id' and tahun_ajaran_id='$tahun_ajaran_id' and semester='$semester'";
-
             $data = $this->db->query($queryData);
               if($data->num_rows() > 0)
               {
@@ -121,6 +123,7 @@ class Surat_siswa extends CI_Controller
                         <input class='form-control' type='hidden' name='siswa_id' value='".$siswa_id."'>
                         <input class='form-control' type='hidden' name='tahun_ajaran_id' value='".$tahun_ajaran_id."'>
                         <input class='form-control' type='hidden' name='semester' value='".$semester."'>
+						<input class='form-control' type='hidden' name='kelompok_id' value='".$kelompok_id."'>
                             <span class='input-group-btn'>
                                 <button type='submit' class='btn btn-danger'><i class='fa fa-trash' '></i></button>
                             </span>
@@ -141,11 +144,11 @@ class Surat_siswa extends CI_Controller
         $surat_id = $this->input->post('surat_id');
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $semester = $this->input->post('semester');
-
+		$kelompok_id = $this->input->post('kelompok_id');
         $sql = "INSERT INTO surat_siswa (surat_siswa_id,siswa_id,surat_id,tahun_ajaran_id,semester) VALUES ('','$siswa_id','$surat_id','$tahun_ajaran_id','$semester')";
         $this->db->query($sql);
 
-        redirect(site_url('surat_siswa/daftar_surah/'.$siswa_id.'/'.$tahun_ajaran_id.'/'.$semester));
+        redirect(site_url('surat_siswa/daftar_surah/'.$siswa_id.'/'.$tahun_ajaran_id.'/'.$semester.'/'.$kelompok_id));
 
 
     }
@@ -154,11 +157,12 @@ class Surat_siswa extends CI_Controller
         $surat_id = $this->input->post('surat_id');
         $tahun_ajaran_id = $this->input->post('tahun_ajaran_id');
         $semester = $this->input->post('semester');
+		$kelompok_id = $this->input->post('kelompok_id');
 
 
         $sql = "DELETE FROM surat_siswa WHERE surat_siswa_id ='$id'";
         $this->db->query($sql);
-        redirect(site_url('surat_siswa/daftar_surah/'.$siswa_id.'/'.$tahun_ajaran_id.'/'.$semester));
+        redirect(site_url('surat_siswa/daftar_surah/'.$siswa_id.'/'.$tahun_ajaran_id.'/'.$semester.'/' .$kelompok_id));
 
     }
 

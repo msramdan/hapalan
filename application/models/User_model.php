@@ -66,7 +66,6 @@ class User_model extends CI_Model
         $this->db->like('user_id', $q);
 	$this->db->or_like('username', $q);
 	$this->db->or_like('password', $q);
-	$this->db->or_like('photo', $q);
 	$this->db->or_like('level', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
@@ -78,7 +77,6 @@ class User_model extends CI_Model
         $this->db->like('user_id', $q);
 	$this->db->or_like('username', $q);
 	$this->db->or_like('password', $q);
-	$this->db->or_like('photo', $q);
 	$this->db->or_like('level', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

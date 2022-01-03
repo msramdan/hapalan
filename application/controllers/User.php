@@ -58,7 +58,6 @@ class User extends CI_Controller
         'app_setting' =>$this->App_setting_model->get_by_id(1),
 		'username' => $row->username,
 		'password' => $row->password,
-		'photo' => $row->photo,
 		'level' => $row->level,
 	    );
             $this->template->load('template','user/user_read', $data);
@@ -78,7 +77,6 @@ class User extends CI_Controller
 	    'user_id' => set_value('user_id'),
 	    'username' => set_value('username'),
 	    'password' => set_value('password'),
-	    'photo' => set_value('photo'),
 	    'level' => set_value('level'),
 	);
         $this->template->load('template','user/user_form', $data);
@@ -92,20 +90,10 @@ class User extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
-            $config['upload_path']      = './admin/assets/img/user'; 
-            $config['allowed_types']    = 'jpg|png|jpeg'; 
-            $config['max_size']         = 10048; 
-            $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
-            $this->load->library('upload',$config);
-            $this->upload->initialize($config);
-            $this->upload->do_upload("photo");
-            $data = $this->upload->data();
-            $photo =$data['file_name'];
 
             $data = array(
         		'username' => $this->input->post('username',TRUE),
                 'password' => sha1($this->input->post('password',TRUE)),
-        		'photo' => $photo,
         		'level' => $this->input->post('level',TRUE),
         	);
 
@@ -128,7 +116,6 @@ class User extends CI_Controller
 		'user_id' => set_value('user_id', $row->user_id),
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
-		'photo' => set_value('photo', $row->photo),
 		'level' => set_value('level', $row->level),
 	    );
             $this->template->load('template','user/user_form', $data);
@@ -147,38 +134,15 @@ class User extends CI_Controller
             $this->update($this->input->post('user_id', TRUE));
         } else {
 
-            $config['upload_path']      = './admin/assets/img/user'; 
-            $config['allowed_types']    = 'jpg|png|jpeg'; 
-            $config['max_size']         = 10048; 
-            $config['file_name']        = 'File-'.date('ymd').'-'.substr(sha1(rand()),0,10); 
-            $this->load->library('upload',$config);
-            $this->upload->initialize($config);
-
-            if ($this->upload->do_upload("photo")) {
-            $id = $this->input->post('user_id');
-            $row = $this->User_model->get_by_id($id);
-            $data = $this->upload->data();
-            $photo =$data['file_name'];
-            if($row->photo==null || $row->photo==''){
-            }else{
-            $target_file = './admin/assets/img/user/'.$row->photo;
-            unlink($target_file);
-            }
-                }else{
-                $photo = $this->input->post('photo_lama');
-            }
-
             if ($this->input->post('password')==''||$this->input->post('password')==null) {            
                  $data = array(
                     'username' => $this->input->post('username',TRUE),
-                    'photo' => $photo,
                     'level' => $this->input->post('level',TRUE),
                 );
             }else{
                 $data = array(
                 'username' => $this->input->post('username',TRUE),
                 'password' => sha1($this->input->post('password',TRUE)),
-                'photo' => $photo,
                 'level' => $this->input->post('level',TRUE),
                 );
             }
@@ -200,11 +164,6 @@ class User extends CI_Controller
             if ($error['code'] != 0) {
                  $this->session->set_flashdata('error', 'Tidak dapat dihapus data sudah berrelasi');
             }else{
-                if($row->photo==null || $row->photo=='' ){
-                }else{
-                $target_file = './admin/assets/img/user/'.$row->photo;
-                unlink($target_file);
-                }
                 $this->session->set_flashdata('message', 'Delete Record Success');
             }
 
@@ -248,8 +207,6 @@ class User extends CI_Controller
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
 	xlsWriteLabel($tablehead, $kolomhead++, "Username");
-	xlsWriteLabel($tablehead, $kolomhead++, "Password");
-	xlsWriteLabel($tablehead, $kolomhead++, "Photo");
 	xlsWriteLabel($tablehead, $kolomhead++, "Level");
 
 	foreach ($this->User_model->get_all() as $data) {
@@ -258,8 +215,6 @@ class User extends CI_Controller
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->username);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->password);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->photo);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->level);
 
 	    $tablebody++;

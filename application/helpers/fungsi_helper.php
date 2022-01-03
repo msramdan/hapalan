@@ -59,6 +59,7 @@ function check_siswa()
 }
 
 
+
 function nama_surat($surat_id){
         $ci = &get_instance();
         $result = $ci->db->get_where('surat', array('surat_id' => $surat_id))->row();

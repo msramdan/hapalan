@@ -20,9 +20,6 @@
               </select>
             </td>
           </tr>
-	    
-        <tr><td width='200'>Alamat <?php echo form_error('alamat') ?></td><td> <textarea class="form-control" rows="3" name="alamat" id="alamat" placeholder="Alamat"><?php echo $alamat; ?></textarea></td></tr>
-
         <?php if ($this->uri->segment(2) == 'create' || $this->uri->segment(2) == 'create_action') { ?>
           <?php
           $queryData = "SELECT user.*,guru.guru_id

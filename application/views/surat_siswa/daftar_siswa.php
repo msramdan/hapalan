@@ -39,7 +39,7 @@
                     <td><?php echo $siswa->nis ?></td>
                     <td><?php echo $siswa->nama_siswa ?></td>
                     <td><?php echo $siswa->nama_kelas ?></td>
-                    <td><a href="<?= base_url() ?>surat_siswa/daftar_surah/<?php echo $siswa->siswa_id ?>/<?= $this->uri->segment(4) ?>/<?= $this->uri->segment(5) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Surat</a>
+                    <td><a href="<?= base_url() ?>surat_siswa/daftar_surah/<?php echo $siswa->siswa_id ?>/<?= $this->uri->segment(4) ?>/<?= $this->uri->segment(5) ?>/<?= $this->uri->segment(3) ?>" class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View Surat</a>
                 </td>
                 </tr>
             <?php } ?> 

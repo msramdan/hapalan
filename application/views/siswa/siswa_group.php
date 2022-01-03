@@ -1,7 +1,5 @@
 <div class="row">
                             <div class="col-md-12">
-                                <a href="../files/Format Import Siswa.xlsx"><i class="fa fa-file-pdf-o faa-pulse animated"></i> &nbsp;Download Format Import Siswa</a>
-
                                 <!-- COLOR PICKER -->
                                 <div class="panel">
                                     <div class="panel-heading">
@@ -65,7 +63,8 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                                 <h3 class="modal-title" id="myModalLabel">Import Data Siswa</h3>
-                            </div>
+                                <a class="btn btn-success" href="../files/Format Import Siswa.xlsx"><i class="fa fa-file-excel-o faa-pulse animated"></i> &nbsp;Download Format Import Siswa</a>
+                              </div>
                             <form action="<?= base_url() ?>import/import_siswa" method="post" enctype="multipart/form-data">
                                     <div class="modal-body">
 

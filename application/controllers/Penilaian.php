@@ -99,18 +99,17 @@ class Penilaian extends CI_Controller
           $semester = $a->semester;
           $spreadsheet = new Spreadsheet;
           $spreadsheet->setActiveSheetIndex(0)
-                      ->setCellValue('A1', 'No')
-                      ->setCellValue('B1', 'TA ID')
-                      ->setCellValue('C1', 'Tahun Ajaran')
-                      ->setCellValue('D1', 'Semester')
-                      ->setCellValue('E1', 'Kelas')
-                      ->setCellValue('F1', 'NIS')
-                      ->setCellValue('G1', 'Nama Siswa')
-                      ->setCellValue('H1', 'Jilid/Alquran')
-                      ->setCellValue('I1', 'Halaman / Juz')
-                      ->setCellValue('J1', 'Tartil')
-                      ->setCellValue('K1', 'Pemahaman')
-                      ->setCellValue('L1', 'Pashohah');
+                      ->setCellValue('A1', 'TA ID')
+                      ->setCellValue('B1', 'Tahun Ajaran')
+                      ->setCellValue('C1', 'Semester')
+                      ->setCellValue('D1', 'Kelas')
+                      ->setCellValue('E1', 'NIS')
+                      ->setCellValue('F1', 'Nama Siswa')
+                      ->setCellValue('G1', 'Jilid/Alquran')
+                      ->setCellValue('H1', 'Halaman / Juz')
+                      ->setCellValue('I1', 'Tartil')
+                      ->setCellValue('J1', 'Pemahaman')
+                      ->setCellValue('K1', 'Pashohah');
           $kolom = 2;
           $nomor = 1;
 
@@ -128,18 +127,17 @@ class Penilaian extends CI_Controller
             foreach ($data_kel as $value) {
               foreach($this->Penilaian_model->get_all_kelompok($value->kelompok_id) as $row) {
                $spreadsheet->setActiveSheetIndex(0)
-                           ->setCellValue('A' . $kolom, $nomor)
-                           ->setCellValue('B' . $kolom, $row->tahun_ajaran_id)
-                           ->setCellValue('C' . $kolom, $row->tahun_ajaran)
-                           ->setCellValue('D' . $kolom, $semester)
-                           ->setCellValue('E' . $kolom, $row->nama_kelas)
-                           ->setCellValue('F' . $kolom, $row->nis)
-                           ->setCellValue('G' . $kolom, $row->nama_siswa)
+                           ->setCellValue('A' . $kolom, $row->tahun_ajaran_id)
+                           ->setCellValue('B' . $kolom, $row->tahun_ajaran)
+                           ->setCellValue('C' . $kolom, $semester)
+                           ->setCellValue('D' . $kolom, $row->nama_kelas)
+                           ->setCellValue('E' . $kolom, $row->nis)
+                           ->setCellValue('F' . $kolom, $row->nama_siswa)
+                           ->setCellValue('G' . $kolom, '')
                            ->setCellValue('H' . $kolom, '')
                            ->setCellValue('I' . $kolom, '')
                            ->setCellValue('J' . $kolom, '')
-                           ->setCellValue('K' . $kolom, '')
-                           ->setCellValue('L' . $kolom, '');
+                           ->setCellValue('K' . $kolom, '');
                $kolom++;
                $nomor++;
           }
@@ -157,13 +155,12 @@ class Penilaian extends CI_Controller
           $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
+          $spreadsheet->getActiveSheet()->getStyle('G1:G'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.ms-excel');
@@ -179,18 +176,17 @@ class Penilaian extends CI_Controller
           $semester = $a->semester;
           $spreadsheet = new Spreadsheet;
           $spreadsheet->setActiveSheetIndex(0)
-                      ->setCellValue('A1', 'No')
-                      ->setCellValue('B1', 'TA ID')
-                      ->setCellValue('C1', 'Tahun Ajaran')
-                      ->setCellValue('D1', 'Semester')
-                      ->setCellValue('E1', 'Kelas')
-                      ->setCellValue('F1', 'NIS')
-                      ->setCellValue('G1', 'Nama Siswa')
-                      ->setCellValue('H1', 'Surah ID')
-                      ->setCellValue('I1', 'Surah')
-                      ->setCellValue('J1', 'Tartil')
-                      ->setCellValue('K1', 'Pemahaman')
-                      ->setCellValue('L1', 'Pashohah');
+                      ->setCellValue('A1', 'TA ID')
+                      ->setCellValue('B1', 'Tahun Ajaran')
+                      ->setCellValue('C1', 'Semester')
+                      ->setCellValue('D1', 'Kelas')
+                      ->setCellValue('E1', 'NIS')
+                      ->setCellValue('F1', 'Nama Siswa')
+                      ->setCellValue('G1', 'Surah ID')
+                      ->setCellValue('H1', 'Surah')
+                      ->setCellValue('I1', 'Tartil')
+                      ->setCellValue('J1', 'Pemahaman')
+                      ->setCellValue('K1', 'Pashohah');
           $kolom = 2;
           $mulai = 2;
           $nomor = 1;
@@ -203,36 +199,32 @@ class Penilaian extends CI_Controller
             $query_kelompok = "SELECT * from kelompok where tahun_ajaran_id='$tahun_ajaran_id'";
             $data_kel= $this->db->query($query_kelompok)->result();
           }
-
-          
-
             foreach ($data_kel as $value) {
             $query_siswa = "SELECT surat_siswa.siswa_id,surat_siswa.semester,siswa.nis,siswa.nama_siswa,kelas.nama_kelas,tahun_ajaran.tahun_ajaran,kelompok_member_with_kelompok.kelompok_id,kelompok_member_with_kelompok.tahun_ajaran_id from surat_siswa join siswa on siswa.siswa_id = surat_siswa.siswa_id join kelas on kelas.kelas_id = siswa.kelas_id join kelompok_member_with_kelompok on kelompok_member_with_kelompok.siswa_id= siswa.siswa_id JOIN tahun_ajaran on tahun_ajaran.tahun_ajaran_id = kelompok_member_with_kelompok.tahun_ajaran_id WHERE surat_siswa.tahun_ajaran_id='$tahun_ajaran_id' AND semester='$semester' and kelompok_id='$value->kelompok_id' GROUP BY surat_siswa.siswa_id";
 
-              foreach ($this->db->query($query_siswa)->result() as $siswa) {
+            foreach ($this->db->query($query_siswa)->result() as $siswa) {
 
                 $jml = $this->db->query("SELECT * from surat_siswa where siswa_id='$siswa->siswa_id'");
                 $jml_data= $jml->num_rows();
                 $data = $kolom + $jml_data - 1; 
                 $spreadsheet->setActiveSheetIndex(0)
-                             ->setCellValue('A' . $kolom, $nomor)
-                             ->setCellValue('B' . $kolom, $siswa->tahun_ajaran_id)
-                             ->setCellValue('C' . $kolom, $siswa->tahun_ajaran)
-                             ->setCellValue('D' . $kolom, $semester)
-                             ->setCellValue('E' . $kolom, $siswa->nama_kelas)
-                             ->setCellValue('F' . $kolom, $siswa->nis)
-                             ->setCellValue('G' . $kolom, $siswa->nama_siswa);
+                             ->setCellValue('A' . $kolom, $siswa->tahun_ajaran_id)
+                             ->setCellValue('B' . $kolom, $siswa->tahun_ajaran)
+                             ->setCellValue('C' . $kolom, $semester)
+                             ->setCellValue('D' . $kolom, $siswa->nama_kelas)
+                             ->setCellValue('E' . $kolom, $siswa->nis)
+                             ->setCellValue('F' . $kolom, $siswa->nama_siswa);
 
                              $daftarSurah="SELECT surat.nama_surat,surat.surat_id from surat_siswa join surat on surat.surat_id = surat_siswa.surat_id where siswa_id='$siswa->siswa_id'";
                              $daftarSurah2= $this->db->query($daftarSurah)->result();
 
                              foreach ($daftarSurah2 as $daftar_surah) {
                                 $spreadsheet->setActiveSheetIndex(0)
-                                   ->setCellValue('H' .$mulai, $daftar_surah->surat_id)
-                                   ->setCellValue('I' .$mulai, $daftar_surah->nama_surat)
+                                   ->setCellValue('G' .$mulai, $daftar_surah->surat_id)
+                                   ->setCellValue('H' .$mulai, $daftar_surah->nama_surat)
+                                   ->setCellValue('I' .$mulai, '')
                                    ->setCellValue('J' .$mulai, '')
-                                   ->setCellValue('K' .$mulai, '')
-                                   ->setCellValue('L' .$mulai, '');
+                                   ->setCellValue('K' .$mulai, '');
                                 $mulai++;
                              }
                 $spreadsheet->getActiveSheet()->mergeCells('A' .$kolom.':A'.$data);
@@ -241,7 +233,6 @@ class Penilaian extends CI_Controller
                 $spreadsheet->getActiveSheet()->mergeCells('D' .$kolom.':D'.$data);
                 $spreadsheet->getActiveSheet()->mergeCells('E' .$kolom.':E'.$data);
                 $spreadsheet->getActiveSheet()->mergeCells('F' .$kolom.':F'.$data);
-                $spreadsheet->getActiveSheet()->mergeCells('G' .$kolom.':G'.$data);
 
                 $kolom = $data + 1;
                 $nomor++;
@@ -261,11 +252,10 @@ class Penilaian extends CI_Controller
           $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
+          $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');   
+          $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');   
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.ms-excel');
@@ -284,18 +274,17 @@ class Penilaian extends CI_Controller
           $spreadsheet = new Spreadsheet;
 
           $spreadsheet->setActiveSheetIndex(0)
-                      ->setCellValue('A1', 'No')
-                      ->setCellValue('B1', 'TA ID')
-                      ->setCellValue('C1', 'Tahun Ajaran')
-                      ->setCellValue('D1', 'Semester')
-                      ->setCellValue('E1', 'Kelompok')
-                      ->setCellValue('F1', 'Kelas')
-                      ->setCellValue('G1', 'NIS')
-                      ->setCellValue('H1', 'Nama Siswa')
-                      ->setCellValue('I1', 'Tertib')
-                      ->setCellValue('J1', 'Disiplin')
-                      ->setCellValue('K1', 'Motivasi')
-                      ->setCellValue('L1', 'Keterangan');
+                      ->setCellValue('A1', 'TA ID')
+                      ->setCellValue('B1', 'Tahun Ajaran')
+                      ->setCellValue('C1', 'Semester')
+                      ->setCellValue('D1', 'Kelompok')
+                      ->setCellValue('E1', 'Kelas')
+                      ->setCellValue('F1', 'NIS')
+                      ->setCellValue('G1', 'Nama Siswa')
+                      ->setCellValue('H1', 'Tertib')
+                      ->setCellValue('I1', 'Disiplin')
+                      ->setCellValue('J1', 'Motivasi')
+                      ->setCellValue('K1', 'Keterangan');
 
           $kolom = 2;
           $nomor = 1;
@@ -313,18 +302,18 @@ class Penilaian extends CI_Controller
             foreach ($data_kel as $value) {
               foreach($this->Penilaian_model->get_all_kelompok($value->kelompok_id) as $row) {
                $spreadsheet->setActiveSheetIndex(0)
-                           ->setCellValue('A' . $kolom, $nomor)
-                           ->setCellValue('B' . $kolom, $row->tahun_ajaran_id)
-                           ->setCellValue('C' . $kolom, $row->tahun_ajaran)
-                           ->setCellValue('D' . $kolom, $semester)
-                           ->setCellValue('E' . $kolom, $row->nama_kelompok)
-                           ->setCellValue('F' . $kolom, $row->nama_kelas)
-                           ->setCellValue('G' . $kolom, $row->nis)
-                           ->setCellValue('H' . $kolom, $row->nama_siswa)
+                          //  ->setCellValue('A' . $kolom, $nomor)
+                           ->setCellValue('A' . $kolom, $row->tahun_ajaran_id)
+                           ->setCellValue('B' . $kolom, $row->tahun_ajaran)
+                           ->setCellValue('C' . $kolom, $semester)
+                           ->setCellValue('D' . $kolom, $row->nama_kelompok)
+                           ->setCellValue('E' . $kolom, $row->nama_kelas)
+                           ->setCellValue('F' . $kolom, $row->nis)
+                           ->setCellValue('G' . $kolom, $row->nama_siswa)
+                           ->setCellValue('H' . $kolom, '')
                            ->setCellValue('I' . $kolom, '')
                            ->setCellValue('J' . $kolom, '')
-                           ->setCellValue('K' . $kolom, '')
-                           ->setCellValue('L' . $kolom, '');
+                           ->setCellValue('K' . $kolom, '');
 
                $kolom++;
                $nomor++;
@@ -343,13 +332,11 @@ class Penilaian extends CI_Controller
           $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
           $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
-          
+          $spreadsheet->getActiveSheet()->getStyle('H1:H'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('I1:I'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('J1:J'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
           $spreadsheet->getActiveSheet()->getStyle('K1:K'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
-          $spreadsheet->getActiveSheet()->getStyle('L1:L'.$data)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFF00');
 
 
 

@@ -52,7 +52,6 @@ class Guru_model extends CI_Model
 	$this->db->or_like('nip', $q);
 	$this->db->or_like('nama_guru', $q);
 	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('alamat', $q);
 	$this->db->or_like('user_id', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
@@ -65,7 +64,6 @@ class Guru_model extends CI_Model
 	$this->db->or_like('nip', $q);
 	$this->db->or_like('nama_guru', $q);
 	$this->db->or_like('jenis_kelamin', $q);
-	$this->db->or_like('alamat', $q);
 	$this->db->or_like('user_id', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

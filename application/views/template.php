@@ -47,18 +47,10 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               
-              <?php if ($this->fungsi->user_login()->photo =='default.jpg') { ?>
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?= base_url() ?>admin/assets/img/sal.jpg ?>" alt="">
+                    <img src="<?= base_url() ?>admin/assets/img/user/user.png" alt="">
                     <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
                   </a>
-              <?php }else{ ?>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?= base_url() ?>admin/assets/img/user/<?= $this->fungsi->user_login()->photo ?>" alt="">
-                    <span><?= ucfirst($this->fungsi->user_login()->username) ?></span>
-                  </a>
-
-              <?php } ?>
 
               <ul class="dropdown-menu logged-user-menu">
                 <li><a href="<?= site_url('profile') ?>"><i class="ti-user"></i> <span>Edit Profile</span></a></li>
